@@ -6,7 +6,7 @@ class SolidColors {
   static const Color primaryColor = Color.fromARGB(255, 68, 4, 87);
   static const Color colorTitle = Color.fromARGB(255, 40, 107, 184);
   static const Color textTitle = Color.fromARGB(255, 0, 0, 0);
-  static const Color scaffoldBg = Color.fromARGB(255, 255, 255, 255);
+  static const Color scaffoldBackground = Color.fromARGB(255, 255, 255, 255);
   static const Color statusBarColor = Color.fromARGB(255, 255, 255, 255);
   static const Color systemNavigationBarColor =
       Color.fromARGB(255, 255, 255, 255);
@@ -46,12 +46,12 @@ class GradientColors {
     Color.fromARGB(255, 0, 0, 0),
     Color.fromARGB(0, 0, 0, 0)
   ];
-  static const List<Color> homePosterCoverGradiant = [
+  static const List<Color> homePosterCoverGradient = [
     Color.fromARGB(0, 0, 0, 0),
-    Color.fromARGB(195, 72, 20, 88),
+    Color.fromARGB(120, 75, 20, 88),
     Color.fromARGB(255, 280, 20, 81)
   ];
-  static const List<Color> singleAppbarGradiant = [
+  static const List<Color> singleAppbarGradient = [
     Color.fromARGB(255, 46, 3, 71),
     Color.fromARGB(0, 0, 0, 0)
   ];
