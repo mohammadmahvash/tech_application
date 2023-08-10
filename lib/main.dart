@@ -32,13 +32,13 @@ class MainApp extends StatelessWidget {
           fontFamily: 'dana',
           textTheme: const TextTheme(
           titleMedium: TextStyle(
-            fontSize: 19,
+            fontSize: 16,
             fontWeight: FontWeight.w700,
             color: SolidColors.posterTitle
           ), 
           titleSmall: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            fontWeight: FontWeight.w300,
             color: SolidColors.posterSubTitle
           ), 
         )),
