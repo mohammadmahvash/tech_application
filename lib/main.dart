@@ -29,19 +29,25 @@ class MainApp extends StatelessWidget {
           Locale('fa'), // persian
         ],
         theme: ThemeData(
-          fontFamily: 'dana',
-          textTheme: const TextTheme(
-          titleMedium: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: SolidColors.posterTitle
-          ), 
-          titleSmall: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w300,
-            color: SolidColors.posterSubTitle
-          ), 
-        )),
+            fontFamily: 'dana',
+            textTheme: const TextTheme(
+              titleLarge: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: SolidColors.posterTitle),
+              titleMedium: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  color: SolidColors.seeMore),
+              titleSmall: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                  color: SolidColors.posterSubTitle),
+                  headlineLarge: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: SolidColors.textTitle),
+            )),
         debugShowCheckedModeBanner: false,
         home: const SplashScreen());
   }

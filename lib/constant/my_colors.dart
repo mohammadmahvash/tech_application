@@ -44,6 +44,7 @@ class GradientColors {
   ];
   static const List<Color> blogPost = [
     Color.fromARGB(255, 0, 0, 0),
+    Color.fromARGB(50, 0, 0, 0),
     Color.fromARGB(0, 0, 0, 0)
   ];
   static const List<Color> homePosterCoverGradient = [
