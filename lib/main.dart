@@ -45,7 +45,11 @@ class MainApp extends StatelessWidget {
                   color: SolidColors.posterSubTitle),
               headlineLarge: TextStyle(
                   fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
+                  color: SolidColors.textTitle),
+              headlineMedium: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800,
                   color: SolidColors.textTitle),
             )),
         debugShowCheckedModeBanner: false,
