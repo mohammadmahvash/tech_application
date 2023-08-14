@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 40),
+        const SizedBox(height: 30),
         Image(
           image: Assets.images.profileavatar.provider(),
           height: 100,

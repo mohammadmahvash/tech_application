@@ -23,13 +23,13 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
           HomePagePoster(size: size, textTheme: textTheme),
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
           HomePageHashtagList(bodyMargin: bodyMargin, textTheme: textTheme),
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
           HomePageBlogListTitle(bodyMargin: bodyMargin, textTheme: textTheme),
           HomePageBlogListItem(
               size: size, bodyMargin: bodyMargin, textTheme: textTheme),
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
           HomePagePodcastListTitle(
               bodyMargin: bodyMargin, textTheme: textTheme),
           //podcastListItem
@@ -268,7 +268,7 @@ class HomePageHashtagList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 40,
       child: ListView.builder(
         itemCount: tagList.length,
         scrollDirection: Axis.horizontal,

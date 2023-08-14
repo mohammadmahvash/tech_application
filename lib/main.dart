@@ -1,12 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tech_application/view/register_intro.dart';
 import 'package:tech_application/view/splash_screen.dart';
 
 import 'constant/my_colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  ByteData data =
+      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: SolidColors.statusBarColor,
       statusBarIconBrightness: Brightness.dark,
@@ -54,7 +62,6 @@ class MainApp extends StatelessWidget {
                   color: SolidColors.textTitle),
             )),
         debugShowCheckedModeBanner: false,
-        // home: const SplashScreen());
-        home: const RegisterIntro());
+        home: const SplashScreen());
   }
 }
