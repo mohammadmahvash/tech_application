@@ -60,8 +60,8 @@ class $AssetsImagesGen {
   SvgGenImage get techbot => const SvgGenImage('assets/images/techbot.svg');
 
   /// List of all assets
-  List<dynamic> get values =>
-      [logo, profileavatar, programming, splashLogo, techbot];
+  List<AssetGenImage> get values =>
+      [logo, profileavatar, programming, splashLogo];
 }
 
 class Assets {
