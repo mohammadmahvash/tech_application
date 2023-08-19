@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tech_application/constant/my_colors.dart';
 import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/gen/assets.gen.dart';
+import 'package:tech_application/view/favorite_categories.dart';
+import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {
   const RegisterIntro({super.key});
@@ -28,22 +29,129 @@ class RegisterIntro extends StatelessWidget {
               width: size.width / 2.5,
               height: size.height / 13,
               child: ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                    textStyle: MaterialStateProperty.resolveWith((states) {
-                      if (states.contains(MaterialState.pressed)) {
-                        return const TextStyle(fontSize: 25);
-                      }
-                      return const TextStyle(fontSize: 20);
-                    }),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        SolidColors.primaryColor)),
+                onPressed: () {
+                  _showEmailBottomSheet(context, size, textTheme);
+                },
                 child: Text(MyStrings.letsGo),
               ),
             )
           ]),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> _showEmailBottomSheet(
+      BuildContext context, Size size, TextTheme textTheme) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Container(
+            height: size.height / 2.5,
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  MyStrings.insertYourEmail,
+                  style: textTheme.headlineLarge,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
+                  child: TextField(
+                    onChanged: (value) {
+                      // print("$value is email ${isEmail(value)}");
+                    },
+                    style: textTheme.headlineMedium,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                        hintText: "techblog@gmail.com",
+                        hintStyle: textTheme.labelMedium),
+                  ),
+                ),
+                SizedBox(
+                  width: size.width / 2.5,
+                  height: size.height / 13,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        _activatedCodeBottomSheet(context, size, textTheme);
+                      },
+                      child: Text(
+                        MyStrings.continuation,
+                      )),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+  Future<dynamic> _activatedCodeBottomSheet(
+      BuildContext context, Size size, TextTheme textTheme) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Container(
+            height: size.height / 2.5,
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  MyStrings.activateCode,
+                  style: textTheme.headlineLarge,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
+                  child: TextField(
+                    onChanged: (value) {
+                      // print("$value is email ${isEmail(value)}");
+                    },
+                    style: textTheme.headlineMedium,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                        hintText: "******",
+                        hintStyle: textTheme.labelMedium),
+                  ),
+                ),
+                SizedBox(
+                  width: size.width / 2.5,
+                  height: size.height / 13,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const FavoriteCategories()));
+                      },
+                      child: Text(
+                        MyStrings.continuation,
+                      )),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tech_application/view/splash_screen.dart';
+import 'package:tech_application/view/register_intro.dart';
+// import 'package:tech_application/view/splash_screen.dart';
 
 import 'constant/my_colors.dart';
 
@@ -39,6 +40,23 @@ class MainApp extends StatelessWidget {
         ],
         theme: ThemeData(
             fontFamily: 'dana',
+            inputDecorationTheme: const InputDecorationTheme(
+                border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            )),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    textStyle: MaterialStateProperty.resolveWith((states) {
+                      if (states.contains(MaterialState.pressed)) {
+                        return const TextStyle(fontSize: 25);
+                      }
+                      return const TextStyle(fontSize: 20);
+                    }),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        SolidColors.primaryColor))),
             textTheme: const TextTheme(
               titleLarge: TextStyle(
                   fontSize: 16,
@@ -60,8 +78,13 @@ class MainApp extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w800,
                   color: SolidColors.textTitle),
+              labelMedium: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: SolidColors.hintText),
             )),
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen());
+        // home: const SplashScreen());
+        home: const RegisterIntro());
   }
 }
