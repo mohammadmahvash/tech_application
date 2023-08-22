@@ -281,14 +281,16 @@ class HomePageHashtagList extends StatelessWidget {
                 0,
                 index == 0 ? bodyMargin : 10,
                 0),
-            child: HashtagComponent(textTheme: textTheme,index: index,),
+            child: HashtagComponent(
+              textTheme: textTheme,
+              index: index,
+            ),
           );
         },
       ),
     );
   }
 }
-
 
 class HomePagePoster extends StatelessWidget {
   const HomePagePoster({

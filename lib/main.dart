@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tech_application/view/register_intro.dart';
 
 import 'constant/my_colors.dart';
+import 'view/register_intro.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

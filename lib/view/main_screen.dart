@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_application/constant/my_colors.dart';
+import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/view/home_page.dart';
 import 'package:tech_application/view/profile_page.dart';
@@ -10,6 +11,8 @@ class MainScreen extends StatefulWidget {
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
+
+final GlobalKey<ScaffoldState> _key = GlobalKey();
 
 class _MainScreenState extends State<MainScreen> {
   var selectedMainScreenPageIndex = 0;
@@ -22,13 +25,78 @@ class _MainScreenState extends State<MainScreen> {
 
     return SafeArea(
         child: Scaffold(
+      key: _key,
+      drawer: Drawer(
+        backgroundColor: SolidColors.scaffoldBackground,
+        child: Padding(
+          padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin),
+          child: ListView(
+            children: [
+              DrawerHeader(
+                  child: Image.asset(
+                Assets.images.drawerimage.path,
+                scale: 3,
+              )),
+              //userProfile
+              ListTile(
+                title: Text(
+                  MyStrings.userProfile,
+                  style: textTheme.headlineMedium,
+                ),
+                onTap: () {},
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+              ),
+              //aboutTec
+              ListTile(
+                title: Text(
+                  MyStrings.aboutTec,
+                  style: textTheme.headlineMedium,
+                ),
+                onTap: () {},
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+              ),
+              //shareTec
+              ListTile(
+                title: Text(
+                  MyStrings.shareTec,
+                  style: textTheme.headlineMedium,
+                ),
+                onTap: () {},
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+              ),
+              //tecIngithub
+              ListTile(
+                title: Text(
+                  MyStrings.tecIngithub,
+                  style: textTheme.headlineMedium,
+                ),
+                onTap: () {},
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: SolidColors.scaffoldBackground,
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Icon(Icons.menu, size: 30, color: Colors.black),
+            InkWell(
+              onTap: () {
+                _key.currentState!.openDrawer();
+              },
+                child: const Icon(Icons.menu, size: 30, color: Colors.black)),
             Image(
               image: Assets.images.logo.provider(),
               height: size.height / 13.6,

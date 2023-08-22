@@ -83,7 +83,12 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
                       child: InkWell(
                           onTap: () {
                             setState(() {
-                              selectedTags.add(tagList[index]);
+                              if (selectedTags.contains(tagList[index])) {
+                                _showSnackBar(context,
+                                    "نمیتوانید تگ تکراری انتخاب کنید!");
+                              } else {
+                                selectedTags.add(tagList[index]);
+                              }
                             });
                           },
                           child: HashtagComponent(
@@ -155,11 +160,25 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
                       MyStrings.continuation,
                     )),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 60),
             ],
           ),
         ),
       ),
     ));
   }
+}
+
+void _showSnackBar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    backgroundColor: Colors.redAccent,
+    content: SizedBox(
+      height: 25,
+      child: Text(
+        message,
+        style: Theme.of(context).textTheme.titleSmall,
+        textAlign: TextAlign.center,
+      ),
+    ),
+  ));
 }
