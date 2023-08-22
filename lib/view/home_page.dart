@@ -4,6 +4,8 @@ import 'package:tech_application/constant/my_colors.dart';
 import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
+import '../my_components.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({
     super.key,
@@ -279,38 +281,14 @@ class HomePageHashtagList extends StatelessWidget {
                 0,
                 index == 0 ? bodyMargin : 10,
                 0),
-            child: Container(
-              // height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: const LinearGradient(
-                      colors: GradientColors.tags,
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft)),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                child: Row(
-                  children: [
-                    ImageIcon(
-                      Assets.icons.hashtag.provider(),
-                      color: Colors.white,
-                      size: 15,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      tagList[index].title!,
-                      style: textTheme.titleLarge,
-                    )
-                  ],
-                ),
-              ),
-            ),
+            child: HashtagComponent(textTheme: textTheme,index: index,),
           );
         },
       ),
     );
   }
 }
+
 
 class HomePagePoster extends StatelessWidget {
   const HomePagePoster({

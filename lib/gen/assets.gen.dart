@@ -11,6 +11,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsCaGen {
+  const $AssetsCaGen();
+
+  /// File path: assets/ca/lets-encrypt-r3.pem
+  String get letsEncryptR3 => 'assets/ca/lets-encrypt-r3.pem';
+
+  /// List of all assets
+  List<String> get values => [letsEncryptR3];
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -41,6 +51,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/arrowdown.png
+  AssetGenImage get arrowdown =>
+      const AssetGenImage('assets/images/arrowdown.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -60,13 +74,14 @@ class $AssetsImagesGen {
   SvgGenImage get techbot => const SvgGenImage('assets/images/techbot.svg');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [logo, profileavatar, programming, splashLogo];
+  List<dynamic> get values =>
+      [arrowdown, logo, profileavatar, programming, splashLogo, techbot];
 }
 
 class Assets {
   Assets._();
 
+  static const $AssetsCaGen ca = $AssetsCaGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }

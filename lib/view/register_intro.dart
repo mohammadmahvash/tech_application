@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/view/favorite_categories.dart';
-import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {
   const RegisterIntro({super.key});
@@ -79,6 +78,7 @@ class RegisterIntro extends StatelessWidget {
                         hintStyle: textTheme.labelMedium),
                   ),
                 ),
+                 //continuationButton
                 SizedBox(
                   width: size.width / 2.5,
                   height: size.height / 13,
@@ -136,6 +136,7 @@ class RegisterIntro extends StatelessWidget {
                         hintStyle: textTheme.labelMedium),
                   ),
                 ),
+                //continuationButton
                 SizedBox(
                   width: size.width / 2.5,
                   height: size.height / 13,

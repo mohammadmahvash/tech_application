@@ -19,6 +19,8 @@ List<HashtagModel> tagList = [
   HashtagModel(title: "پایتون"),
 ];
 
+List<HashtagModel> selectedTags = [];
+
 List<BlogModel> blogList = [
   BlogModel(
       id: 1,
