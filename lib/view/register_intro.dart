@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tech_application/constant/my_strings.dart';
+import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/view/favorite_categories.dart';
 

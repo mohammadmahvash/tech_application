@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tech_application/constant/my_colors.dart';
-import 'package:tech_application/constant/my_strings.dart';
+import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/gen/assets.gen.dart';
-import 'package:tech_application/my_components.dart';
+import 'package:tech_application/component/my_components.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({

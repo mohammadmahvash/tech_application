@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tech_application/constant/my_colors.dart';
-import 'package:tech_application/constant/my_strings.dart';
+import 'package:get/get.dart';
+import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/view/home_page.dart';
 import 'package:tech_application/view/profile_page.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-class _MainScreenState extends State<MainScreen> {
-  var selectedMainScreenPageIndex = 0;
+class MainScreen extends StatelessWidget {
+  final RxInt selectedMainScreenPageIndex = 0.obs;
+
+  MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +89,9 @@ class _MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             InkWell(
-              onTap: () {
-                _key.currentState!.openDrawer();
-              },
+                onTap: () {
+                  _key.currentState!.openDrawer();
+                },
                 child: const Icon(Icons.menu, size: 30, color: Colors.black)),
             Image(
               image: Assets.images.logo.provider(),
@@ -107,22 +103,23 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Stack(
         children: [
-          Positioned.fill(
-              child: IndexedStack(
-            index: selectedMainScreenPageIndex,
-            children: [
-              HomePage(
-                  size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-              ProfilePage(
-                  size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-            ],
+          Positioned.fill(child: Obx(
+            () {
+              return IndexedStack(
+                index: selectedMainScreenPageIndex.value,
+                children: [
+                  HomePage(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  ProfilePage(
+                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                ],
+              );
+            },
           )),
           BottomNavigation(
             size: size,
             changeMainScreenIndex: (int value) {
-              setState(() {
-                selectedMainScreenPageIndex = value;
-              });
+              selectedMainScreenPageIndex.value = value;
             },
           )
         ],

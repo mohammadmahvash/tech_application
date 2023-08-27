@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tech_application/constant/my_colors.dart';
+import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
-import 'Models/fake_data.dart';
+import '../Models/fake_data.dart';
 
 class DividerTech extends StatelessWidget {
   const DividerTech({
