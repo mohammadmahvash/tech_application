@@ -5,48 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../Models/fake_data.dart';
 
-class DividerTech extends StatelessWidget {
-  const DividerTech({
-    super.key,
-    required this.size,
-  });
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Divider(
-      indent: size.width / 6,
-      endIndent: size.width / 6,
-      color: SolidColors.dividerColor,
-      thickness: 0.8,
-    );
-  }
-}
-
-browserLauncherURL(String url) async{
-  var uri = Uri.parse(url);
-  if(await canLaunchUrl(uri)){
-    await launchUrl(uri);
-  }
-  else{
-    return false;
-  }
-}
-
-void showErrorSnackBar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    backgroundColor: Colors.redAccent,
-    content: SizedBox(
-      // height: 25,
-      child: Text(
-        message,
-        style: Theme.of(context).textTheme.titleSmall,
-        textAlign: TextAlign.center,
-      ),
-    ),
-  ));
-}
 
 class HashtagComponent extends StatelessWidget {
   const HashtagComponent({
@@ -86,4 +44,46 @@ class HashtagComponent extends StatelessWidget {
       ),
     );
   }
+}
+
+class DividerTech extends StatelessWidget {
+  const DividerTech({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      indent: size.width / 6,
+      endIndent: size.width / 6,
+      color: SolidColors.dividerColor,
+      thickness: 0.8,
+    );
+  }
+}
+
+browserLauncherURL(String url) async {
+  var uri = Uri.parse(url);
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri);
+  } else {
+    return false;
+  }
+}
+
+void showErrorSnackBar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    backgroundColor: Colors.redAccent,
+    content: SizedBox(
+      // height: 25,
+      child: Text(
+        message,
+        style: Theme.of(context).textTheme.titleSmall,
+        textAlign: TextAlign.center,
+      ),
+    ),
+  ));
 }
