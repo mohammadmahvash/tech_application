@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'component/constant/my_colors.dart';
-import 'view/register_intro.dart';
+import 'view/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,7 +87,6 @@ class MainApp extends StatelessWidget {
                   color: SolidColors.hintText),
             )),
         debugShowCheckedModeBanner: false,
-        // home: const SplashScreen());
-        home: const RegisterIntro());
+        home: const SplashScreen());
   }
 }

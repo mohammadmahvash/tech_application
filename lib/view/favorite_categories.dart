@@ -84,7 +84,7 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
                           onTap: () {
                             setState(() {
                               if (selectedTags.contains(tagList[index])) {
-                                _showSnackBar(context,
+                                showErrorSnackBar(context,
                                     "نمیتوانید تگ تکراری انتخاب کنید!");
                               } else {
                                 selectedTags.add(tagList[index]);
@@ -169,16 +169,4 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
   }
 }
 
-void _showSnackBar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    backgroundColor: Colors.redAccent,
-    content: SizedBox(
-      height: 25,
-      child: Text(
-        message,
-        style: Theme.of(context).textTheme.titleSmall,
-        textAlign: TextAlign.center,
-      ),
-    ),
-  ));
-}
+

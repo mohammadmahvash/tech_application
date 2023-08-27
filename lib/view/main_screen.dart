@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/view/home_page.dart';
 import 'package:tech_application/view/profile_page.dart';
@@ -21,6 +23,7 @@ class MainScreen extends StatelessWidget {
 
     return SafeArea(
         child: Scaffold(
+      backgroundColor: SolidColors.scaffoldBackground,
       key: _key,
       drawer: Drawer(
         backgroundColor: SolidColors.scaffoldBackground,
@@ -61,7 +64,9 @@ class MainScreen extends StatelessWidget {
                   MyStrings.shareTec,
                   style: textTheme.headlineMedium,
                 ),
-                onTap: () {},
+                onTap: () async {
+                  await Share.share(MyStrings.shareText);
+                },
               ),
               const Divider(
                 color: SolidColors.dividerColor,
@@ -72,7 +77,15 @@ class MainScreen extends StatelessWidget {
                   MyStrings.tecIngithub,
                   style: textTheme.headlineMedium,
                 ),
-                onTap: () {},
+                onTap: () {
+                  if (browserLauncherURL(MyStrings.techBlogGithubUrl) ==
+                      false) {
+                    showErrorSnackBar(context,
+                        "can't open this ${MyStrings.techBlogGithubUrl}");
+                  } else {
+                    browserLauncherURL(MyStrings.techBlogGithubUrl);
+                  }
+                },
               ),
               const Divider(
                 color: SolidColors.dividerColor,
