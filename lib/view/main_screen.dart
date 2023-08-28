@@ -5,7 +5,7 @@ import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/gen/assets.gen.dart';
-import 'package:tech_application/view/home_page.dart';
+import 'package:tech_application/view/home_screen.dart';
 import 'package:tech_application/view/profile_page.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -121,7 +121,7 @@ class MainScreen extends StatelessWidget {
               return IndexedStack(
                 index: selectedMainScreenPageIndex.value,
                 children: [
-                  HomePage(
+                  HomeScreen(
                       size: size, textTheme: textTheme, bodyMargin: bodyMargin),
                   ProfilePage(
                       size: size, textTheme: textTheme, bodyMargin: bodyMargin),
