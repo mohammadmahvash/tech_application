@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/controller/home_screen_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../Models/fake_data.dart';
 
 class HashtagComponent extends StatelessWidget {
   const HashtagComponent({
@@ -34,9 +34,9 @@ class HashtagComponent extends StatelessWidget {
               color: Colors.white,
               size: 15,
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 10),
             Text(
-              tagList[index].title!,
+              Get.find<HomeScreenController>().tagsList[index].title!,
               style: textTheme.titleLarge,
             )
           ],

@@ -25,15 +25,20 @@ class HomeScreenController extends GetxController {
     var response = await DioService().getMethod(ApiConstant.getHomeItems);
 
     if (response.statusCode == 200) {
+      poster.value = PosterModel.fromJson(response.data['poster']);
+
+      response.data['tags'].forEach((element) {
+        tagsList.add(HashtagModel.fromJson(element));
+      });
+
       response.data['top_visited'].forEach((element) {
         topArticlesList.add(ArticleModel.fromJson(element));
       });
+
       response.data['top_podcasts'].forEach((element) {
         topPodcastsList.add(PodcastModel.fromJson(element));
       });
       topPodcastsList.removeRange(0, 3);
-
-      poster.value = PosterModel.fromJson(response.data['poster']);
 
       loading.value = false;
     }

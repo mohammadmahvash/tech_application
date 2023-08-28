@@ -33,8 +33,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 homePagePoster(),
                 const SizedBox(height: 30),
-                HomePageHashtagList(
-                    bodyMargin: bodyMargin, textTheme: textTheme),
+                homePageHashtagList(),
                 const SizedBox(height: 30),
                 HomePageBlogListTitle(
                     bodyMargin: bodyMargin, textTheme: textTheme),
@@ -56,7 +55,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  SizedBox homePageBlogListItem() {
+  Widget homePageBlogListItem() {
     return SizedBox(
       height: size.height / 3.6,
       child: ListView.builder(
@@ -151,7 +150,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  SizedBox homePagePodcastListItem() {
+  Widget homePagePodcastListItem() {
     return SizedBox(
       height: size.height / 3.6,
       child: ListView.builder(
@@ -207,7 +206,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  SizedBox homePagePoster() {
+  Widget homePagePoster() {
     return SizedBox(
       width: size.width / 1.28,
       height: size.height / 4.2,
@@ -254,6 +253,29 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget homePageHashtagList() {
+    return SizedBox(
+    height: 40,
+    child: ListView.builder(
+      itemCount: homeScreenController.tagsList.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.fromLTRB(
+              index == homeScreenController.tagsList.length - 1 ? bodyMargin : 0,
+              0,
+              index == 0 ? bodyMargin : 6,
+              0),
+          child: HashtagComponent(
+            textTheme: textTheme,
+            index: index,
+          ),
+        );
+      },
+    ),
+  );
   }
 }
 
@@ -314,41 +336,6 @@ class HomePageBlogListTitle extends StatelessWidget {
             style: textTheme.titleMedium,
           )
         ],
-      ),
-    );
-  }
-}
-
-class HomePageHashtagList extends StatelessWidget {
-  const HomePageHashtagList({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: ListView.builder(
-        itemCount: tagList.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(
-                index == tagList.length - 1 ? bodyMargin : 0,
-                0,
-                index == 0 ? bodyMargin : 10,
-                0),
-            child: HashtagComponent(
-              textTheme: textTheme,
-              index: index,
-            ),
-          );
-        },
       ),
     );
   }
