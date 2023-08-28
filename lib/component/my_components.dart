@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Models/fake_data.dart';
-
 
 class HashtagComponent extends StatelessWidget {
   const HashtagComponent({
@@ -86,4 +86,18 @@ void showErrorSnackBar(BuildContext context, String message) {
       ),
     ),
   ));
+}
+
+SpinKitFadingCircle circularLoading() {
+  return const SpinKitFadingCircle(
+    color: SolidColors.primaryColor,
+    size: 30.0,
+  );
+}
+
+SpinKitFadingCube cubeLoading() {
+  return const SpinKitFadingCube(
+    color: SolidColors.primaryColor,
+    size: 30.0,
+  );
 }

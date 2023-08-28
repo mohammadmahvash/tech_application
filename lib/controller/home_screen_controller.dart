@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:tech_application/Models/article_model.dart';
 import 'package:tech_application/Models/hashtag_model.dart';
@@ -9,10 +7,11 @@ import 'package:tech_application/component/constant/api_constant.dart';
 import 'package:tech_application/services/dio_service.dart';
 
 class HomeScreenController extends GetxController {
-  late Rx<PosterModel> poster;
+  Rx<PosterModel> poster = PosterModel().obs;
   RxList<ArticleModel> topArticlesList = RxList();
   RxList<PodcastModel> topPodcastsList = RxList();
   RxList<HashtagModel> tagsList = RxList();
+  RxBool loading = false.obs;
 
   @override
   void onInit() {
@@ -21,6 +20,8 @@ class HomeScreenController extends GetxController {
   }
 
   Future getHomeItems() async {
+    loading.value = true;
+
     var response = await DioService().getMethod(ApiConstant.getHomeItems);
 
     if (response.statusCode == 200) {
@@ -31,6 +32,10 @@ class HomeScreenController extends GetxController {
         topPodcastsList.add(PodcastModel.fromJson(element));
       });
       topPodcastsList.removeRange(0, 3);
+
+      poster.value = PosterModel.fromJson(response.data['poster']);
+
+      loading.value = false;
     }
   }
 }

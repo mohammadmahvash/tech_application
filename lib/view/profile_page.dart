@@ -18,80 +18,83 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 30),
-        Image(
-          image: Assets.images.profileavatar.provider(),
-          height: 100,
-        ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ImageIcon(
-              Assets.icons.bluepen.provider(),
-              color: SolidColors.seeMore,
-            ),
-            const SizedBox(width: 8),
-            Text(
-              MyStrings.imageProfileEdit,
-              style: textTheme.titleMedium,
-            )
-          ],
-        ),
-        const SizedBox(height: 40),
-        Text(
-          MyStrings.nameFatemeAmiri,
-          style: textTheme.headlineMedium,
-        ),
-        const SizedBox(height: 10),
-        Text(
-          MyStrings.gmailFatemeAmiri,
-          style: textTheme.headlineMedium,
-        ),
-        const SizedBox(height: 25),
-        DividerTech(size: size),
-        InkWell(
-          onTap: () {},
-          splashColor: SolidColors.primaryColor,
-          child: SizedBox(
-              height: 50,
-              child: Center(
-                child: Text(
-                  MyStrings.myFavBlog,
-                  style: textTheme.headlineLarge,
-                ),
-              )),
-        ),
-        DividerTech(size: size),
-        InkWell(
-          onTap: () {},
-          splashColor: SolidColors.primaryColor,
-          child: SizedBox(
-              height: 50,
-              child: Center(
-                child: Text(
-                  MyStrings.myFavPodcast,
-                  style: textTheme.headlineLarge,
-                ),
-              )),
-        ),
-        DividerTech(size: size),
-        InkWell(
-          onTap: () {},
-          splashColor: SolidColors.primaryColor,
-          child: SizedBox(
-              height: 50,
-              child: Center(
-                child: Text(
-                  MyStrings.logOut,
-                  style: textTheme.headlineLarge,
-                ),
-              )),
-        ),
-        // const SizedBox(height: 150),
-      ],
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          const SizedBox(height: 30),
+          Image(
+            image: Assets.images.profileavatar.provider(),
+            height: 100,
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ImageIcon(
+                Assets.icons.bluepen.provider(),
+                color: SolidColors.seeMore,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                MyStrings.imageProfileEdit,
+                style: textTheme.titleMedium,
+              )
+            ],
+          ),
+          const SizedBox(height: 40),
+          Text(
+            MyStrings.nameFatemeAmiri,
+            style: textTheme.headlineMedium,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            MyStrings.gmailFatemeAmiri,
+            style: textTheme.headlineMedium,
+          ),
+          const SizedBox(height: 25),
+          DividerTech(size: size),
+          InkWell(
+            onTap: () {},
+            splashColor: SolidColors.primaryColor,
+            child: SizedBox(
+                height: 50,
+                child: Center(
+                  child: Text(
+                    MyStrings.myFavBlog,
+                    style: textTheme.headlineLarge,
+                  ),
+                )),
+          ),
+          DividerTech(size: size),
+          InkWell(
+            onTap: () {},
+            splashColor: SolidColors.primaryColor,
+            child: SizedBox(
+                height: 50,
+                child: Center(
+                  child: Text(
+                    MyStrings.myFavPodcast,
+                    style: textTheme.headlineLarge,
+                  ),
+                )),
+          ),
+          DividerTech(size: size),
+          InkWell(
+            onTap: () {},
+            splashColor: SolidColors.primaryColor,
+            child: SizedBox(
+                height: 50,
+                child: Center(
+                  child: Text(
+                    MyStrings.logOut,
+                    style: textTheme.headlineLarge,
+                  ),
+                )),
+          ),
+          // const SizedBox(height: 150),
+        ],
+      ),
     );
   }
 }
