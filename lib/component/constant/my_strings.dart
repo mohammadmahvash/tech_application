@@ -45,6 +45,8 @@ www.sasansafari.com
 من متن و بدنه اصلی مقاله هستم ، اگه میخوای من رو ویرایش کنی و یه مقاله جذاب بنویسی ، نوشته آبی رنگ بالا که نوشته "ویرایش متن اصلی مقاله" رو با انگشتت لمس کن تا وارد ویرایشگر بشی""";
 
   static String visit = 'بازدید';
+  static String titleAppBarArticlesList = "لیست مقاله ها";
+  static String titleAppBarPodcastsList = "لیست پادکست ها";
   static String titleAppBarManageArticle = "مدیریت مقاله ها";
   static String managePodcast = "مدیریت پادکست ها";
   static String titleAppBarArticleContentEditor = "نوشتن/ویرایش مقاله ";

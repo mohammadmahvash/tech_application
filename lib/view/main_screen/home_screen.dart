@@ -7,7 +7,7 @@ import 'package:tech_application/controller/home_screen_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../component/my_components.dart';
+import '../../component/my_components.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
