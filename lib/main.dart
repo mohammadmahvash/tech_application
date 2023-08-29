@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tech_application/view/article_list_screen.dart';
+import 'package:tech_application/view/single_article_content.dart';
 
 import 'component/constant/my_colors.dart';
 import 'view/splash_screen.dart';
@@ -83,16 +83,19 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: SolidColors.primaryColor),
               labelSmall: TextStyle(
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: FontWeight.w800,
                   color: SolidColors.textTitle),
               labelMedium: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: SolidColors.hintText),
+                  bodySmall: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: SolidColors.seeMore)
             )),
         debugShowCheckedModeBanner: false,
-        // home: const SplashScreen());
-        home: const ArticleListScreen());
+        home: SingleArticleContent());
   }
 }

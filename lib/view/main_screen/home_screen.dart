@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tech_application/Models/fake_data.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/controller/home_screen_controller.dart';
@@ -257,25 +256,27 @@ class HomeScreen extends StatelessWidget {
 
   Widget homePageHashtagList() {
     return SizedBox(
-    height: 40,
-    child: ListView.builder(
-      itemCount: homeScreenController.tagsList.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: EdgeInsets.fromLTRB(
-              index == homeScreenController.tagsList.length - 1 ? bodyMargin : 0,
-              0,
-              index == 0 ? bodyMargin : 6,
-              0),
-          child: HashtagComponent(
-            textTheme: textTheme,
-            index: index,
-          ),
-        );
-      },
-    ),
-  );
+      height: 40,
+      child: ListView.builder(
+        itemCount: homeScreenController.tagsList.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.fromLTRB(
+                index == homeScreenController.tagsList.length - 1
+                    ? bodyMargin
+                    : 0,
+                0,
+                index == 0 ? bodyMargin : 6,
+                0),
+            child: HashtagComponent(
+              textTheme: textTheme,
+              index: index,
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
