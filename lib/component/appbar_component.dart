@@ -5,7 +5,7 @@ PreferredSize appBar(double bodyMargin, TextTheme textTheme ,String title) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(60),
     child: Padding(
-      padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin / 1.5),
+      padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin / 1.9),
       child: AppBar(
         backgroundColor: SolidColors.scaffoldBackground,
         elevation: 0,

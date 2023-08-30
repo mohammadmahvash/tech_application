@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tech_application/view/single_article_content.dart';
+import 'package:get/get.dart';
+import 'package:tech_application/view/article_list_screen.dart';
+import 'package:tech_application/view/single_article_info.dart';
 
 import 'component/constant/my_colors.dart';
 import 'view/splash_screen.dart';
@@ -29,15 +31,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('fa'), // persian
-        ],
+    return GetMaterialApp(
+        locale: const Locale('fa'),
         theme: ThemeData(
             fontFamily: 'dana',
             inputDecorationTheme: const InputDecorationTheme(
@@ -79,7 +74,7 @@ class MainApp extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                   color: SolidColors.textTitle),
               headlineSmall: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: SolidColors.primaryColor),
               labelSmall: TextStyle(
@@ -96,6 +91,6 @@ class MainApp extends StatelessWidget {
                   color: SolidColors.seeMore)
             )),
         debugShowCheckedModeBanner: false,
-        home: SingleArticleContent());
+        home: ArticleListScreen());
   }
 }

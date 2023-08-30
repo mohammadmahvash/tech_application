@@ -5,12 +5,17 @@ import 'package:tech_application/component/appbar_component.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/my_components.dart';
-import 'package:tech_application/controller/article_controller.dart';
+import 'package:tech_application/controller/article_info_controller.dart';
+import 'package:tech_application/controller/article_list_controller.dart';
+import 'package:tech_application/view/single_article_info.dart';
 
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key});
 
-  final ArticleController articleController = Get.put(ArticleController());
+  final ArticleListController articleListController =
+      Get.put(ArticleListController());
+  final ArticleInfoController articleInfoController =
+      Get.put(ArticleInfoController());
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -23,20 +28,27 @@ class ArticleListScreen extends StatelessWidget {
       appBar: appBar(bodyMargin, textTheme, MyStrings.titleAppBarArticlesList),
       body: Obx(
         () => Padding(
-          padding: EdgeInsets.only(left: bodyMargin/1.5, right: bodyMargin / 1.5),
-          child: SizedBox(
-            child: ListView.builder(
-              itemCount: articleController.articleList.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+          padding:
+              EdgeInsets.only(left: bodyMargin / 1.9, right: bodyMargin / 1.9),
+          child: ListView.builder(
+            itemCount: articleListController.articleList.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: InkWell(
+                  onTap: () {
+                    articleInfoController.id.value =
+                        int.parse(articleListController.articleList[index].id!);
+                    Get.to(SingleArticleInfo());
+                  },
                   child: Row(
                     children: [
                       SizedBox(
-                        width: size.width / 4.2,
-                        height: size.height / 8,
+                        width: size.width / 4,
+                        height: size.height / 7,
                         child: CachedNetworkImage(
-                          imageUrl: articleController.articleList[index].image!,
+                          imageUrl:
+                              articleListController.articleList[index].image!,
                           imageBuilder: (context, imageProvider) => Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -51,34 +63,40 @@ class ArticleListScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 5),
                       Expanded(
                         child: Column(
                           children: [
-                            Text(articleController.articleList[index].title!,
+                            Text(
+                                articleListController.articleList[index].title!,
                                 style: textTheme.headlineMedium,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3),
-                                const SizedBox(height: 10),
-                                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(articleController.articleList[index].author!,
-                                style: textTheme.labelSmall),
-                                Text("${articleController.articleList[index].view!} ${MyStrings.visit}",
-                                style: textTheme.labelSmall),
-                                const SizedBox(width: 20),
-                                Text(articleController.articleList[index].categoryName!,
-                                style: textTheme.bodySmall),
-                                  ],
-                                )
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                    articleListController
+                                        .articleList[index].author!,
+                                    style: textTheme.labelSmall),
+                                Text(
+                                    "${articleListController.articleList[index].view!} ${MyStrings.visit}",
+                                    style: textTheme.labelSmall),
+                                Text(
+                                    articleListController
+                                        .articleList[index].categoryName!,
+                                    style: textTheme.bodySmall),
+                              ],
+                            )
                           ],
                         ),
                       )
                     ],
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ),
       ),
