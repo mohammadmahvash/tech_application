@@ -7,7 +7,7 @@ import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article_info_controller.dart';
 import 'package:tech_application/controller/article_list_controller.dart';
-import 'package:tech_application/view/single_article_info.dart';
+import 'package:tech_application/view/article/single_article_info.dart';
 
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key});
@@ -39,7 +39,7 @@ class ArticleListScreen extends StatelessWidget {
                   onTap: () {
                     articleInfoController.id.value =
                         int.parse(articleListController.articleList[index].id!);
-                    Get.to(SingleArticleInfo());
+                    Get.to(()=>const SingleArticleInfo());
                   },
                   child: Row(
                     children: [
