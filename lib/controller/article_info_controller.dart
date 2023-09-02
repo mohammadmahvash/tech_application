@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:tech_application/Models/article_info_model.dart';
 import 'package:tech_application/Models/article_model.dart';
 import 'package:tech_application/Models/hashtag_model.dart';
 import 'package:tech_application/component/constant/api_constant.dart';
 import 'package:tech_application/services/dio_service.dart';
+import 'package:tech_application/view/article/single_article_info.dart';
 
 class ArticleInfoController extends GetxController {
   RxInt id = RxInt(0);
@@ -14,7 +13,8 @@ class ArticleInfoController extends GetxController {
   RxList<HashtagModel> relatedTags = RxList();
   RxBool loading = false.obs;
 
-  Future getArticleInfo() async {
+  Future getArticleInfo(String id) async {
+    articleInfoModel = ArticleInfoModel().obs;
     loading.value = true;
     // TODO userId is hardCode
     var userId = "";
@@ -27,8 +27,8 @@ class ArticleInfoController extends GetxController {
     if (response.statusCode == 200) {
       articleInfoModel.value = ArticleInfoModel.fromJson(response.data);
 
+      relatedArticle.clear();
       response.data["related"].forEach((element) {
-
         relatedArticle.add(ArticleModel.fromJson(element));
       });
       relatedArticle.removeWhere((element) => element.author == null);
@@ -36,10 +36,12 @@ class ArticleInfoController extends GetxController {
       relatedArticle.removeWhere((element) => element.author == "''");
       relatedArticle.removeWhere((element) => element.title == "تست");
 
+      relatedTags.clear();
       response.data["tags"].forEach((element) {
         relatedTags.add(HashtagModel.fromJson(element));
       });
       loading.value = false;
+      Get.to(() => SingleArticleInfo());
     }
   }
 }

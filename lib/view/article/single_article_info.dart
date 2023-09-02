@@ -2,28 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article_info_controller.dart';
+import 'package:tech_application/controller/article_list_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
+import 'package:tech_application/view/article/article_list_screen.dart';
 
-class SingleArticleInfo extends StatefulWidget {
-  const SingleArticleInfo({super.key});
+class SingleArticleInfo extends StatelessWidget {
+  SingleArticleInfo({super.key});
 
-  @override
-  State<SingleArticleInfo> createState() => _SingleArticleInfoState();
-}
-
-class _SingleArticleInfoState extends State<SingleArticleInfo> {
   final ArticleInfoController articleInfoController =
       Get.put(ArticleInfoController());
-
-  @override
-  void initState() {
-    super.initState();
-    articleInfoController.getArticleInfo();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +70,9 @@ class _SingleArticleInfoState extends State<SingleArticleInfo> {
                               children: [
                                 const SizedBox(width: 10),
                                 InkWell(
-                                  onTap: () => Get.back(),
+                                  onTap: () {
+                                    Get.back();
+                                  },
                                   child: const Icon(
                                     Icons.arrow_back_outlined,
                                     color: Colors.white,
@@ -90,9 +84,14 @@ class _SingleArticleInfoState extends State<SingleArticleInfo> {
                                   color: Colors.white,
                                 ),
                                 const SizedBox(width: 20),
-                                const Icon(
-                                  Icons.share,
-                                  color: Colors.white,
+                                InkWell(
+                                  onTap: () async{
+                                    await Share.share("${articleInfoController.articleInfoModel.value.title!}\n ${MyStrings.shareText}");
+                                  },
+                                  child: const Icon(
+                                    Icons.share,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 const SizedBox(width: 15),
                               ],
@@ -149,12 +148,9 @@ class _SingleArticleInfoState extends State<SingleArticleInfo> {
                   )
                 ],
               )
-            : Column(
-                children: [
-                  SizedBox(height: size.height / 2.3),
-                  circularLoading(),
-                ],
-              )),
+            : SizedBox(
+              height: Get.height,
+              child: circularLoading())),
       )),
     );
   }
@@ -166,81 +162,86 @@ class _SingleArticleInfoState extends State<SingleArticleInfo> {
         itemCount: articleInfoController.relatedArticle.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: size.height / 5.3,
-                  width: size.width / 2.4,
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        articleInfoController.relatedArticle[index].image!,
-                    imageBuilder: (context, imageProvider) => Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                  image: imageProvider, fit: BoxFit.cover)),
-                          foregroundDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              gradient: const LinearGradient(
-                                  colors: GradientColors.blogPost,
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter)),
-                        ),
-                        Positioned(
-                          bottom: 8,
-                          right: 0,
-                          left: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                  articleInfoController
-                                      .relatedArticle[index].author!,
-                                  style: textTheme.titleSmall),
-                              Row(
-                                children: [
-                                  Text(
-                                    articleInfoController
-                                        .relatedArticle[index].view!,
-                                    style: textTheme.titleSmall,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  const Icon(
-                                    Icons.remove_red_eye,
-                                    color: Colors.white,
-                                    size: 18,
-                                  )
-                                ],
-                              ),
-                            ],
+          return GestureDetector(
+            onTap: () {
+              articleInfoController.getArticleInfo(articleInfoController.relatedArticle[index].id!);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height / 5.3,
+                    width: size.width / 2.4,
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          articleInfoController.relatedArticle[index].image!,
+                      imageBuilder: (context, imageProvider) => Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                    image: imageProvider, fit: BoxFit.cover)),
+                            foregroundDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: const LinearGradient(
+                                    colors: GradientColors.blogPost,
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.topCenter)),
                           ),
-                        )
-                      ],
-                    ),
-                    placeholder: (context, url) => circularLoading(),
-                    errorWidget: (context, url, error) => const Icon(
-                      Icons.image_not_supported_outlined,
-                      color: Colors.grey,
-                      size: 50,
+                          Positioned(
+                            bottom: 8,
+                            right: 0,
+                            left: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                    articleInfoController
+                                        .relatedArticle[index].author!,
+                                    style: textTheme.titleSmall),
+                                Row(
+                                  children: [
+                                    Text(
+                                      articleInfoController
+                                          .relatedArticle[index].view!,
+                                      style: textTheme.titleSmall,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    const Icon(
+                                      Icons.remove_red_eye,
+                                      color: Colors.white,
+                                      size: 18,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      placeholder: (context, url) => circularLoading(),
+                      errorWidget: (context, url, error) => const Icon(
+                        Icons.image_not_supported_outlined,
+                        color: Colors.grey,
+                        size: 50,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: size.width / 2.7,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Text(
-                      articleInfoController.relatedArticle[index].title!,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
+                  SizedBox(
+                    width: size.width / 2.7,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Text(
+                        articleInfoController.relatedArticle[index].title!,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           );
         },
@@ -255,30 +256,30 @@ class _SingleArticleInfoState extends State<SingleArticleInfo> {
         itemCount: articleInfoController.relatedTags.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Padding(
-              padding: const EdgeInsets.only(right: 5),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 10, 0),
-                  child: Row(
-                    children: [
-                      ImageIcon(
-                        Assets.icons.hashtag.provider(),
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        articleInfoController.relatedTags[index].title!,
-                        style: textTheme.titleSmall,
-                      )
-                    ],
+          return GestureDetector(
+            onTap: () async {
+              var tagId = articleInfoController.relatedTags[index].id!;
+              await Get.find<ArticleListController>()
+                  .getArticleListByTagId(tagId);
+
+              var tagName ="${MyStrings.byTagName} ${articleInfoController.relatedTags[index].title!}";
+              Get.to(() => ArticleListScreen(title: tagName));
+            },
+            child: Padding(
+                padding: const EdgeInsets.only(right: 5),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+                    child: Text(
+                      articleInfoController.relatedTags[index].title!,
+                      style: textTheme.titleSmall,
+                    ),
                   ),
-                ),
-              ));
+                )),
+          );
         },
       ),
     );

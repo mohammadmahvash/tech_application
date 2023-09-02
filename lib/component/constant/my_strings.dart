@@ -12,7 +12,8 @@ class MyStrings {
   static const String logOut = "خروج از حساب کاربری";
   static const String insertYourEmail = "لطفا ایمیلت رو وارد کن";
   static const String activateCode = "کد فعال سازی رو وارد کن ";
-  static const String chooseFavoriteCategories = "دسته بندی هایی که دوست داری رو انتخاب کن";
+  static const String chooseFavoriteCategories =
+      "دسته بندی هایی که دوست داری رو انتخاب کن";
   static const String welcome = """به تک‌بلاگ خوش اومدی
 
 برای ارسال مطلب و پادکست باید حتما 
@@ -22,10 +23,7 @@ class MyStrings {
 اضافه نکردی !!!""";
   static const String shareText = """
 
-من از تکبلاگ استفاده میکنم ، خیلی باحاله ، تو هم داشته باش\n
-
-www.sasansafari.com
-
+من از تکبلاگ استفاده میکنم ، خیلی باحاله ، تو هم داشته باش
 """;
   static const String podcastEmpty = """  
 
@@ -85,10 +83,13 @@ www.sasansafari.com
   static String youAlreadyLeft = "قبلا خارج شدی !!";
   static String areYouSureExit = "آیا از خروج خود مطمئن هستید ؟";
   static String addNewPodcast = "اضافه کردن یک پادکست جدید";
+  static String newArticles = "مقالات جدید";
+  static String newPodcasts = "پادکست های جدید";
   static String addNewFile = "اضافه کردن فایل";
   static String frilance = "بخش چهارم : فریلنسر دیوانه";
   static String meaningFullTitle = "لطفا یک عنوان پرمعنا انتخاب کن";
   static String verification = "تایید";
+  static String byTagName = "بر اساس تگ";
   static String later = "بعدا";
   static String minute = "دقیقه";
   static String houre = "ساعت";

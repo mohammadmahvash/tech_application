@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:tech_application/view/article/article_list_screen.dart';
+import 'package:tech_application/view/splash_screen.dart';
 
 import 'component/constant/my_colors.dart';
 
@@ -51,7 +51,7 @@ class MainApp extends StatelessWidget {
                         SolidColors.primaryColor))),
             textTheme: const TextTheme(
                 titleLarge: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.w700,
                     color: SolidColors.posterTitle),
                 titleMedium: TextStyle(
@@ -87,6 +87,7 @@ class MainApp extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     color: SolidColors.seeMore))),
         debugShowCheckedModeBanner: false,
-        home: ArticleListScreen());
+        // home: ArticleListScreen(title: MyStrings.newArticles,));
+        home: const SplashScreen());
   }
 }

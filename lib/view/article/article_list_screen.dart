@@ -7,10 +7,11 @@ import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article_info_controller.dart';
 import 'package:tech_application/controller/article_list_controller.dart';
-import 'package:tech_application/view/article/single_article_info.dart';
 
 class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({super.key});
+  ArticleListScreen({super.key, required this.title});
+
+  final String title;
 
   final ArticleListController articleListController =
       Get.put(ArticleListController());
@@ -25,21 +26,21 @@ class ArticleListScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       backgroundColor: SolidColors.scaffoldBackground,
-      appBar: appBar(bodyMargin, textTheme, MyStrings.titleAppBarArticlesList),
+      appBar: appBar(bodyMargin, textTheme, title),
       body: Obx(
         () => Padding(
           padding:
               EdgeInsets.only(left: bodyMargin / 1.9, right: bodyMargin / 1.9),
           child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
             itemCount: articleListController.articleList.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: InkWell(
                   onTap: () {
-                    articleInfoController.id.value =
-                        int.parse(articleListController.articleList[index].id!);
-                    Get.to(()=>const SingleArticleInfo());
+                    articleInfoController.getArticleInfo(
+                        articleListController.articleList[index].id!);
                   },
                   child: Row(
                     children: [

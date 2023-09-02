@@ -30,6 +30,8 @@ class HomeScreenController extends GetxController {
       response.data['tags'].forEach((element) {
         tagsList.add(HashtagModel.fromJson(element));
       });
+      tagsList.removeWhere((element) => element.title=="اخبار");
+      tagsList.removeWhere((element) => element.title=="اخبار فیلم و سریال");
 
       response.data['top_visited'].forEach((element) {
         topArticlesList.add(ArticleModel.fromJson(element));
