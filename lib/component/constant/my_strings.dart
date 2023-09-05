@@ -79,7 +79,7 @@ class MyStrings {
   static String exit = "خروج";
   static String cancel = "لغو";
   static String error = "خطا";
-  static String errorText = "Eror";
+  static String errorText = "Error";
   static String youAlreadyLeft = "قبلا خارج شدی !!";
   static String areYouSureExit = "آیا از خروج خود مطمئن هستید ؟";
   static String addNewPodcast = "اضافه کردن یک پادکست جدید";
@@ -95,7 +95,8 @@ class MyStrings {
   static String houre = "ساعت";
   static String isEmail = "isEmail:";
   static String tecEmail = "techblog@gmail.com";
-  static String enterEmaile = "لطفا ایمیل خود را به درستی وارد کنید";
+  static String activateCodeIsNotCorrect = "کد فعال سازی وارد شده اشتباه است";
+  static String pleaseEnterEmailCorrect = "لطفا ایمیل خود را به درستی وارد کنید";
   static String formatEmailNotCorrect =
       "فرمت ایمیل درست نمیباشد, لطفا ایمیل خود را به درستی وارد کنید";
   static String selectAudioFile = "انتخاب فابل صوتی";

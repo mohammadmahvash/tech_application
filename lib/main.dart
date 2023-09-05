@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tech_application/view/splash_screen.dart';
 
 import 'component/constant/my_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   ByteData data =
       await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
   SecurityContext.defaultContext
@@ -20,6 +20,9 @@ void main() async {
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: SolidColors.systemNavigationBarColor,
       systemNavigationBarIconBrightness: Brightness.dark));
+
+  await GetStorage.init();
+
   runApp(const MainApp());
 }
 

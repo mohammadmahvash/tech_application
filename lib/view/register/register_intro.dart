@@ -150,8 +150,6 @@ class RegisterIntro extends StatelessWidget {
                   child: ElevatedButton(
                       onPressed: () {
                         registerController.verifyCode();
-                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        //     builder: (context) => const FavoriteCategories()));
                       },
                       child: Text(
                         MyStrings.continuation,
