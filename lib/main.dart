@@ -7,13 +7,10 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_application/view/splash_screen.dart';
 
 import 'component/constant/my_colors.dart';
+import 'my_http_overrides.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  ByteData data =
-      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-  SecurityContext.defaultContext
-      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  HttpOverrides.global = MyHttpOverrides();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: SolidColors.statusBarColor,

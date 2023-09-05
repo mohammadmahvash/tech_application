@@ -41,9 +41,6 @@ class RegisterController extends GetxController {
       box.write(MyStorage.token, response.data["token"]);
       box.write(MyStorage.userId, response.data["user_id"]);
 
-      print("read::: ${box.read(MyStorage.token)}");
-      print("read::: ${box.read(MyStorage.userId)}");
-
       Get.to(() => MainScreen());
     } else {
       log("error");
