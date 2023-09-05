@@ -5,6 +5,7 @@ import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/gen/assets.gen.dart';
+import 'package:tech_application/view/register/register_intro.dart';
 
 import 'home_screen.dart';
 import 'profile_page.dart';
@@ -183,7 +184,10 @@ class BottomNavigation extends StatelessWidget {
                     color: Colors.white,
                   )),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    //TODO Check if user is sign in or not
+                    Get.to(()=> RegisterIntro());
+                  },
                   icon: ImageIcon(
                     Assets.icons.write.provider(),
                     color: Colors.white,

@@ -74,8 +74,8 @@ class MyStrings {
 دونسته هات رو با جامعه‌ی گیک های فارسی زبان به اشتراک بذار..
 """;
 
-  static String nameFatemeAmiri = "فاطمه امیری";
-  static String gmailFatemeAmiri = "fatemeamiri@gmail.com";
+  static String nameMohamadMahvash = "محمد ماهوش";
+  static String gmailMohamadMahvash = "mohammadmahvash1@gmail.com";
   static String exit = "خروج";
   static String cancel = "لغو";
   static String error = "خطا";

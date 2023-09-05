@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tech_application/Models/fake_data.dart';
+import 'package:get/get.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/controller/home_screen_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/component/my_components.dart';
 
@@ -15,11 +16,15 @@ class FavoriteCategories extends StatefulWidget {
 }
 
 class _FavoriteCategoriesState extends State<FavoriteCategories> {
+  final HomeScreenController homeScreenController =
+      Get.put(HomeScreenController());
+
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
     double bodyMargin = size.width / 10;
+    // List<HashtagModel> selectedTags = [];
 
     return SafeArea(
         child: Scaffold(
@@ -58,94 +63,98 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
               ),
               const SizedBox(height: 20),
               // tagList
-              SizedBox(
-                height: 95,
-                child: GridView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: tagList.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 5,
-                      crossAxisSpacing: 10,
-                      childAspectRatio: 0.2),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.fromLTRB(
-                          index == tagList.length - 1 ||
-                                  index == tagList.length - 2
-                              ? bodyMargin
-                              : 0,
-                          0,
-                          index == 0 || index == 1 ? bodyMargin : 5,
-                          0),
-                      child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              if (selectedTags.contains(tagList[index])) {
-                                showErrorSnackBar(context,
-                                    "نمیتوانید تگ تکراری انتخاب کنید!");
-                              } else {
-                                selectedTags.add(tagList[index]);
-                              }
-                            });
-                          },
-                          child: HashtagComponent(
-                              textTheme: textTheme, index: index)),
-                    );
-                  },
+              Obx(
+                ()=> SizedBox(
+                  height: 95,
+                  child: GridView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: homeScreenController.tagsList.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 5,
+                        crossAxisSpacing: 10,
+                        mainAxisExtent: 180,
+                        childAspectRatio: 0.22),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            index == homeScreenController.tagsList.length - 1 
+                                ? bodyMargin
+                                : 0,
+                            0,
+                            index == 0 || index == 1 ? bodyMargin : 5,
+                            0),
+                        child: InkWell(
+                            onTap: () {
+                                if (homeScreenController.selectedTags.contains(
+                                    homeScreenController.tagsList[index])) {
+                                  showErrorSnackBar(context,
+                                      "نمیتوانید تگ تکراری انتخاب کنید!");
+                                } else {
+                                  homeScreenController.selectedTags
+                                      .add(homeScreenController.tagsList[index]);
+                                }
+                            },
+                            child: HashtagComponent(
+                                textTheme: textTheme, index: index)),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
               Image.asset(Assets.images.arrowdown.path, scale: 1.8),
               const SizedBox(height: 30),
               //SelectedTags
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                child: SizedBox(
-                  width: size.width,
-                  height: 100,
-                  child: GridView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: selectedTags.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 5,
-                            childAspectRatio: 3.5),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: SolidColors.surface),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(width: 10),
-                              Text(
-                                selectedTags[index].title!,
-                                style: textTheme.labelSmall,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    selectedTags.removeAt(index);
-                                  });
-                                },
-                                child: const Icon(CupertinoIcons.xmark,
-                                    size: 20, color: Colors.grey),
-                              ),
-                            ],
+              Obx(
+                ()=> Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: SizedBox(
+                    width: size.width,
+                    height: 100,
+                    child: GridView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      itemCount: homeScreenController.selectedTags.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 5,
+                              childAspectRatio: 3.5),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: SolidColors.surface),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const SizedBox(width: 10),
+                                Text(
+                                  homeScreenController.selectedTags[index].title!,
+                                  style: textTheme.labelSmall,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      homeScreenController.selectedTags.removeAt(index);
+                                    });
+                                  },
+                                  child: const Icon(CupertinoIcons.xmark,
+                                      size: 20, color: Colors.grey),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -168,5 +177,3 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
     ));
   }
 }
-
-

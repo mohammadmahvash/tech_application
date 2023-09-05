@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/controller/register_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
-import 'package:tech_application/view/favorite_categories.dart';
 
 class RegisterIntro extends StatelessWidget {
-  const RegisterIntro({super.key});
+  RegisterIntro({super.key});
+
+  final RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +71,7 @@ class RegisterIntro extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
                   child: TextField(
+                    controller: registerController.emailTextEditingController,
                     onChanged: (value) {
                       // print("$value is email ${isEmail(value)}");
                     },
@@ -78,12 +82,13 @@ class RegisterIntro extends StatelessWidget {
                         hintStyle: textTheme.labelMedium),
                   ),
                 ),
-                 //continuationButton
+                //continuationButton
                 SizedBox(
                   width: size.width / 2.5,
                   height: size.height / 13,
                   child: ElevatedButton(
                       onPressed: () {
+                        registerController.registerEmail();
                         Navigator.of(context).pop();
                         _activatedCodeBottomSheet(context, size, textTheme);
                       },
@@ -98,6 +103,7 @@ class RegisterIntro extends StatelessWidget {
       },
     );
   }
+
   Future<dynamic> _activatedCodeBottomSheet(
       BuildContext context, Size size, TextTheme textTheme) {
     return showModalBottomSheet(
@@ -126,14 +132,15 @@ class RegisterIntro extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
                   child: TextField(
+                    controller:
+                        registerController.activatedCodeTextEditingController,
                     onChanged: (value) {
                       // print("$value is email ${isEmail(value)}");
                     },
                     style: textTheme.headlineMedium,
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
-                        hintText: "******",
-                        hintStyle: textTheme.labelMedium),
+                        hintText: "******", hintStyle: textTheme.labelMedium),
                   ),
                 ),
                 //continuationButton
@@ -142,7 +149,9 @@ class RegisterIntro extends StatelessWidget {
                   height: size.height / 13,
                   child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const FavoriteCategories()));
+                        registerController.verifyCode();
+                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        //     builder: (context) => const FavoriteCategories()));
                       },
                       child: Text(
                         MyStrings.continuation,

@@ -44,12 +44,12 @@ class ProfilePage extends StatelessWidget {
           ),
           const SizedBox(height: 40),
           Text(
-            MyStrings.nameFatemeAmiri,
+            MyStrings.nameMohamadMahvash,
             style: textTheme.headlineMedium,
           ),
           const SizedBox(height: 10),
           Text(
-            MyStrings.gmailFatemeAmiri,
+            MyStrings.gmailMohamadMahvash,
             style: textTheme.headlineMedium,
           ),
           const SizedBox(height: 25),

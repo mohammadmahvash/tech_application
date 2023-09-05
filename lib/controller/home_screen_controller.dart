@@ -11,6 +11,7 @@ class HomeScreenController extends GetxController {
   RxList<ArticleModel> topArticlesList = RxList();
   RxList<PodcastModel> topPodcastsList = RxList();
   RxList<HashtagModel> tagsList = RxList();
+  RxList<HashtagModel> selectedTags = RxList();
   RxBool loading = false.obs;
 
   @override
