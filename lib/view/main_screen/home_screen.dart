@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/controller/article_info_controller.dart';
 import 'package:tech_application/controller/article_list_controller.dart';
@@ -44,8 +45,8 @@ class HomeScreen extends StatelessWidget {
                 homePageHashtagList(),
                 const SizedBox(height: 30),
                 GestureDetector(
-                    onTap: () => Get.to(
-                        () => ArticleListScreen(title: MyStrings.newArticles)),
+                    onTap: () => Get.toNamed(MyRoute.routeArticleListScreen,
+                        arguments: {'title': MyStrings.newArticles}),
                     child: homePageBlogListTitle()),
                 homePageBlogListItem(),
                 const SizedBox(height: 30),
@@ -315,8 +316,11 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 articleListController.getArticleListByTagId(
                     homeScreenController.tagsList[index].id!);
-                    var tagName ="${MyStrings.byTagName} ${homeScreenController.tagsList[index].title}";
-                    Get.to(()=>ArticleListScreen(title: tagName));
+                var tagName =
+                    "${MyStrings.byTagName} ${homeScreenController.tagsList[index].title}";
+
+                Get.toNamed(MyRoute.routeArticleListScreen,
+                    arguments: {'title': tagName});
               },
               child: HashtagComponent(
                 textTheme: textTheme,

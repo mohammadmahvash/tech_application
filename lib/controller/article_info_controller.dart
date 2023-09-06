@@ -41,6 +41,9 @@ class ArticleInfoController extends GetxController {
       response.data["tags"].forEach((element) {
         relatedTags.add(HashtagModel.fromJson(element));
       });
+      relatedTags.removeWhere((element) => element.title == "اخبار");
+      relatedTags.removeWhere((element) => element.title == "اخبار فیلم و سریال");
+
       loading.value = false;
       Get.toNamed(MyRoute.routeSingleArticleInfo);
     }

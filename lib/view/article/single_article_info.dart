@@ -4,6 +4,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article_info_controller.dart';
@@ -85,8 +86,9 @@ class SingleArticleInfo extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 20),
                                 InkWell(
-                                  onTap: () async{
-                                    await Share.share("${articleInfoController.articleInfoModel.value.title!}\n ${MyStrings.shareText}");
+                                  onTap: () async {
+                                    await Share.share(
+                                        "${articleInfoController.articleInfoModel.value.title!}\n ${MyStrings.shareText}");
                                   },
                                   child: const Icon(
                                     Icons.share,
@@ -119,6 +121,10 @@ class SingleArticleInfo extends StatelessWidget {
                             const SizedBox(width: 10),
                             Text(articleInfoController
                                 .articleInfoModel.value.view!),
+                            const SizedBox(width: 3),
+                            Text(
+                              MyStrings.visit,
+                            )
                           ],
                         ),
                         const SizedBox(height: 30),
@@ -148,9 +154,7 @@ class SingleArticleInfo extends StatelessWidget {
                   )
                 ],
               )
-            : SizedBox(
-              height: Get.height,
-              child: circularLoading())),
+            : SizedBox(height: Get.height, child: circularLoading())),
       )),
     );
   }
@@ -164,7 +168,8 @@ class SingleArticleInfo extends StatelessWidget {
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              articleInfoController.getArticleInfo(articleInfoController.relatedArticle[index].id!);
+              articleInfoController.getArticleInfo(
+                  articleInfoController.relatedArticle[index].id!);
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
@@ -262,8 +267,11 @@ class SingleArticleInfo extends StatelessWidget {
               await Get.find<ArticleListController>()
                   .getArticleListByTagId(tagId);
 
-              var tagName ="${MyStrings.byTagName} ${articleInfoController.relatedTags[index].title!}";
-              Get.to(() => ArticleListScreen(title: tagName));
+              var tagName =
+                  "${MyStrings.byTagName} ${articleInfoController.relatedTags[index].title!}";
+
+              Get.toNamed(MyRoute.routeArticleListScreen,
+                  arguments: {'title': tagName});
             },
             child: Padding(
                 padding: const EdgeInsets.only(right: 5),

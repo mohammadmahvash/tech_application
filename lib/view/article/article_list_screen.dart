@@ -9,9 +9,10 @@ import 'package:tech_application/controller/article_info_controller.dart';
 import 'package:tech_application/controller/article_list_controller.dart';
 
 class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({super.key, required this.title,});
+  ArticleListScreen({super.key});
 
-  final String title;
+  final String title = Get.arguments['title'];
+  
 
   final ArticleListController articleListController =
       Get.find<ArticleListController>();
@@ -19,6 +20,7 @@ class ArticleListScreen extends StatelessWidget {
       Get.find<ArticleInfoController>();
   @override
   Widget build(BuildContext context) {
+    debugPrint(title);
     var textTheme = Theme.of(context).textTheme;
     var size = MediaQuery.of(context).size;
     double bodyMargin = size.width / 10;
