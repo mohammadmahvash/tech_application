@@ -3,6 +3,7 @@ import 'package:tech_application/Models/article_info_model.dart';
 import 'package:tech_application/Models/article_model.dart';
 import 'package:tech_application/Models/hashtag_model.dart';
 import 'package:tech_application/component/constant/api_constant.dart';
+import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/services/dio_service.dart';
 import 'package:tech_application/view/article/single_article_info.dart';
 
@@ -41,7 +42,7 @@ class ArticleInfoController extends GetxController {
         relatedTags.add(HashtagModel.fromJson(element));
       });
       loading.value = false;
-      Get.to(() => SingleArticleInfo());
+      Get.toNamed(MyRoute.routeSingleArticleInfo);
     }
   }
 }

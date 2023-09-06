@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/register_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
 class RegisterIntro extends StatelessWidget {
   RegisterIntro({super.key});
 
-  final RegisterController registerController = Get.put(RegisterController());
+  final registerController = Get.find<RegisterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -151,8 +154,15 @@ class RegisterIntro extends StatelessWidget {
                       onPressed: () {
                         registerController.verifyCode();
                       },
-                      child: Text(
-                        MyStrings.continuation,
+                      child: Obx(
+                        () => registerController.loading.value == false
+                            ? Text(
+                                MyStrings.continuation,
+                              )
+                            : const SpinKitFadingCircle(
+                                color: Colors.white,
+                                size: 30.0,
+                              ),
                       )),
                 )
               ],

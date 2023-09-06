@@ -15,7 +15,7 @@ class SingleArticleInfo extends StatelessWidget {
   SingleArticleInfo({super.key});
 
   final ArticleInfoController articleInfoController =
-      Get.put(ArticleInfoController());
+      Get.find<ArticleInfoController>();
 
   @override
   Widget build(BuildContext context) {

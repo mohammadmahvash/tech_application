@@ -9,14 +9,14 @@ import 'package:tech_application/controller/article_info_controller.dart';
 import 'package:tech_application/controller/article_list_controller.dart';
 
 class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({super.key, required this.title});
+  ArticleListScreen({super.key, required this.title,});
 
   final String title;
 
   final ArticleListController articleListController =
-      Get.put(ArticleListController());
+      Get.find<ArticleListController>();
   final ArticleInfoController articleInfoController =
-      Get.put(ArticleInfoController());
+      Get.find<ArticleInfoController>();
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
