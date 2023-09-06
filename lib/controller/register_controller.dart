@@ -42,33 +42,35 @@ class RegisterController extends GetxController {
       'command': 'verify',
     };
     var response = await DioService().postMethod(map, ApiConstant.postRegister);
-    log(response.data.toString());
-    var responseStatus = response.data["response"];
+    if (response.statusCode == 200) {
+      log(response.data.toString());
+      var responseStatus = response.data["response"];
 
-    loading.value = false;
+      loading.value = false;
 
-    switch (responseStatus) {
-      case 'verified':
-        var box = GetStorage();
-        box.write(MyStorage.token, response.data["token"]);
-        box.write(MyStorage.userId, response.data["user_id"]);
+      switch (responseStatus) {
+        case 'verified':
+          var box = GetStorage();
+          box.write(MyStorage.token, response.data["token"]);
+          box.write(MyStorage.userId, response.data["user_id"]);
 
-        Get.snackbar(MyStrings.logIn, MyStrings.yourRegistrationWasSuccesful,
-            backgroundColor: Colors.greenAccent);
+          Get.snackbar(MyStrings.logIn, MyStrings.yourRegistrationWasSuccesful,
+              backgroundColor: Colors.greenAccent);
 
-        Get.offAllNamed(MyRoute.routeMainScreen);
-        break;
-      case 'incorrect_code':
-        Get.snackbar(MyStrings.error, MyStrings.activateCodeIsNotCorrect,
-            backgroundColor: Colors.redAccent);
-        break;
-      case 'expired':
-        Get.snackbar(
-          MyStrings.error,
-          MyStrings.activateCodeIsExpired,
-          backgroundColor: Colors.redAccent,
-        );
-        break;
+          Get.offAllNamed(MyRoute.routeMainScreen);
+          break;
+        case 'incorrect_code':
+          Get.snackbar(MyStrings.error, MyStrings.activateCodeIsNotCorrect,
+              backgroundColor: Colors.redAccent);
+          break;
+        case 'expired':
+          Get.snackbar(
+            MyStrings.error,
+            MyStrings.activateCodeIsExpired,
+            backgroundColor: Colors.redAccent,
+          );
+          break;
+      }
     }
   }
 
@@ -116,30 +118,36 @@ class RegisterController extends GetxController {
               children: [
                 InkWell(
                   onTap: () => debugPrint("article management"),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        Assets.icons.articlemanagement.path,
-                        height: 28,
-                      ),
-                      const SizedBox(width: 10),
-                      Text(MyStrings.manageArticle,
-                          style: Get.theme.textTheme.headlineMedium),
-                    ],
+                  child: SizedBox(
+                    height: 40,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          Assets.icons.articlemanagement.path,
+                          height: 28,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(MyStrings.manageArticle,
+                            style: Get.theme.textTheme.headlineMedium),
+                      ],
+                    ),
                   ),
                 ),
                 InkWell(
                   onTap: () => debugPrint("podcast management"),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        Assets.icons.podcastmanagement.path,
-                        height: 28,
-                      ),
-                      const SizedBox(width: 10),
-                      Text(MyStrings.managePodcast,
-                          style: Get.theme.textTheme.headlineMedium),
-                    ],
+                  child: SizedBox(
+                    height: 40,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          Assets.icons.podcastmanagement.path,
+                          height: 28,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(MyStrings.managePodcast,
+                            style: Get.theme.textTheme.headlineMedium),
+                      ],
+                    ),
                   ),
                 ),
               ],

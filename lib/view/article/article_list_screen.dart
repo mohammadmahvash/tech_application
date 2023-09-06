@@ -19,7 +19,6 @@ class ArticleListScreen extends StatelessWidget {
       Get.find<ArticleInfoController>();
   @override
   Widget build(BuildContext context) {
-    debugPrint(title);
     double bodyMargin = Get.width / 10;
 
     return SafeArea(

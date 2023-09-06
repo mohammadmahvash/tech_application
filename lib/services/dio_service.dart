@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' as dio_service;
 
@@ -12,7 +11,12 @@ class DioService {
               responseType: ResponseType.json,
               method: "GET",
             ))
-        .then((response) => response);
+        .then((response) => response)
+        .catchError((err) {
+      if (err is DioException) {
+        return err.response!;
+      }
+    });
   }
 
   Future<dynamic> postMethod(Map<String, dynamic> map, String url) async {
@@ -24,6 +28,11 @@ class DioService {
                 contentType: "application/json",
                 responseType: ResponseType.json,
                 method: "POST"))
-        .then((response) => response);
+        .then((response) => response)
+        .catchError((err) {
+      if (err is DioException) {
+        return err.response!;
+      }
+    });
   }
 }
