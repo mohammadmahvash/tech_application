@@ -10,6 +10,7 @@ class MyStrings {
   static const String myFavBlog = "مقالات مورد علاقه من";
   static const String myFavPodcast = "پادکست های مورد علاقه من";
   static const String logOut = "خروج از حساب کاربری";
+  static const String logIn = "ورود به حساب کاربری";
   static const String insertYourEmail = "لطفا ایمیلت رو وارد کن";
   static const String activateCode = "کد فعال سازی رو وارد کن ";
   static const String chooseFavoriteCategories =
@@ -95,8 +96,11 @@ class MyStrings {
   static String houre = "ساعت";
   static String isEmail = "isEmail:";
   static String tecEmail = "techblog@gmail.com";
+  static String yourRegistrationWasSuccesful = "ثبت نام شما با موفقیت انجام شد";
   static String activateCodeIsNotCorrect = "کد فعال سازی وارد شده اشتباه است";
-  static String pleaseEnterEmailCorrect = "لطفا ایمیل خود را به درستی وارد کنید";
+  static String activateCodeIsExpired = "کد فعال سازی وارد شده منقضی شده است";
+  static String pleaseEnterEmailCorrect =
+      "لطفا ایمیل خود را به درستی وارد کنید";
   static String formatEmailNotCorrect =
       "فرمت ایمیل درست نمیباشد, لطفا ایمیل خود را به درستی وارد کنید";
   static String selectAudioFile = "انتخاب فابل صوتی";

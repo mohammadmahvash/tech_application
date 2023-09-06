@@ -4,6 +4,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
+import 'package:tech_application/controller/register_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/view/register/register_intro.dart';
 
@@ -144,7 +145,7 @@ class MainScreen extends StatelessWidget {
 }
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({
+  BottomNavigation({
     super.key,
     required this.size,
     required this.changeMainScreenIndex,
@@ -152,6 +153,8 @@ class BottomNavigation extends StatelessWidget {
 
   final Size size;
   final Function(int) changeMainScreenIndex;
+
+  final RegisterController _registerController = Get.put(RegisterController(),permanent: true);
 
   @override
   Widget build(BuildContext context) {
@@ -185,8 +188,7 @@ class BottomNavigation extends StatelessWidget {
                   )),
               IconButton(
                   onPressed: () {
-                    //TODO Check if user is sign in or not
-                    Get.to(() => RegisterIntro());
+                    _registerController.checkLogIn();
                   },
                   icon: ImageIcon(
                     Assets.icons.write.provider(),
