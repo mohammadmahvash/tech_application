@@ -15,8 +15,6 @@ import '../../component/my_components.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     super.key,
-    required this.size,
-    required this.textTheme,
     required this.bodyMargin,
   });
 
@@ -29,8 +27,6 @@ class HomeScreen extends StatelessWidget {
   final ArticleListController articleListController =
       Get.put(ArticleListController());
 
-  final Size size;
-  final TextTheme textTheme;
   final double bodyMargin;
 
   @override
@@ -51,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                 homePageBlogListItem(),
                 const SizedBox(height: 30),
                 HomePagePodcastListTitle(
-                    bodyMargin: bodyMargin, textTheme: textTheme),
+                    bodyMargin: bodyMargin),
                 //podcastListItem
                 homePagePodcastListItem(),
                 const SizedBox(height: 50),
@@ -59,7 +55,7 @@ class HomeScreen extends StatelessWidget {
             )
           : Column(
               children: [
-                SizedBox(height: size.height / 2.8),
+                SizedBox(height: Get.height / 2.8),
                 circularLoading(),
               ],
             )),
@@ -78,7 +74,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             MyStrings.viewHotestBlog,
-            style: textTheme.titleMedium,
+            style: Get.theme.textTheme.titleMedium,
           )
         ],
       ),
@@ -87,7 +83,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget homePageBlogListItem() {
     return SizedBox(
-      height: size.height / 3.6,
+      height: Get.height / 3.6,
       child: ListView.builder(
         itemCount: homeScreenController.topArticlesList.length,
         scrollDirection: Axis.horizontal,
@@ -108,8 +104,8 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height / 5.3,
-                    width: size.width / 2.4,
+                    height: Get.height / 5.3,
+                    width: Get.width / 2.4,
                     child: CachedNetworkImage(
                       imageUrl:
                           homeScreenController.topArticlesList[index].image!,
@@ -137,13 +133,13 @@ class HomeScreen extends StatelessWidget {
                                 Text(
                                     homeScreenController
                                         .topArticlesList[index].author!,
-                                    style: textTheme.titleSmall),
+                                    style: Get.theme.textTheme.titleSmall),
                                 Row(
                                   children: [
                                     Text(
                                       homeScreenController
                                           .topArticlesList[index].view!,
-                                      style: textTheme.titleSmall,
+                                      style: Get.theme.textTheme.titleSmall,
                                     ),
                                     const SizedBox(width: 5),
                                     const Icon(
@@ -167,11 +163,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: size.width / 2.7,
+                    width: Get.width / 2.7,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
                         homeScreenController.topArticlesList[index].title!,
+                        style: Get.theme.textTheme.bodyMedium,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -188,7 +185,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget homePagePodcastListItem() {
     return SizedBox(
-      height: size.height / 3.6,
+      height: Get.height / 3.6,
       child: ListView.builder(
         itemCount: homeScreenController.topPodcastsList.length,
         scrollDirection: Axis.horizontal,
@@ -204,8 +201,8 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                    height: size.height / 5.3,
-                    width: size.width / 2.4,
+                    height: Get.height / 5.3,
+                    width: Get.width / 2.4,
                     child: CachedNetworkImage(
                       imageUrl:
                           homeScreenController.topPodcastsList[index].poster!,
@@ -223,13 +220,13 @@ class HomeScreen extends StatelessWidget {
                       ),
                     )),
                 SizedBox(
-                  width: size.width / 2.7,
+                  width: Get.width / 2.7,
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Center(
                       child: Text(
                         homeScreenController.topPodcastsList[index].title!,
-                        style: textTheme.headlineLarge,
+                        style: Get.theme.textTheme.headlineLarge,
                       ),
                     ),
                   ),
@@ -249,8 +246,8 @@ class HomeScreen extends StatelessWidget {
             .getArticleInfo(homeScreenController.poster.value.id!);
       },
       child: SizedBox(
-        width: size.width / 1.28,
-        height: size.height / 4.2,
+        width: Get.width / 1.28,
+        height: Get.height / 4.2,
         child: CachedNetworkImage(
           imageUrl: homeScreenController.poster.value.image!,
           imageBuilder: (context, imageProvider) => Stack(
@@ -278,7 +275,7 @@ class HomeScreen extends StatelessWidget {
                       child: Text(
                         textAlign: TextAlign.center,
                         homeScreenController.poster.value.title!,
-                        style: textTheme.titleLarge,
+                        style: Get.theme.textTheme.titleLarge,
                       ),
                     )
                   ],
@@ -323,7 +320,6 @@ class HomeScreen extends StatelessWidget {
                     arguments: {'title': tagName});
               },
               child: HashtagComponent(
-                textTheme: textTheme,
                 index: index,
               ),
             ),
@@ -338,11 +334,9 @@ class HomePagePodcastListTitle extends StatelessWidget {
   const HomePagePodcastListTitle({
     super.key,
     required this.bodyMargin,
-    required this.textTheme,
   });
 
   final double bodyMargin;
-  final TextTheme textTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -357,7 +351,7 @@ class HomePagePodcastListTitle extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             MyStrings.viewHotestPodCasts,
-            style: textTheme.titleMedium,
+            style: Get.theme.textTheme.titleMedium,
           )
         ],
       ),

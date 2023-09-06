@@ -19,9 +19,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
+    double bodyMargin = Get.width / 10;
 
     return SafeArea(
         child: Scaffold(
@@ -42,7 +40,7 @@ class MainScreen extends StatelessWidget {
               ListTile(
                 title: Text(
                   MyStrings.userProfile,
-                  style: textTheme.headlineMedium,
+                  style: Get.theme.textTheme.headlineMedium,
                 ),
                 onTap: () {},
               ),
@@ -53,7 +51,7 @@ class MainScreen extends StatelessWidget {
               ListTile(
                 title: Text(
                   MyStrings.aboutTec,
-                  style: textTheme.headlineMedium,
+                  style: Get.theme.textTheme.headlineMedium,
                 ),
                 onTap: () {},
               ),
@@ -64,7 +62,7 @@ class MainScreen extends StatelessWidget {
               ListTile(
                 title: Text(
                   MyStrings.shareTec,
-                  style: textTheme.headlineMedium,
+                  style: Get.theme.textTheme.headlineMedium,
                 ),
                 onTap: () async {
                   await Share.share(MyStrings.shareText);
@@ -77,7 +75,7 @@ class MainScreen extends StatelessWidget {
               ListTile(
                 title: Text(
                   MyStrings.tecIngithub,
-                  style: textTheme.headlineMedium,
+                  style: Get.theme.textTheme.headlineMedium,
                 ),
                 onTap: () {
                   if (browserLauncherURL(MyStrings.techBlogGithubUrl) ==
@@ -110,7 +108,7 @@ class MainScreen extends StatelessWidget {
                 child: const Icon(Icons.menu, size: 30, color: Colors.black)),
             Image(
               image: Assets.images.logo.provider(),
-              height: size.height / 13.6,
+              height: Get.height / 13.6,
             ),
             const Icon(Icons.search, size: 30, color: Colors.black),
           ],
@@ -123,16 +121,13 @@ class MainScreen extends StatelessWidget {
               return IndexedStack(
                 index: selectedMainScreenPageIndex.value,
                 children: [
-                  HomeScreen(
-                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
-                  ProfilePage(
-                      size: size, textTheme: textTheme, bodyMargin: bodyMargin),
+                  HomeScreen(bodyMargin: bodyMargin),
+                  ProfilePage(bodyMargin: bodyMargin),
                 ],
               );
             },
           )),
           BottomNavigation(
-            size: size,
             changeMainScreenIndex: (int value) {
               selectedMainScreenPageIndex.value = value;
             },
@@ -146,11 +141,9 @@ class MainScreen extends StatelessWidget {
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({
     super.key,
-    required this.size,
     required this.changeMainScreenIndex,
   });
 
-  final Size size;
   final Function(int) changeMainScreenIndex;
 
   @override
@@ -160,7 +153,7 @@ class BottomNavigation extends StatelessWidget {
       right: 0,
       left: 0,
       child: Container(
-        height: size.height / 8,
+        height: Get.height / 8,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -168,8 +161,8 @@ class BottomNavigation extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)),
         child: Container(
-          height: size.height / 10,
-          width: size.width / 1.4,
+          height: Get.height / 10,
+          width: Get.width / 1.4,
           alignment: Alignment.center,
           decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20)),

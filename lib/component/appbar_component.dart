@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 
-PreferredSize appBar(double bodyMargin, TextTheme textTheme ,String title) {
+PreferredSize appBar(double bodyMargin, String title) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(60),
     child: Padding(
@@ -11,8 +12,7 @@ PreferredSize appBar(double bodyMargin, TextTheme textTheme ,String title) {
         elevation: 0,
         actions: [
           Center(
-            child: Text(title,
-                style: textTheme.headlineSmall),
+            child: Text(title, style: Get.theme.textTheme.headlineSmall),
           )
         ],
         leading: Align(

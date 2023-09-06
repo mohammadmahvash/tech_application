@@ -20,8 +20,6 @@ class SingleArticleInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(
@@ -37,7 +35,7 @@ class SingleArticleInfo extends StatelessWidget {
                               .articleInfoModel.value.image!,
                           imageBuilder: (context, imageProvider) => SizedBox(
                               width: double.maxFinite,
-                              height: size.height / 3.5,
+                              height: Get.height / 3.5,
                               child: Image(
                                 image: imageProvider,
                                 fit: BoxFit.cover,
@@ -50,7 +48,7 @@ class SingleArticleInfo extends StatelessWidget {
                               ),
                           errorWidget: (context, url, error) => SizedBox(
                                 width: double.maxFinite,
-                                height: size.height / 3.5,
+                                height: Get.height / 3.5,
                                 child: Image.asset(
                                   Assets.images.singlePlaceHolder.path,
                                   fit: BoxFit.cover,
@@ -107,7 +105,7 @@ class SingleArticleInfo extends StatelessWidget {
                       children: [
                         Text(
                           articleInfoController.articleInfoModel.value.title!,
-                          style: textTheme.headlineLarge,
+                          style: Get.theme.textTheme.headlineLarge,
                         ),
                         Row(
                           children: [
@@ -117,7 +115,7 @@ class SingleArticleInfo extends StatelessWidget {
                             Text(
                                 articleInfoController
                                     .articleInfoModel.value.author!,
-                                style: textTheme.headlineMedium),
+                                style: Get.theme.textTheme.headlineMedium),
                             const SizedBox(width: 10),
                             Text(articleInfoController
                                 .articleInfoModel.value.view!),
@@ -137,18 +135,18 @@ class SingleArticleInfo extends StatelessWidget {
                         ),
                         const SizedBox(height: 70),
                         //hashtag list
-                        hashtagList(size, textTheme),
+                        hashtagList(),
                         const SizedBox(height: 40),
                         Align(
                           alignment: Alignment.centerRight,
                           child: Text(
                             MyStrings.relatedArticle,
-                            style: textTheme.titleMedium,
+                            style: Get.theme.textTheme.titleMedium,
                           ),
                         ),
                         const SizedBox(height: 20),
                         //related Article
-                        relatedArticles(size, textTheme),
+                        relatedArticles(),
                       ],
                     ),
                   )
@@ -159,9 +157,9 @@ class SingleArticleInfo extends StatelessWidget {
     );
   }
 
-  Widget relatedArticles(Size size, TextTheme textTheme) {
+  Widget relatedArticles() {
     return SizedBox(
-      height: size.height / 3.6,
+      height: Get.height / 3.6,
       child: ListView.builder(
         itemCount: articleInfoController.relatedArticle.length,
         scrollDirection: Axis.horizontal,
@@ -176,8 +174,8 @@ class SingleArticleInfo extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height / 5.3,
-                    width: size.width / 2.4,
+                    height: Get.height / 5.3,
+                    width: Get.width / 2.4,
                     child: CachedNetworkImage(
                       imageUrl:
                           articleInfoController.relatedArticle[index].image!,
@@ -205,13 +203,13 @@ class SingleArticleInfo extends StatelessWidget {
                                 Text(
                                     articleInfoController
                                         .relatedArticle[index].author!,
-                                    style: textTheme.titleSmall),
+                                    style: Get.theme.textTheme.titleSmall),
                                 Row(
                                   children: [
                                     Text(
                                       articleInfoController
                                           .relatedArticle[index].view!,
-                                      style: textTheme.titleSmall,
+                                      style: Get.theme.textTheme.titleSmall,
                                     ),
                                     const SizedBox(width: 5),
                                     const Icon(
@@ -235,7 +233,7 @@ class SingleArticleInfo extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: size.width / 2.7,
+                    width: Get.width / 2.7,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
@@ -254,7 +252,7 @@ class SingleArticleInfo extends StatelessWidget {
     );
   }
 
-  Widget hashtagList(Size size, TextTheme textTheme) {
+  Widget hashtagList() {
     return SizedBox(
       height: 40,
       child: ListView.builder(
@@ -283,7 +281,7 @@ class SingleArticleInfo extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
                     child: Text(
                       articleInfoController.relatedTags[index].title!,
-                      style: textTheme.titleSmall,
+                      style: Get.theme.textTheme.titleSmall,
                     ),
                   ),
                 )),

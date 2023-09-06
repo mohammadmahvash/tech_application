@@ -12,7 +12,6 @@ class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key});
 
   final String title = Get.arguments['title'];
-  
 
   final ArticleListController articleListController =
       Get.find<ArticleListController>();
@@ -21,14 +20,12 @@ class ArticleListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint(title);
-    var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
+    double bodyMargin = Get.width / 10;
 
     return SafeArea(
         child: Scaffold(
       backgroundColor: SolidColors.scaffoldBackground,
-      appBar: appBar(bodyMargin, textTheme, title),
+      appBar: appBar(bodyMargin, title),
       body: Obx(
         () => Padding(
           padding:
@@ -47,8 +44,8 @@ class ArticleListScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: size.width / 4,
-                        height: size.height / 7,
+                        width: Get.width / 4,
+                        height: Get.height / 7,
                         child: CachedNetworkImage(
                           imageUrl:
                               articleListController.articleList[index].image!,
@@ -72,7 +69,7 @@ class ArticleListScreen extends StatelessWidget {
                           children: [
                             Text(
                                 articleListController.articleList[index].title!,
-                                style: textTheme.headlineMedium,
+                                style: Get.theme.textTheme.headlineMedium,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3),
                             const SizedBox(height: 10),
@@ -82,14 +79,14 @@ class ArticleListScreen extends StatelessWidget {
                                 Text(
                                     articleListController
                                         .articleList[index].author!,
-                                    style: textTheme.labelSmall),
+                                    style: Get.theme.textTheme.labelSmall),
                                 Text(
                                     "${articleListController.articleList[index].view!} ${MyStrings.visit}",
-                                    style: textTheme.labelSmall),
+                                    style: Get.theme.textTheme.labelSmall),
                                 Text(
                                     articleListController
                                         .articleList[index].categoryName!,
-                                    style: textTheme.bodySmall),
+                                    style: Get.theme.textTheme.bodySmall),
                               ],
                             )
                           ],

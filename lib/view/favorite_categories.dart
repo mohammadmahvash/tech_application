@@ -21,10 +21,7 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
 
   @override
   Widget build(BuildContext context) {
-    var textTheme = Theme.of(context).textTheme;
-    var size = MediaQuery.of(context).size;
-    double bodyMargin = size.width / 10;
-    // List<HashtagModel> selectedTags = [];
+    double bodyMargin = Get.width / 10;
 
     return SafeArea(
         child: Scaffold(
@@ -37,12 +34,12 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
               const SizedBox(height: 60),
               SvgPicture.asset(
                 Assets.images.techbot.path,
-                height: size.height / 7,
+                height: Get.height / 7,
               ),
               const SizedBox(height: 20),
               Text(
                 MyStrings.successfulRegistration,
-                style: textTheme.headlineMedium,
+                style: Get.theme.textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               Padding(
@@ -50,7 +47,7 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: MyStrings.nameAndFamilyName,
-                    hintStyle: textTheme.labelMedium,
+                    hintStyle: Get.theme.textTheme.labelMedium,
                     contentPadding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
                   ),
                 ),
@@ -58,29 +55,30 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
               const SizedBox(height: 30),
               Text(
                 MyStrings.chooseFavoriteCategories,
-                style: textTheme.headlineMedium,
+                style: Get.theme.textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
               // tagList
               Obx(
-                ()=> SizedBox(
+                () => SizedBox(
                   height: 95,
                   child: GridView.builder(
                     physics: const ClampingScrollPhysics(),
                     itemCount: homeScreenController.tagsList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 5,
-                        crossAxisSpacing: 10,
-                        mainAxisExtent: 180,
-                        childAspectRatio: 0.22),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 5,
+                            crossAxisSpacing: 10,
+                            mainAxisExtent: 180,
+                            childAspectRatio: 0.22),
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.fromLTRB(
-                            index == homeScreenController.tagsList.length - 1 
+                            index == homeScreenController.tagsList.length - 1
                                 ? bodyMargin
                                 : 0,
                             0,
@@ -88,17 +86,16 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
                             0),
                         child: InkWell(
                             onTap: () {
-                                if (homeScreenController.selectedTags.contains(
-                                    homeScreenController.tagsList[index])) {
-                                  showErrorSnackBar(context,
-                                      "نمیتوانید تگ تکراری انتخاب کنید!");
-                                } else {
-                                  homeScreenController.selectedTags
-                                      .add(homeScreenController.tagsList[index]);
-                                }
+                              if (homeScreenController.selectedTags.contains(
+                                  homeScreenController.tagsList[index])) {
+                                showErrorSnackBar(context,
+                                    "نمیتوانید تگ تکراری انتخاب کنید!");
+                              } else {
+                                homeScreenController.selectedTags
+                                    .add(homeScreenController.tagsList[index]);
+                              }
                             },
-                            child: HashtagComponent(
-                                textTheme: textTheme, index: index)),
+                            child: HashtagComponent(index: index)),
                       );
                     },
                   ),
@@ -109,10 +106,10 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
               const SizedBox(height: 30),
               //SelectedTags
               Obx(
-                ()=> Padding(
+                () => Padding(
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   child: SizedBox(
-                    width: size.width,
+                    width: Get.width,
                     height: 100,
                     child: GridView.builder(
                       physics: const ClampingScrollPhysics(),
@@ -137,13 +134,15 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
                               children: [
                                 const SizedBox(width: 10),
                                 Text(
-                                  homeScreenController.selectedTags[index].title!,
-                                  style: textTheme.labelSmall,
+                                  homeScreenController
+                                      .selectedTags[index].title!,
+                                  style: Get.theme.textTheme.labelSmall,
                                 ),
                                 InkWell(
                                   onTap: () {
                                     setState(() {
-                                      homeScreenController.selectedTags.removeAt(index);
+                                      homeScreenController.selectedTags
+                                          .removeAt(index);
                                     });
                                   },
                                   child: const Icon(CupertinoIcons.xmark,
@@ -161,8 +160,8 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
               const SizedBox(height: 50),
               //continuationButton
               SizedBox(
-                width: size.width / 2.5,
-                height: size.height / 13,
+                width: Get.width / 2.5,
+                height: Get.height / 13,
                 child: ElevatedButton(
                     onPressed: () {},
                     child: Text(

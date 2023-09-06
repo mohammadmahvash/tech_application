@@ -47,6 +47,7 @@ class MyStrings {
   static String titleAppBarArticlesList = "لیست مقاله ها";
   static String titleAppBarPodcastsList = "لیست پادکست ها";
   static String titleAppBarManageArticle = "مدیریت مقاله ها";
+  static String manageArticle = "مدیریت مقاله ها";
   static String managePodcast = "مدیریت پادکست ها";
   static String titleAppBarArticleContentEditor = "نوشتن/ویرایش مقاله ";
   static String hintArticleContentEditor = "میتونی مقاله‌تو اینجا بنویسی...";
@@ -72,7 +73,7 @@ class MyStrings {
   static String shareKnowledge = "دونسته هات رو با بقیه به اشتراک بذار ...";
   static String gigTech = """
 فکر کن !!  اینجا بودنت به این معناست که یک گیک تکنولوژی هستی
-دونسته هات رو با جامعه‌ی گیک های فارسی زبان به اشتراک بذار..
+دونسته هات رو با جامعه‌ی گیک های فارسی زبان به اشتراک بذار ...
 """;
 
   static String nameMohamadMahvash = "محمد ماهوش";

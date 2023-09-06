@@ -121,6 +121,11 @@ class MainApp extends StatelessWidget {
             bodySmall: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: SolidColors.seeMore)));
+                color: SolidColors.seeMore),
+                bodyMedium: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w800,
+                color: SolidColors.textTitle),
+                ));
   }
 }

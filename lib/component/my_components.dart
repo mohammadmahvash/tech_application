@@ -9,11 +9,9 @@ import 'package:url_launcher/url_launcher.dart';
 class HashtagComponent extends StatelessWidget {
   const HashtagComponent({
     super.key,
-    required this.textTheme,
     required this.index,
   });
 
-  final TextTheme textTheme;
   final int index;
 
   @override
@@ -37,7 +35,7 @@ class HashtagComponent extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               Get.find<HomeScreenController>().tagsList[index].title!,
-              style: textTheme.titleLarge,
+              style: Get.theme.textTheme.titleLarge,
             )
           ],
         ),
@@ -49,16 +47,13 @@ class HashtagComponent extends StatelessWidget {
 class DividerTech extends StatelessWidget {
   const DividerTech({
     super.key,
-    required this.size,
   });
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
     return Divider(
-      indent: size.width / 6,
-      endIndent: size.width / 6,
+      indent: Get.width / 6,
+      endIndent: Get.width / 6,
       color: SolidColors.dividerColor,
       thickness: 0.8,
     );
@@ -81,7 +76,7 @@ void showErrorSnackBar(BuildContext context, String message) {
       // height: 25,
       child: Text(
         message,
-        style: Theme.of(context).textTheme.titleSmall,
+        style: Get.theme.textTheme.titleSmall,
         textAlign: TextAlign.center,
       ),
     ),

@@ -14,6 +14,10 @@ import 'package:flutter/services.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/articlemanagement.png
+  AssetGenImage get articlemanagement =>
+      const AssetGenImage('assets/icons/articlemanagement.png');
+
   /// File path: assets/icons/bluemicrophone.png
   AssetGenImage get bluemicrophone =>
       const AssetGenImage('assets/icons/bluemicrophone.png');
@@ -27,6 +31,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/home.png
   AssetGenImage get home => const AssetGenImage('assets/icons/home.png');
 
+  /// File path: assets/icons/podcastmanagement.png
+  AssetGenImage get podcastmanagement =>
+      const AssetGenImage('assets/icons/podcastmanagement.png');
+
   /// File path: assets/icons/user.png
   AssetGenImage get user => const AssetGenImage('assets/icons/user.png');
 
@@ -34,8 +42,16 @@ class $AssetsIconsGen {
   AssetGenImage get write => const AssetGenImage('assets/icons/write.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [bluemicrophone, bluepen, hashtag, home, user, write];
+  List<AssetGenImage> get values => [
+        articlemanagement,
+        bluemicrophone,
+        bluepen,
+        hashtag,
+        home,
+        podcastmanagement,
+        user,
+        write
+      ];
 }
 
 class $AssetsImagesGen {
