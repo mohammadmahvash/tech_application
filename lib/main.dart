@@ -8,7 +8,7 @@ import 'package:tech_application/binding.dart';
 import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/view/article/article_list_screen.dart';
-import 'package:tech_application/view/article/single_article_info.dart';
+import 'package:tech_application/view/article/article_single_page_info.dart';
 import 'package:tech_application/view/main_screen/main_screen.dart';
 import 'package:tech_application/view/register/register_intro.dart';
 import 'package:tech_application/view/splash_screen.dart';
@@ -55,7 +55,7 @@ class MainApp extends StatelessWidget {
           ),
           GetPage(
             name: MyRoute.routeSingleArticleInfo,
-            page: () => SingleArticleInfo(),
+            page: () => ArticleSinglePageInfo(),
             binding: ArticleBinding()
           ),
         ],

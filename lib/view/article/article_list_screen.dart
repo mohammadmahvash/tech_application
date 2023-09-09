@@ -5,8 +5,8 @@ import 'package:tech_application/component/appbar_component.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/my_components.dart';
-import 'package:tech_application/controller/article_info_controller.dart';
-import 'package:tech_application/controller/article_list_controller.dart';
+import 'package:tech_application/controller/article/article_info_controller.dart';
+import 'package:tech_application/controller/article/article_list_controller.dart';
 
 class ArticleListScreen extends StatelessWidget {
   ArticleListScreen({super.key});

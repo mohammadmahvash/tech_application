@@ -7,13 +7,12 @@ import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
-import 'package:tech_application/controller/article_info_controller.dart';
-import 'package:tech_application/controller/article_list_controller.dart';
+import 'package:tech_application/controller/article/article_info_controller.dart';
+import 'package:tech_application/controller/article/article_list_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
-import 'package:tech_application/view/article/article_list_screen.dart';
 
-class SingleArticleInfo extends StatelessWidget {
-  SingleArticleInfo({super.key});
+class ArticleSinglePageInfo extends StatelessWidget {
+  ArticleSinglePageInfo({super.key});
 
   final ArticleInfoController articleInfoController =
       Get.find<ArticleInfoController>();
