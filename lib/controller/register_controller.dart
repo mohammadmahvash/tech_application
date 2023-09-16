@@ -116,8 +116,11 @@ class RegisterController extends GetxController {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                //ArticleManagementBTN
                 InkWell(
-                  onTap: () => debugPrint("article management"),
+                  onTap: () {
+                    Get.toNamed(MyRoute.routeArticleManagementList);
+                  },
                   child: SizedBox(
                     height: 40,
                     child: Row(
@@ -133,6 +136,7 @@ class RegisterController extends GetxController {
                     ),
                   ),
                 ),
+                //PodcastManagementBTN
                 InkWell(
                   onTap: () => debugPrint("podcast management"),
                   child: SizedBox(

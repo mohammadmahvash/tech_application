@@ -45,7 +45,7 @@ class ArticleInfoController extends GetxController {
           .removeWhere((element) => element.title == "اخبار فیلم و سریال");
 
       loading.value = false;
-      Get.toNamed(MyRoute.routeSingleArticleInfo);
+      Get.toNamed(MyRoute.routeArticleSinglePageInfo);
     }
   }
 }
