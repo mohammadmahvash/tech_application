@@ -1,171 +1,162 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:tech_application/component/appbar_component.dart';
+import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
-import 'package:tech_application/controller/register_controller.dart';
+import 'package:tech_application/component/my_components.dart';
+import 'package:tech_application/controller/article/article_management_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
 class ArticleManagementList extends StatelessWidget {
   ArticleManagementList({super.key});
 
-  final registerController = Get.find<RegisterController>();
+  final articleManagementController = Get.find<ArticleManagementController>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SvgPicture.asset(Assets.images.techbot.path,
-                height: Get.height / 6),
-            const SizedBox(height: 20),
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                  text: MyStrings.welcome,
-                  style: Get.theme.textTheme.headlineLarge),
-            ),
-            const SizedBox(height: 90),
-            SizedBox(
-              width: Get.width / 2.5,
-              height: Get.height / 13,
-              child: ElevatedButton(
-                onPressed: () {
-                  _showEmailBottomSheet(context);
-                },
-                child: Text(MyStrings.letsGo),
-              ),
-            )
-          ]),
-        ),
+        backgroundColor: SolidColors.scaffoldBackground,
+        appBar: appBar(MyStrings.titleAppBarManageArticle),
+        body: Obx(() => articleManagementController.loading.value == true
+            ? Column(
+                children: [
+                  SizedBox(height: Get.height / 2.8),
+                  circularLoading(),
+                ],
+              )
+            : articleManagementController.articleList.isNotEmpty
+                ? articleManagementArticleListState()
+                : articleManagementEmptyState()),
       ),
     );
   }
 
-  Future<dynamic> _showEmailBottomSheet(BuildContext context) {
-    return showModalBottomSheet(
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-            height: Get.height / 2.5,
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                )),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  MyStrings.insertYourEmail,
-                  style: Get.theme.textTheme.headlineLarge,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
-                  child: TextField(
-                    controller: registerController.emailTextEditingController,
-                    onChanged: (value) {
-                      // print("$value is email ${isEmail(value)}");
-                    },
-                    style: Get.theme.textTheme.headlineMedium,
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        hintText: "techblog@gmail.com",
-                        hintStyle: Get.theme.textTheme.labelMedium),
+  Widget articleManagementArticleListState() {
+    double bodyMargin = Get.width / 10;
+    return Column(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(left: bodyMargin / 1.9, right: bodyMargin / 1.9),
+            child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: articleManagementController.articleList.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: InkWell(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: Get.width / 4,
+                          height: Get.height / 7,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                articleManagementController.articleList[index].image!,
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover)),
+                            ),
+                            placeholder: (context, url) => circularLoading(),
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.image_not_supported_outlined,
+                              color: Colors.grey,
+                              size: 50,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                  articleManagementController
+                                      .articleList[index].title!,
+                                  style: Get.theme.textTheme.headlineMedium,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                      articleManagementController
+                                          .articleList[index].author!,
+                                      style: Get.theme.textTheme.labelSmall),
+                                  Text(
+                                      "${articleManagementController.articleList[index].view!} ${MyStrings.visit}",
+                                      style: Get.theme.textTheme.labelSmall),
+                                  Text(
+                                      articleManagementController
+                                          .articleList[index].categoryName!,
+                                      style: Get.theme.textTheme.bodySmall),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                //continuationButton
-                SizedBox(
-                  width: Get.width / 2.5,
-                  height: Get.height / 13,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        registerController.registerEmail();
-                        Navigator.of(context).pop();
-                        _activatedCodeBottomSheet(context);
-                      },
-                      child: Text(
-                        MyStrings.continuation,
-                      )),
-                )
-              ],
+                );
+              },
             ),
           ),
-        );
-      },
+        ),
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              width: Get.width / 1.25,
+              height: Get.height / 13,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text(MyStrings.textManageArticle),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 
-  Future<dynamic> _activatedCodeBottomSheet(BuildContext context) {
-    return showModalBottomSheet(
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-            height: Get.height / 2.5,
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                )),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  MyStrings.activateCode,
-                  style: Get.theme.textTheme.headlineLarge,
+  Widget articleManagementEmptyState() {
+    return Center(
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        const SizedBox(height: 150),
+        SvgPicture.asset(Assets.images.sadTechbot.path, height: Get.height / 6),
+        const SizedBox(height: 20),
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+              text: MyStrings.articleEmpty,
+              style: Get.theme.textTheme.headlineLarge),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                width: Get.width / 1.25,
+                height: Get.height / 13,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(MyStrings.textManageArticle),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
-                  child: TextField(
-                    controller:
-                        registerController.activatedCodeTextEditingController,
-                    onChanged: (value) {
-                      // print("$value is email ${isEmail(value)}");
-                    },
-                    style: Get.theme.textTheme.headlineMedium,
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        hintText: "******",
-                        hintStyle: Get.theme.textTheme.labelMedium),
-                  ),
-                ),
-                //continuationButton
-                SizedBox(
-                  width: Get.width / 2.5,
-                  height: Get.height / 13,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        registerController.verifyCode();
-                      },
-                      child: Obx(
-                        () => registerController.loading.value == false
-                            ? Text(
-                                MyStrings.continuation,
-                              )
-                            : const SpinKitFadingCircle(
-                                color: Colors.white,
-                                size: 30.0,
-                              ),
-                      )),
-                )
-              ],
+              ),
             ),
           ),
-        );
-      },
+        )
+      ]),
     );
   }
 }

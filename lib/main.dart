@@ -85,9 +85,9 @@ class MainApp extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10))),
                 textStyle: MaterialStateProperty.resolveWith((states) {
                   if (states.contains(MaterialState.pressed)) {
-                    return const TextStyle(fontSize: 25);
+                    return const TextStyle(fontSize: 20);
                   }
-                  return const TextStyle(fontSize: 20);
+                  return const TextStyle(fontSize: 18);
                 }),
                 backgroundColor: MaterialStateProperty.all<Color>(
                     SolidColors.primaryColor))),

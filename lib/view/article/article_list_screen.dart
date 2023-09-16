@@ -24,7 +24,7 @@ class ArticleListScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       backgroundColor: SolidColors.scaffoldBackground,
-      appBar: appBar(bodyMargin, title),
+      appBar: appBar(title),
       body: Obx(
         () => Padding(
           padding:

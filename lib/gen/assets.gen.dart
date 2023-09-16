@@ -76,6 +76,10 @@ class $AssetsImagesGen {
   AssetGenImage get programming =>
       const AssetGenImage('assets/images/programming.png');
 
+  /// File path: assets/images/sad_techbot.svg
+  SvgGenImage get sadTechbot =>
+      const SvgGenImage('assets/images/sad_techbot.svg');
+
   /// File path: assets/images/single_place_holder.jpg
   AssetGenImage get singlePlaceHolder =>
       const AssetGenImage('assets/images/single_place_holder.jpg');
@@ -94,6 +98,7 @@ class $AssetsImagesGen {
         logo,
         profileavatar,
         programming,
+        sadTechbot,
         singlePlaceHolder,
         splashLogo,
         techbot

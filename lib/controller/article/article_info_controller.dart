@@ -21,8 +21,6 @@ class ArticleInfoController extends GetxController {
 
     var response = await DioService().getMethod(
         "${ApiConstant.baseURL}article/get.php?command=info&id=$id&user_id=$userId");
-    // var response = await DioService().getMethod(
-    //     "https://techblog.sasansafari.com/Techblog/api/article/get.php?command=info&id=$id&user_id=1");
 
     if (response.statusCode == 200) {
       articleInfoModel.value = ArticleInfoModel.fromJson(response.data);

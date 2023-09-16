@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 
-PreferredSize appBar(double bodyMargin, String title) {
+PreferredSize appBar(String title) {
+  double bodyMargin = Get.width / 10;
   return PreferredSize(
     preferredSize: const Size.fromHeight(60),
     child: Padding(
@@ -15,14 +16,17 @@ PreferredSize appBar(double bodyMargin, String title) {
             child: Text(title, style: Get.theme.textTheme.headlineSmall),
           )
         ],
-        leading: Align(
-          child: Container(
-            width: 45,
-            height: 45,
-            decoration: BoxDecoration(
-                color: SolidColors.primaryColor.withAlpha(140),
-                shape: BoxShape.circle),
-            child: const Icon(Icons.arrow_back_outlined),
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Align(
+            child: Container(
+              width: 45,
+              height: 45,
+              decoration: BoxDecoration(
+                  color: SolidColors.primaryColor.withAlpha(140),
+                  shape: BoxShape.circle),
+              child: const Icon(Icons.arrow_back_outlined),
+            ),
           ),
         ),
       ),
