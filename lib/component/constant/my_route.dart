@@ -4,4 +4,5 @@ class MyRoute {
   static const String routeArticleListScreen = "/ArticleListScreen";
   static const String routeArticleSinglePageInfo = "/ArticleSinglePageInfo";
   static const String routeArticleManagementList = "/ArticleManagementList";
+  static const String routeArticleManagementSinglePageInfo = "/ArticleManagementSinglePageInfo";
 }

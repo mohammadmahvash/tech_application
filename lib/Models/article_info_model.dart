@@ -13,21 +13,11 @@ class ArticleInfoModel {
   String? createdAt;
   bool? isFavorite;
 
-  ArticleInfoModel(
-      // {
-      // required this.id,
-      // required this.title,
-      // required this.content,
-      // required this.image,
-      // required this.categoryId,
-      // required this.categoryName,
-      // required this.author,
-      // required this.view,
-      // required this.status,
-      // required this.createdAt,
-      // required this.isFavorite,
-      // }
-      );
+  ArticleInfoModel([
+    this.title,
+    this.content,
+    this.image
+  ]);
 
   ArticleInfoModel.fromJson(Map<String, dynamic> json) {
     id = json["info"]["id"];

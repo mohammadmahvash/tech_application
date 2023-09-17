@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/appbar_component.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
@@ -12,7 +13,8 @@ import 'package:tech_application/gen/assets.gen.dart';
 class ArticleManagementList extends StatelessWidget {
   ArticleManagementList({super.key});
 
-  final articleManagementController = Get.find<ArticleManagementController>();
+  final ArticleManagementController articleManagementController =
+      Get.find<ArticleManagementController>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,8 @@ class ArticleManagementList extends StatelessWidget {
       children: [
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(left: bodyMargin / 1.9, right: bodyMargin / 1.9),
+            padding: EdgeInsets.only(
+                left: bodyMargin / 1.9, right: bodyMargin / 1.9),
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: articleManagementController.articleList.length,
@@ -55,8 +58,8 @@ class ArticleManagementList extends StatelessWidget {
                           width: Get.width / 4,
                           height: Get.height / 7,
                           child: CachedNetworkImage(
-                            imageUrl:
-                                articleManagementController.articleList[index].image!,
+                            imageUrl: articleManagementController
+                                .articleList[index].image!,
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
@@ -83,7 +86,8 @@ class ArticleManagementList extends StatelessWidget {
                                   maxLines: 3),
                               const SizedBox(height: 10),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Text(
                                       articleManagementController
@@ -118,7 +122,8 @@ class ArticleManagementList extends StatelessWidget {
               width: Get.width / 1.25,
               height: Get.height / 13,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () =>
+                    Get.toNamed(MyRoute.routeArticleManagementSinglePageInfo),
                 child: Text(MyStrings.textManageArticle),
               ),
             ),
@@ -149,7 +154,8 @@ class ArticleManagementList extends StatelessWidget {
                 width: Get.width / 1.25,
                 height: Get.height / 13,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Get.toNamed(MyRoute.routeArticleManagementSinglePageInfo),
                   child: Text(MyStrings.textManageArticle),
                 ),
               ),

@@ -37,10 +37,10 @@ class MyStrings {
 لطفا اطلاعات ثبت نام رو کامل کن
 """;
 
-  static String titltArrticle =
+  static String titltArticleManagementSinglePageInfoDefault =
       'اینجا عنوان مقاله قرار میگیره ، یه عنوان جذاب انتخاب کن';
 
-  static String editOrginalTextArticle = """
+  static String editOrginalContentTextArticleManagementSinglePageInfoDefault = """
 من متن و بدنه اصلی مقاله هستم ، اگه میخوای من رو ویرایش کنی و یه مقاله جذاب بنویسی ، نوشته آبی رنگ بالا که نوشته "ویرایش متن اصلی مقاله" رو با انگشتت لمس کن تا وارد ویرایشگر بشی""";
 
   static String visit = 'بازدید';
@@ -55,6 +55,7 @@ class MyStrings {
   static String titleDialogSingleManageArticle = "عنوان مقاله";
   static String hintTextSingleManageArticle = "اینجا بنویس";
   static String save = "ثبت";
+  static String done = "تموم شد";
   static String selectImage = "انتخاب تصویر";
   static String editTitleArticle = "ویرایش عنوان مقاله";
   static String editTitlePodcast = "ویرایش عنوان پادکست";
