@@ -1,20 +1,28 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
+import 'package:tech_application/component/constant/dimensions.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article/article_list_controller.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
+import 'package:tech_application/controller/file_picker_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
+import 'package:tech_application/services/file_picker.dart';
 
 class ArticleManagementSinglePageInfo extends StatelessWidget {
   ArticleManagementSinglePageInfo({super.key});
 
   final ArticleManagementController articleManagementInfoController =
       Get.find<ArticleManagementController>();
+
+  final FilePickerController filePickerController =
+      Get.put(FilePickerController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,30 +35,39 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      CachedNetworkImage(
-                          imageUrl: articleManagementInfoController
-                              .articleInfoModel.value.image!,
-                          imageBuilder: (context, imageProvider) => SizedBox(
-                              width: double.maxFinite,
-                              height: Get.height / 3.5,
-                              child: Image(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                              )),
-                          placeholder: (context, url) => Column(
-                                children: [
-                                  const SizedBox(height: 80),
-                                  circularLoading(),
-                                ],
-                              ),
-                          errorWidget: (context, url, error) => SizedBox(
-                                width: double.maxFinite,
-                                height: Get.height / 3.5,
-                                child: Image.asset(
-                                  Assets.images.singlePlaceHolder.path,
-                                  fit: BoxFit.cover,
-                                ),
-                              )),
+                      SizedBox(
+                        width: Get.width,
+                        height: Get.height/3,
+                          child: filePickerController.file.value.size == 0
+                              ? CachedNetworkImage(
+                                  imageUrl: articleManagementInfoController
+                                      .articleInfoModel.value.image!,
+                                  imageBuilder: (context, imageProvider) =>
+                                      SizedBox(
+                                          width: double.maxFinite,
+                                          height: Get.height / 3.5,
+                                          child: Image(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                          )),
+                                  placeholder: (context, url) => Column(
+                                        children: [
+                                          const SizedBox(height: 80),
+                                          circularLoading(),
+                                        ],
+                                      ),
+                                  errorWidget: (context, url, error) =>
+                                      SizedBox(
+                                        width: double.maxFinite,
+                                        height: Get.height / 3.5,
+                                        child: Image.asset(
+                                          Assets.images.singlePlaceHolder.path,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ))
+                              : Image.file(File(filePickerController
+                                  .file.value.path
+                                  .toString()),fit: BoxFit.cover,)),
                       Positioned(
                           top: 0,
                           right: 0,
@@ -82,14 +99,27 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                           right: 0,
                           left: 0,
                           child: Center(
-                            child: Container(
-                              height: Get.height / 20,
-                              width: Get.width / 3,
-                              color: SolidColors.primaryColor,
-                              child: Center(
-                                child: Text(
-                                  "${MyStrings.selectImage} +",
-                                  style: Get.theme.textTheme.labelMedium,
+                            child: InkWell(
+                              onTap: () => pickFile(),
+                              child: Container(
+                                height: Get.height / 20,
+                                width: Get.width / 3,
+                                decoration: const BoxDecoration(
+                                    color: SolidColors.primaryColor,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    )),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      MyStrings.selectImage,
+                                      style: Get.theme.textTheme.labelMedium,
+                                    ),
+                                    const Icon(Icons.add,
+                                        color: Colors.white, size: 20),
+                                  ],
                                 ),
                               ),
                             ),
@@ -97,20 +127,21 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(Dimensions.bodyMargin / 3),
                     child: Column(
                       children: [
-                        const SizedBox(height: 30),
-                        editTitleArticle(),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 20),
+                        BluePenTitle(
+                            title: MyStrings.editTitleArticle, bodyMargin: 0),
                         Text(
                           articleManagementInfoController
                               .articleInfoModel.value.title!,
                           style: Get.theme.textTheme.headlineLarge,
                         ),
                         const SizedBox(height: 10),
-                        editMainTextArticle(),
-                        const SizedBox(height: 10),
+                        BluePenTitle(
+                            title: MyStrings.editMainTextArticle,
+                            bodyMargin: 0),
                         HtmlWidget(
                           articleManagementInfoController
                               .articleInfoModel.value.content!,
@@ -120,30 +151,14 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                                   circularLoading(),
                         ),
                         const SizedBox(height: 30),
-                        selectCategoryTitle(),
+                        BluePenTitle(
+                            title: MyStrings.selectCategory, bodyMargin: 0),
+                        //hashtagList(),
                         const SizedBox(height: 70),
                         //hashtag list
-                        //hashtagList(),
                       ],
                     ),
                   ),
-                  // Expanded(
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.only(bottom: 20),
-                  //     child: Align(
-                  //       alignment: Alignment.bottomCenter,
-                  //       child: SizedBox(
-                  //         width: Get.width / 2.5,
-                  //         height: Get.height / 13,
-                  //         child: ElevatedButton(
-                  //           onPressed: () {},
-                  //           child: Text(MyStrings.done),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Align(
@@ -163,57 +178,6 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
               )
             : SizedBox(height: Get.height, child: circularLoading())),
       )),
-    );
-  }
-
-  Row selectCategoryTitle() {
-    return Row(
-      children: [
-        ImageIcon(
-          Assets.icons.bluepen.provider(),
-          color: SolidColors.seeMore,
-          size: 20,
-        ),
-        const SizedBox(width: 5),
-        Text(
-          MyStrings.selectCategory,
-          style: Get.theme.textTheme.titleMedium,
-        )
-      ],
-    );
-  }
-
-  Row editMainTextArticle() {
-    return Row(
-      children: [
-        ImageIcon(
-          Assets.icons.bluepen.provider(),
-          color: SolidColors.seeMore,
-          size: 20,
-        ),
-        const SizedBox(width: 5),
-        Text(
-          MyStrings.editMainTextArticle,
-          style: Get.theme.textTheme.titleMedium,
-        )
-      ],
-    );
-  }
-
-  Widget editTitleArticle() {
-    return Row(
-      children: [
-        ImageIcon(
-          Assets.icons.bluepen.provider(),
-          color: SolidColors.seeMore,
-          size: 20,
-        ),
-        const SizedBox(width: 5),
-        Text(
-          MyStrings.editTitleArticle,
-          style: Get.theme.textTheme.titleMedium,
-        )
-      ],
     );
   }
 

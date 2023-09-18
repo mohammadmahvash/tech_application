@@ -1,10 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:tech_application/component/constant/dimensions.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/controller/home_screen_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+class BlueMicrophoneTitle extends StatelessWidget {
+  const BlueMicrophoneTitle({
+    super.key,
+    required this.title,
+  });
+
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: Dimensions.bodyMargin, bottom: 10),
+      child: Row(
+        children: [
+          ImageIcon(
+            Assets.icons.bluemicrophone.provider(),
+            color: SolidColors.seeMore,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            title,
+            style: Get.theme.textTheme.titleMedium,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class BluePenTitle extends StatelessWidget {
+  const BluePenTitle({
+    super.key,
+    required this.title,
+    required this.bodyMargin,
+  });
+
+  final String title;
+  final double bodyMargin;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: bodyMargin, bottom: 10),
+      child: Row(
+        children: [
+          ImageIcon(
+            Assets.icons.bluepen.provider(),
+            color: SolidColors.seeMore,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            title,
+            style: Get.theme.textTheme.titleMedium,
+          )
+        ],
+      ),
+    );
+  }
+}
 
 class HashtagComponent extends StatelessWidget {
   const HashtagComponent({

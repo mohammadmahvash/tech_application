@@ -6,15 +6,14 @@ import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/controller/article/article_info_controller.dart';
 import 'package:tech_application/controller/article/article_list_controller.dart';
 import 'package:tech_application/controller/home_screen_controller.dart';
-import 'package:tech_application/gen/assets.gen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../component/constant/dimensions.dart';
 import '../../component/my_components.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     super.key,
-    required this.bodyMargin,
   });
 
   final HomeScreenController homeScreenController =
@@ -26,7 +25,7 @@ class HomeScreen extends StatelessWidget {
   final ArticleListController articleListController =
       Get.put(ArticleListController());
 
-  final double bodyMargin;
+  final double bodyMargin = Dimensions.bodyMargin;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +41,13 @@ class HomeScreen extends StatelessWidget {
                 GestureDetector(
                     onTap: () => Get.toNamed(MyRoute.routeArticleListScreen,
                         arguments: {'title': MyStrings.newArticles}),
-                    child: homePageBlogListTitle()),
+                    child: BluePenTitle(
+                      title: MyStrings.viewHotestBlog,
+                      bodyMargin: Get.width / 10,
+                    )),
                 homePageBlogListItem(),
                 const SizedBox(height: 30),
-                HomePagePodcastListTitle(
-                    bodyMargin: bodyMargin),
+                const BlueMicrophoneTitle(title: MyStrings.viewHotestPodCasts),
                 //podcastListItem
                 homePagePodcastListItem(),
                 const SizedBox(height: 50),
@@ -58,25 +59,6 @@ class HomeScreen extends StatelessWidget {
                 circularLoading(),
               ],
             )),
-    );
-  }
-
-  Widget homePageBlogListTitle() {
-    return Padding(
-      padding: EdgeInsets.only(right: bodyMargin, bottom: 10),
-      child: Row(
-        children: [
-          ImageIcon(
-            Assets.icons.bluepen.provider(),
-            color: SolidColors.seeMore,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            MyStrings.viewHotestBlog,
-            style: Get.theme.textTheme.titleMedium,
-          )
-        ],
-      ),
     );
   }
 
@@ -324,35 +306,6 @@ class HomeScreen extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class HomePagePodcastListTitle extends StatelessWidget {
-  const HomePagePodcastListTitle({
-    super.key,
-    required this.bodyMargin,
-  });
-
-  final double bodyMargin;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: bodyMargin, bottom: 10),
-      child: Row(
-        children: [
-          ImageIcon(
-            Assets.icons.bluemicrophone.provider(),
-            color: SolidColors.seeMore,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            MyStrings.viewHotestPodCasts,
-            style: Get.theme.textTheme.titleMedium,
-          )
-        ],
       ),
     );
   }

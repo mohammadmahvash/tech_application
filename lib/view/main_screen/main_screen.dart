@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:tech_application/component/constant/dimensions.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
@@ -19,7 +20,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double bodyMargin = Get.width / 10;
+    double bodyMargin = Dimensions.bodyMargin;
 
     return SafeArea(
         child: Scaffold(
@@ -121,8 +122,8 @@ class MainScreen extends StatelessWidget {
               return IndexedStack(
                 index: selectedMainScreenPageIndex.value,
                 children: [
-                  HomeScreen(bodyMargin: bodyMargin),
-                  ProfilePage(bodyMargin: bodyMargin),
+                  HomeScreen(),
+                  ProfilePage(),
                 ],
               );
             },

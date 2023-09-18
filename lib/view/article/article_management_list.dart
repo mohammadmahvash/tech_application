@@ -10,6 +10,8 @@ import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
+import '../../component/constant/dimensions.dart';
+
 class ArticleManagementList extends StatelessWidget {
   ArticleManagementList({super.key});
 
@@ -37,7 +39,7 @@ class ArticleManagementList extends StatelessWidget {
   }
 
   Widget articleManagementArticleListState() {
-    double bodyMargin = Get.width / 10;
+    double bodyMargin = Dimensions.bodyMargin;
     return Column(
       children: [
         Expanded(

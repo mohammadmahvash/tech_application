@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tech_application/component/constant/dimensions.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 
 PreferredSize appBar(String title) {
-  double bodyMargin = Get.width / 10;
+  double bodyMargin = Dimensions.bodyMargin;
   return PreferredSize(
     preferredSize: const Size.fromHeight(60),
     child: Padding(

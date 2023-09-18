@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:tech_application/component/constant/dimensions.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/controller/home_screen_controller.dart';
@@ -21,7 +22,7 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
 
   @override
   Widget build(BuildContext context) {
-    double bodyMargin = Get.width / 10;
+    double bodyMargin = Dimensions.bodyMargin;
 
     return SafeArea(
         child: Scaffold(
