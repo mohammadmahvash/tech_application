@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -13,6 +14,7 @@ import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article/article_list_controller.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
 import 'package:tech_application/controller/file_picker_controller.dart';
+import 'package:tech_application/controller/home_screen_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/services/file_picker.dart';
 import 'package:tech_application/view/article/article_content_html_editor.dart';
@@ -22,6 +24,9 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
 
   final ArticleManagementController articleManagementInfoController =
       Get.find<ArticleManagementController>();
+
+  final HomeScreenController homeScreenController =
+      Get.find<HomeScreenController>();
 
   final FilePickerController filePickerController =
       Get.put(FilePickerController());
@@ -202,21 +207,15 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                           child: BluePenTitle(
                               title: MyStrings.editTitleArticle, bodyMargin: 0),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              articleManagementInfoController
-                                  .articleInfoModel.value.title!,
-                              style: Get.theme.textTheme.headlineLarge,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                            )
-                          ],
+                        Text(
+                          articleManagementInfoController
+                              .articleInfoModel.value.title!,
+                          style: Get.theme.textTheme.headlineLarge,
                         ),
                         const SizedBox(height: 10),
                         //EditMainTextArticle
                         InkWell(
-                          onTap: () => Get.to(()=>ArticleContentHtmlEditor()),
+                          onTap: () => Get.to(() => ArticleContentHtmlEditor()),
                           child: BluePenTitle(
                               title: MyStrings.editMainTextArticle,
                               bodyMargin: 0),
@@ -231,11 +230,18 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                         ),
                         const SizedBox(height: 30),
                         //SelectCategory
-                        BluePenTitle(
-                            title: MyStrings.selectCategory, bodyMargin: 0),
-                        //hashtagList(),
-                        const SizedBox(height: 70),
+                        InkWell(
+                          onTap: () => chooseCategoryBottomSheet(),
+                          child: BluePenTitle(
+                              title: MyStrings.selectCategory, bodyMargin: 0),
+                        ),
                         //hashtag list
+                        articleManagementInfoController.selectedTags.isEmpty
+                            ? Text(
+                                MyStrings.youHaveNotChoosenCategoryYet,
+                                style: Get.theme.textTheme.headlineLarge,
+                              )
+                            : hashtagList(),
                       ],
                     ),
                   ),
@@ -247,8 +253,7 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                         width: Get.width / 2.5,
                         height: Get.height / 13,
                         child: ElevatedButton(
-                          onPressed: () => Get.toNamed(
-                              MyRoute.routeArticleManagementSinglePageInfo),
+                          onPressed: () {},
                           child: Text(MyStrings.done),
                         ),
                       ),
@@ -265,39 +270,182 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
     return SizedBox(
       height: 40,
       child: ListView.builder(
-        itemCount: articleManagementInfoController.relatedTags.length,
+        itemCount: articleManagementInfoController.selectedTags.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () async {
-              var tagId =
-                  articleManagementInfoController.relatedTags[index].id!;
-              await Get.find<ArticleListController>()
-                  .getArticleListByTagId(tagId);
-
-              var tagName =
-                  "${MyStrings.byTagName} ${articleManagementInfoController.relatedTags[index].title!}";
-
-              Get.toNamed(MyRoute.routeArticleListScreen,
-                  arguments: {'title': tagName});
-            },
-            child: Padding(
-                padding: const EdgeInsets.only(right: 5),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.grey),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
-                    child: Text(
-                      articleManagementInfoController.relatedTags[index].title!,
-                      style: Get.theme.textTheme.titleSmall,
-                    ),
+          return Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.grey),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+                  child: Text(
+                    articleManagementInfoController.selectedTags[index].title!,
+                    style: Get.theme.textTheme.titleSmall,
                   ),
-                )),
-          );
+                ),
+              ));
         },
       ),
     );
+  }
+
+  Widget categories() {
+    return SizedBox(
+      height: Get.height / 4,
+      child: GridView.builder(
+        scrollDirection: Axis.vertical,
+        physics: const ClampingScrollPhysics(),
+        itemCount: homeScreenController.tagsList.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            childAspectRatio: 4),
+        itemBuilder: (context, index) {
+          return InkWell(
+              onTap: () {
+                articleManagementInfoController.articleInfoModel.value
+                    .categoryId = homeScreenController.tagsList[index].id;
+
+                articleManagementInfoController.articleInfoModel.update((val) {
+                  val!.id = homeScreenController.tagsList[index].id;
+                  val.categoryName = homeScreenController.tagsList[index].title;
+                });
+
+                if (articleManagementInfoController.selectedTags
+                    .contains(homeScreenController.tagsList[index])) {
+                  Get.snackbar(
+                    MyStrings.error,
+                    MyStrings.cannotChooseDuplicateTag,
+                    backgroundColor: Colors.redAccent,
+                  );
+                } else {
+                  articleManagementInfoController.selectedTags
+                      .add(homeScreenController.tagsList[index]);
+                }
+              },
+              child: HashtagComponent(index: index));
+        },
+      ),
+    );
+  }
+
+  chooseCategoryBottomSheet() {
+    Get.bottomSheet(
+        isScrollControlled: true,
+        persistent: true,
+        Container(
+          height: Get.height / 1.2,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(30),
+              topLeft: Radius.circular(30),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(Assets.images.techbot.path,
+                        height: Get.height / 18,
+                        alignment: Alignment.topCenter),
+                    const SizedBox(width: 10),
+                    Column(
+                      children: [
+                        const SizedBox(height: 15),
+                        Text(MyStrings.clickonCategoryToAddIntoArticle,
+                            style: Get.theme.textTheme.headlineMedium),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                categories(),
+                Image.asset(Assets.images.arrowdown.path, scale: 3),
+                const SizedBox(height: 30),
+                Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: SizedBox(
+                      width: Get.width,
+                      height: Get.height / 6,
+                      child: GridView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        itemCount:
+                            articleManagementInfoController.selectedTags.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 5,
+                                childAspectRatio: 3.5),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: SolidColors.surface),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    articleManagementInfoController
+                                        .selectedTags[index].title!,
+                                    style: Get.theme.textTheme.labelSmall,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      articleManagementInfoController
+                                          .selectedTags
+                                          .removeAt(index);
+                                    },
+                                    child: const Icon(CupertinoIcons.xmark,
+                                        size: 20, color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: SizedBox(
+                          width: Get.width / 2.25,
+                          height: Get.height / 13,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text(MyStrings.verification),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }

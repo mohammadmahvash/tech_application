@@ -19,6 +19,7 @@ class ArticleManagementController extends GetxController {
               .editOrginalContentTextArticleManagementSinglePageInfoDefault,
           Assets.images.singlePlaceHolder.path)
       .obs;
+  RxList<HashtagModel> selectedTags = RxList();
   TextEditingController textEditingController = TextEditingController();
   RxBool loading = false.obs;
 

@@ -74,6 +74,7 @@ class MyStrings {
   static String shareTec = "اشتراک گذاری تک بلاگ";
   static String tecIngithub = "تک‌بلاگ در گیت هاب";
   static String shareKnowledge = "دونسته هات رو با بقیه به اشتراک بذار ...";
+  static String clickonCategoryToAddIntoArticle = "روی دسته بندی مرتبط ضربه بزن تا به مقاله اضافه بشه";
   static String gigTech = """
 فکر کن !!  اینجا بودنت به این معناست که یک گیک تکنولوژی هستی
 دونسته هات رو با جامعه‌ی گیک های فارسی زبان به اشتراک بذار ...
@@ -116,4 +117,6 @@ class MyStrings {
   static String addNewTimeFile = "لطفا زمان و فایل قسمت جدید پادکست رو وارد کن";
   static String selectShortTitle = "لطفا یه عنوان پر معنا و کوتاه انتخاب کن";
   static String writeYourTitle = "عنوان را وارد کنید";
+  static String cannotChooseDuplicateTag = "نمیتوانید تگ تکراری انتخاب کنید!";
+  static String youHaveNotChoosenCategoryYet = "هنوز دسته بندی انتخاب نکردی!";
 }

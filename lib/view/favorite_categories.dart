@@ -91,6 +91,7 @@ class _FavoriteCategoriesState extends State<FavoriteCategories> {
                                   homeScreenController.tagsList[index])) {
                                 showErrorSnackBar(context,
                                     "نمیتوانید تگ تکراری انتخاب کنید!");
+                                
                               } else {
                                 homeScreenController.selectedTags
                                     .add(homeScreenController.tagsList[index]);
