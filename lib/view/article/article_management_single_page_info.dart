@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/constant/dimensions.dart';
@@ -24,6 +25,67 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
   final FilePickerController filePickerController =
       Get.put(FilePickerController());
 
+  showEditTitleDialog() {
+    Get.defaultDialog(
+      content: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              SvgPicture.asset(Assets.images.techbot.path, width: 30),
+              const SizedBox(width: 8),
+              Column(
+                children: [
+                  const SizedBox(height: 15),
+                  Text(MyStrings.selectShortTitle,
+                      style: Get.textTheme.headlineMedium),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          TextField(
+            controller: articleManagementInfoController.textEditingController,
+            keyboardType: TextInputType.text,
+            minLines: 1,
+            maxLines: 2,
+            decoration: InputDecoration(
+                hintText: MyStrings.writeYourTitle,
+                hintStyle: Get.theme.textTheme.labelMedium,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(15),
+                )),
+            style: const TextStyle(color: Colors.black),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              //ConfirmBTN
+              TextButton(
+                onPressed: () {
+                  articleManagementInfoController.updateArticleTitle();
+                  Get.back();
+                },
+                child: Text(MyStrings.verification,
+                    style: Get.textTheme.headlineMedium),
+              ),
+              //CancelBTN
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child:
+                    Text(MyStrings.later, style: Get.textTheme.headlineMedium),
+              ),
+            ],
+          ),
+        ],
+      ),
+      contentPadding: const EdgeInsets.only(right: 10, left: 10),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,8 +98,8 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                   Stack(
                     children: [
                       SizedBox(
-                        width: Get.width,
-                        height: Get.height/3,
+                          width: Get.width,
+                          height: Get.height / 3,
                           child: filePickerController.file.value.size == 0
                               ? CachedNetworkImage(
                                   imageUrl: articleManagementInfoController
@@ -65,9 +127,11 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                                           fit: BoxFit.cover,
                                         ),
                                       ))
-                              : Image.file(File(filePickerController
-                                  .file.value.path
-                                  .toString()),fit: BoxFit.cover,)),
+                              : Image.file(
+                                  File(filePickerController.file.value.path
+                                      .toString()),
+                                  fit: BoxFit.cover,
+                                )),
                       Positioned(
                           top: 0,
                           right: 0,
@@ -131,14 +195,24 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
-                        BluePenTitle(
-                            title: MyStrings.editTitleArticle, bodyMargin: 0),
-                        Text(
-                          articleManagementInfoController
-                              .articleInfoModel.value.title!,
-                          style: Get.theme.textTheme.headlineLarge,
+                        //EditTitleArticle
+                        InkWell(
+                          onTap: () => showEditTitleDialog(),
+                          child: BluePenTitle(
+                              title: MyStrings.editTitleArticle, bodyMargin: 0),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              articleManagementInfoController
+                                  .articleInfoModel.value.title!,
+                              style: Get.theme.textTheme.headlineLarge,
+                            ),
+                            const Expanded( child: SizedBox.shrink(),)
+                          ],
                         ),
                         const SizedBox(height: 10),
+                        //EditMainTextArticle
                         BluePenTitle(
                             title: MyStrings.editMainTextArticle,
                             bodyMargin: 0),
@@ -151,6 +225,7 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                                   circularLoading(),
                         ),
                         const SizedBox(height: 30),
+                        //SelectCategory
                         BluePenTitle(
                             title: MyStrings.selectCategory, bodyMargin: 0),
                         //hashtagList(),

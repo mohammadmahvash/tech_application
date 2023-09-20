@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:tech_application/controller/article/article_info_controller.dart';
 import 'package:tech_application/controller/article/article_list_controller.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
-import 'package:tech_application/controller/file_picker_controller.dart';
 import 'package:tech_application/controller/home_screen_controller.dart';
 import 'package:tech_application/controller/register_controller.dart';
 

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tech_application/Models/article_info_model.dart';
@@ -18,6 +19,7 @@ class ArticleManagementController extends GetxController {
               .editOrginalContentTextArticleManagementSinglePageInfoDefault,
           Assets.images.singlePlaceHolder.path)
       .obs;
+  TextEditingController textEditingController = TextEditingController();
   RxBool loading = false.obs;
 
   @override
@@ -40,5 +42,11 @@ class ArticleManagementController extends GetxController {
       });
       loading.value = false;
     }
+  }
+
+  updateArticleTitle() {
+    articleInfoModel.update((val) {
+      val!.title = textEditingController.text;
+    });
   }
 }

@@ -112,4 +112,6 @@ class MyStrings {
   static String stars = "******";
   static String nameAndFamilyName = "نام و نام خانوادگی";
   static String addNewTimeFile = "لطفا زمان و فایل قسمت جدید پادکست رو وارد کن";
+  static String selectShortTitle = "لطفا یه عنوان پر معنا و کوتاه انتخاب کن";
+  static String writeYourTitle = "عنوان را وارد کنید";
 }
