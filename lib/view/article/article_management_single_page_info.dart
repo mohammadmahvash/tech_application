@@ -15,6 +15,7 @@ import 'package:tech_application/controller/article/article_management_controlle
 import 'package:tech_application/controller/file_picker_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/services/file_picker.dart';
+import 'package:tech_application/view/article/article_content_html_editor.dart';
 
 class ArticleManagementSinglePageInfo extends StatelessWidget {
   ArticleManagementSinglePageInfo({super.key});
@@ -207,15 +208,19 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                               articleManagementInfoController
                                   .articleInfoModel.value.title!,
                               style: Get.theme.textTheme.headlineLarge,
-                            ),
-                            const Expanded( child: SizedBox.shrink(),)
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                            )
                           ],
                         ),
                         const SizedBox(height: 10),
                         //EditMainTextArticle
-                        BluePenTitle(
-                            title: MyStrings.editMainTextArticle,
-                            bodyMargin: 0),
+                        InkWell(
+                          onTap: () => Get.to(()=>ArticleContentHtmlEditor()),
+                          child: BluePenTitle(
+                              title: MyStrings.editMainTextArticle,
+                              bodyMargin: 0),
+                        ),
                         HtmlWidget(
                           articleManagementInfoController
                               .articleInfoModel.value.content!,

@@ -49,4 +49,10 @@ class ArticleManagementController extends GetxController {
       val!.title = textEditingController.text;
     });
   }
+
+  updateMainTextArticle(String content) {
+    articleInfoModel.update((val) {
+      val!.content = content;
+    });
+  }
 }

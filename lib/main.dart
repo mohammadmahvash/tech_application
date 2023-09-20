@@ -7,7 +7,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tech_application/binding.dart';
 import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
-import 'package:tech_application/view/article/article_content_html_editor.dart';
 import 'package:tech_application/view/article/article_list_screen.dart';
 import 'package:tech_application/view/article/article_management_list.dart';
 import 'package:tech_application/view/article/article_management_single_page_info.dart';
@@ -75,8 +74,7 @@ class MainApp extends StatelessWidget {
         locale: const Locale('fa'),
         theme: lightTheme(),
         debugShowCheckedModeBanner: false,
-        // home: const SplashScreen());
-        home: const ArticleContentHtmlEditor(title: "HTML Editor Test"));
+        home: const SplashScreen());
   }
 
   ThemeData lightTheme() {
