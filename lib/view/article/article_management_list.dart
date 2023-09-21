@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +9,7 @@ import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
+import 'package:tech_application/controller/article/article_info_controller.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
@@ -17,6 +20,9 @@ class ArticleManagementList extends StatelessWidget {
 
   final ArticleManagementController articleManagementController =
       Get.find<ArticleManagementController>();
+
+  final ArticleInfoController articleInfoController =
+      Get.put(ArticleInfoController());
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +59,11 @@ class ArticleManagementList extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      log(articleManagementController.articleList[index].id);
+                      articleInfoController.getArticleInfo(
+                          articleManagementController.articleList[index].id!);
+                    },
                     child: Row(
                       children: [
                         SizedBox(

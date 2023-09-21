@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -5,8 +8,10 @@ import 'package:tech_application/Models/article_info_model.dart';
 import 'package:tech_application/Models/article_model.dart';
 import 'package:tech_application/Models/hashtag_model.dart';
 import 'package:tech_application/component/constant/api_constant.dart';
+import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_storage.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/controller/file_picker_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/services/dio_service.dart';
 
@@ -20,12 +25,14 @@ class ArticleManagementController extends GetxController {
           Assets.images.singlePlaceHolder.path)
       .obs;
   RxList<HashtagModel> selectedTags = RxList();
+  RxList<int> selectedTagsId = RxList();
   TextEditingController textEditingController = TextEditingController();
   RxBool loading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
+    articleInfoModel.value.image = "";
     getArticleManagementList();
   }
 
@@ -42,6 +49,55 @@ class ArticleManagementController extends GetxController {
         articleList.add(ArticleModel.fromJson(element));
       });
       loading.value = false;
+    }
+  }
+
+  storeArticle() async {
+    FilePickerController filePickerController =
+        Get.find<FilePickerController>();
+    loading.value = true;
+
+    Map<String, dynamic> map = {
+      'title': articleInfoModel.value.title,
+      'content': articleInfoModel.value.content,
+      'cat_id': articleInfoModel.value.categoryId,
+      'tag_list': selectedTagsId,
+      'user_id': GetStorage().read(MyStorage.userId),
+      'image': await dio.MultipartFile.fromFile(
+          filePickerController.file.value.path!),
+      'command': "store",
+    };
+    var response = await DioService().postMethod(map, ApiConstant.postArticle);
+    log(response.data.toString());
+
+    var statusCode = response.data["status_code"];
+    loading.value = false;
+
+    switch (statusCode) {
+      case 201:
+        Get.snackbar(MyStrings.success, MyStrings.articleStoreSuccesful,
+            backgroundColor: Colors.greenAccent);
+
+        Get.offAllNamed(MyRoute.routeArticleManagementList);
+        break;
+      case 401:
+        Get.snackbar(MyStrings.error, MyStrings.notAuthorizedError,
+            backgroundColor: Colors.redAccent);
+        break;
+      case 403:
+        Get.snackbar(
+          MyStrings.error,
+          MyStrings.invalidTokenError,
+          backgroundColor: Colors.redAccent,
+        );
+        break;
+      case 500:
+        Get.snackbar(
+          MyStrings.error,
+          MyStrings.serverError,
+          backgroundColor: Colors.redAccent,
+        );
+        break;
     }
   }
 

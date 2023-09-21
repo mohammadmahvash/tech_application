@@ -4,4 +4,5 @@ class ApiConstant {
   static const getHomeItems = "${baseURL}home/?command=index";
   static const getArticleList = "${baseURL}article/get.php?command=new&user_id=";
   static const postRegister = "${baseURL}register/action.php";
+  static const postArticle = "${baseURL}article/post.php";
 }

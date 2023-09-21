@@ -8,10 +8,8 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/constant/dimensions.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
-import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
-import 'package:tech_application/controller/article/article_list_controller.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
 import 'package:tech_application/controller/file_picker_controller.dart';
 import 'package:tech_application/controller/home_screen_controller.dart';
@@ -253,8 +251,14 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                         width: Get.width / 2.5,
                         height: Get.height / 13,
                         child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text(MyStrings.done),
+                          onPressed: () async =>
+                              await articleManagementInfoController
+                                  .storeArticle(),
+                          child:
+                              articleManagementInfoController.loading.value ==
+                                      true
+                                  ? circularLoading()
+                                  : Text(MyStrings.done),
                         ),
                       ),
                     ),
@@ -278,7 +282,8 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey),
+                    gradient:
+                        const LinearGradient(colors: GradientColors.tags)),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
                   child: Text(
@@ -309,6 +314,9 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
               onTap: () {
                 articleManagementInfoController.articleInfoModel.value
                     .categoryId = homeScreenController.tagsList[index].id;
+
+                articleManagementInfoController.selectedTagsId
+                    .add(int.parse(homeScreenController.tagsList[index].id!));
 
                 articleManagementInfoController.articleInfoModel.update((val) {
                   val!.id = homeScreenController.tagsList[index].id;
@@ -391,7 +399,8 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                           return Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: SolidColors.surface),
+                                gradient: const LinearGradient(
+                                    colors: GradientColors.tags)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 16),
                               child: Row(
@@ -402,13 +411,25 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                                   Text(
                                     articleManagementInfoController
                                         .selectedTags[index].title!,
-                                    style: Get.theme.textTheme.labelSmall,
+                                    style: Get.theme.textTheme.titleSmall,
                                   ),
                                   InkWell(
                                     onTap: () {
                                       articleManagementInfoController
                                           .selectedTags
                                           .removeAt(index);
+
+                                      articleManagementInfoController
+                                          .selectedTagsId
+                                          .removeAt(index);
+
+                                      articleManagementInfoController
+                                              .articleInfoModel
+                                              .value
+                                              .categoryId =
+                                          articleManagementInfoController
+                                              .selectedTagsId.last
+                                              .toString();
                                     },
                                     child: const Icon(CupertinoIcons.xmark,
                                         size: 20, color: Colors.grey),

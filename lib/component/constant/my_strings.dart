@@ -83,8 +83,13 @@ class MyStrings {
   static String nameMohamadMahvash = "محمد ماهوش";
   static String gmailMohamadMahvash = "mohammadmahvash1@gmail.com";
   static String exit = "خروج";
+  static String success = "موفقیت";
   static String cancel = "لغو";
   static String error = "خطا";
+  static String serverError = "خطا سرور";
+  static String notAuthorizedError = "ابتدا ثبت نام کنید";
+  static String invalidTokenError = """توکن شما منقضی شده است.
+  مجددا وارد حساب کاربری خود شوید!""";
   static String errorText = "Error";
   static String youAlreadyLeft = "قبلا خارج شدی !!";
   static String areYouSureExit = "آیا از خروج خود مطمئن هستید ؟";
@@ -102,6 +107,7 @@ class MyStrings {
   static String isEmail = "isEmail:";
   static String tecEmail = "techblog@gmail.com";
   static String yourRegistrationWasSuccesful = "ثبت نام شما با موفقیت انجام شد";
+  static String articleStoreSuccesful = "مقاله با موفقیت ثبت شد";
   static String activateCodeIsNotCorrect = "کد فعال سازی وارد شده اشتباه است";
   static String activateCodeIsExpired = "کد فعال سازی وارد شده منقضی شده است";
   static String pleaseEnterEmailCorrect =

@@ -70,6 +70,7 @@ class RegisterIntro extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
                   child: TextField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: registerController.emailTextEditingController,
                     onChanged: (value) {
                       // print("$value is email ${isEmail(value)}");
@@ -130,6 +131,7 @@ class RegisterIntro extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 24),
                   child: TextField(
+                    keyboardType: TextInputType.number,
                     controller:
                         registerController.activatedCodeTextEditingController,
                     onChanged: (value) {

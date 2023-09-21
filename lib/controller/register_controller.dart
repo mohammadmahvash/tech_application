@@ -54,6 +54,9 @@ class RegisterController extends GetxController {
           box.write(MyStorage.token, response.data["token"]);
           box.write(MyStorage.userId, response.data["user_id"]);
 
+          log(name: "userId", GetStorage().read(MyStorage.userId));
+          log(name: "token", GetStorage().read(MyStorage.token));
+
           Get.snackbar(MyStrings.logIn, MyStrings.yourRegistrationWasSuccesful,
               backgroundColor: Colors.greenAccent);
 

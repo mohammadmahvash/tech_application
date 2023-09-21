@@ -2,6 +2,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' as dio_service;
+import 'package:get_storage/get_storage.dart';
+import 'package:tech_application/component/constant/my_storage.dart';
 
 class DioService {
   Dio dio = Dio();
@@ -13,16 +15,20 @@ class DioService {
               responseType: ResponseType.json,
               method: "GET",
             ))
-        .then((response) => response)
-        .catchError((err) {
-      if (err is DioException) {
-        return err.response!;
-      }
-    });
+        .then((response) => response);
+    //     .catchError((err) {
+    //   if (err is DioException) {
+    //     return throw err.response.toString();
+    //   }
+    // });
   }
 
   Future<dynamic> postMethod(Map<String, dynamic> map, String url) async {
-    //TODO read token from storage
+
+    var token = GetStorage().read(MyStorage.token);
+    dio.options.headers['Authorization'] = "$token";
+
+
     return await dio
         .post(url,
             data: dio_service.FormData.fromMap(map),
@@ -33,7 +39,7 @@ class DioService {
         .then((response) => response)
         .catchError((err) {
       if (err is DioException) {
-        return err.response!;
+        return throw err.response!;
       }
     });
   }
