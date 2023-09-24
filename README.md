@@ -4,6 +4,10 @@
 <img src="assets/images/logo.png"align="center" width="200" />
 
 <img src="https://sasansafari.com/techblog_github/Screenshot_1652643493.png" align="center" height="" width="200" />
+<img src="https://github.com/mohammadmahvash/tech_application/assets/90309839/27f8d221-2505-474f-aaa2-1bb555c05c59" align="center" height="" width="200" />
+<img src="https://github.com/mohammadmahvash/tech_application/assets/90309839/c219f246-15f6-498f-9487-1673498323ea" align="center" height="" width="200" />
+<img src="https://github.com/mohammadmahvash/tech_application/assets/90309839/57a472b5-1f68-4636-8e36-ddabe0e7d0ca" align="center" height="" width="200" />
+
 </div>  
   
 
