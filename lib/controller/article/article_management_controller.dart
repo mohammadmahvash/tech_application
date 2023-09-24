@@ -61,7 +61,7 @@ class ArticleManagementController extends GetxController {
       'title': articleInfoModel.value.title,
       'content': articleInfoModel.value.content,
       'cat_id': articleInfoModel.value.categoryId,
-      'tag_list': selectedTagsId,
+      'tag_list': "$selectedTagsId",
       'user_id': GetStorage().read(MyStorage.userId),
       'image': await dio.MultipartFile.fromFile(
           filePickerController.file.value.path!),
@@ -77,8 +77,6 @@ class ArticleManagementController extends GetxController {
       case 201:
         Get.snackbar(MyStrings.success, MyStrings.articleStoreSuccesful,
             backgroundColor: Colors.greenAccent);
-
-        Get.offAllNamed(MyRoute.routeArticleManagementList);
         break;
       case 401:
         Get.snackbar(MyStrings.error, MyStrings.notAuthorizedError,
@@ -99,6 +97,7 @@ class ArticleManagementController extends GetxController {
         );
         break;
     }
+    Get.offNamed(MyRoute.routeArticleManagementList);
   }
 
   updateArticleTitle() {

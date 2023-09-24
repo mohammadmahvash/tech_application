@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -251,9 +252,12 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                         width: Get.width / 2.5,
                         height: Get.height / 13,
                         child: ElevatedButton(
-                          onPressed: () async =>
-                              await articleManagementInfoController
-                                  .storeArticle(),
+                          onPressed: () async{
+                            // debugger();
+                            await articleManagementInfoController
+                                  .storeArticle();
+                                  },
+                              
                           child:
                               articleManagementInfoController.loading.value ==
                                       true

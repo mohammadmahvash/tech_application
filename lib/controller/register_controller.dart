@@ -122,7 +122,7 @@ class RegisterController extends GetxController {
                 //ArticleManagementBTN
                 InkWell(
                   onTap: () {
-                    Get.toNamed(MyRoute.routeArticleManagementList);
+                    Get.offNamed(MyRoute.routeArticleManagementList);
                   },
                   child: SizedBox(
                     height: 40,
