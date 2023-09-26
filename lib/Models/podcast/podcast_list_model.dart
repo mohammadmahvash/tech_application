@@ -1,36 +1,34 @@
 import 'package:tech_application/component/constant/api_constant.dart';
 
-class PodcastModel {
+class PodcastListModel {
   String? id;
   String? title;
   String? poster;
-  String? categoryName;
-  String? author;
+  String? publisher;
   String? view;
   String? status;
   String? createdAt;
+  bool? isFavorite;
 
-  PodcastModel({
+  PodcastListModel({
     required this.id,
     required this.title,
     required this.poster,
-    required this.categoryName,
-    required this.author,
+    required this.publisher,
     required this.view,
     required this.status,
     required this.createdAt,
+    required this.isFavorite,
   });
 
-  PodcastModel.fromJson(Map<String, dynamic> json) {
+  PodcastListModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     title = json["title"];
     poster = ApiConstant.baseHostImageURL + json["poster"];
-    categoryName = json["cat_name"];
-    author = json["author"];
+    publisher = json["publisher"];
     view = json["view"];
     status = json["status"];
     createdAt = json["created_at"];
+    isFavorite = json["isFavorite"];
   }
-
-  get length => null;
-}
+  }

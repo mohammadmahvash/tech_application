@@ -12,6 +12,7 @@ import 'package:tech_application/view/article/article_management_list.dart';
 import 'package:tech_application/view/article/article_management_single_page_info.dart';
 import 'package:tech_application/view/article/article_single_page_info.dart';
 import 'package:tech_application/view/main_screen/main_screen.dart';
+import 'package:tech_application/view/podcast/podcast_list_screen.dart';
 import 'package:tech_application/view/register/register_intro.dart';
 import 'package:tech_application/view/splash_screen.dart';
 
@@ -48,6 +49,12 @@ class MainApp extends StatelessWidget {
             name: MyRoute.routeRegisterIntro,
             page: () => RegisterIntro(),
             binding: RegisterBinding()
+          ),
+          GetPage(
+            name: MyRoute.routePodcastListScreen,
+            page: () => PodcastListScreen(),
+            binding: PodcastBinding(),
+            arguments: {'title': MyStrings.newPodcasts}
           ),
           GetPage(
             name: MyRoute.routeArticleListScreen,

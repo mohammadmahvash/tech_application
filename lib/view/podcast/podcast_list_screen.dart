@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/appbar_component.dart';
 import 'package:tech_application/component/constant/dimensions.dart';
-import 'package:tech_application/component/constant/my_strings.dart';
 import 'package:tech_application/component/constant/my_colors.dart';
 import 'package:tech_application/component/my_components.dart';
-import 'package:tech_application/controller/article/article_info_controller.dart';
-import 'package:tech_application/controller/article/article_list_controller.dart';
+import 'package:tech_application/controller/podcast/podcast_list_controller.dart';
 
-class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({super.key});
+class PodcastListScreen extends StatelessWidget {
+  PodcastListScreen({super.key});
 
   final String title = Get.arguments['title'];
 
-  final ArticleListController articleListController =
-      Get.find<ArticleListController>();
-  final ArticleInfoController articleInfoController =
-      Get.find<ArticleInfoController>();
+  final PodcastListController podcastListController =
+      Get.find<PodcastListController>();
+  // final ArticleInfoController articleInfoController =
+  //     Get.find<ArticleInfoController>();
   @override
   Widget build(BuildContext context) {
     double bodyMargin = Dimensions.bodyMargin;
@@ -27,20 +25,20 @@ class ArticleListScreen extends StatelessWidget {
       backgroundColor: SolidColors.scaffoldBackground,
       appBar: appBar(title),
       body: Obx(
-        () => articleListController.loading.value == false
+        () => podcastListController.loading.value == false
             ? Padding(
                 padding: EdgeInsets.only(
                     left: bodyMargin / 1.9, right: bodyMargin / 1.9),
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: articleListController.articleList.length,
+                  itemCount: podcastListController.podcastList.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: InkWell(
                         onTap: () {
-                          articleInfoController.getArticleInfo(
-                              articleListController.articleList[index].id!);
+                          // articleInfoController.getArticleInfo(
+                          //     articleListController.articleList[index].id!);
                         },
                         child: Row(
                           children: [
@@ -48,8 +46,8 @@ class ArticleListScreen extends StatelessWidget {
                               width: Get.width / 4,
                               height: Get.height / 7,
                               child: CachedNetworkImage(
-                                imageUrl: articleListController
-                                    .articleList[index].image!,
+                                imageUrl: podcastListController
+                                    .podcastList[index].poster!,
                                 imageBuilder: (context, imageProvider) =>
                                     Container(
                                   decoration: BoxDecoration(
@@ -73,29 +71,22 @@ class ArticleListScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text(
-                                      articleListController
-                                          .articleList[index].title!,
+                                      podcastListController
+                                          .podcastList[index].title!,
                                       style: Get.theme.textTheme.headlineMedium,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 3),
                                   const SizedBox(height: 10),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                          articleListController
-                                              .articleList[index].author!,
+                                          podcastListController
+                                                  .podcastList[index]
+                                                  .publisher ??
+                                              "",
                                           style:
                                               Get.theme.textTheme.labelSmall),
-                                      Text(
-                                          "${articleListController.articleList[index].view!} ${MyStrings.visit}",
-                                          style:
-                                              Get.theme.textTheme.labelSmall),
-                                      Text(
-                                          articleListController
-                                              .articleList[index].categoryName!,
-                                          style: Get.theme.textTheme.bodySmall),
                                     ],
                                   )
                                 ],

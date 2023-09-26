@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tech_application/Models/article_info_model.dart';
-import 'package:tech_application/Models/article_model.dart';
+import 'package:tech_application/Models/article/article_info_model.dart';
+import 'package:tech_application/Models/article/article_model.dart';
 import 'package:tech_application/Models/hashtag_model.dart';
 import 'package:tech_application/component/constant/api_constant.dart';
 import 'package:tech_application/component/constant/my_route.dart';
@@ -19,7 +19,7 @@ class ArticleInfoController extends GetxController {
     articleInfoModel = ArticleInfoModel().obs;
     loading.value = true;
 
-    String userId = GetStorage().read(MyStorage.userId);
+    String? userId = GetStorage().read(MyStorage.userId);
 
     var response = await DioService().getMethod(
         "${ApiConstant.baseURL}article/get.php?command=info&id=$id&user_id=$userId");

@@ -38,16 +38,25 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 30),
                 homePageHashtagList(),
                 const SizedBox(height: 30),
+                //articleTitle
                 GestureDetector(
-                    onTap: () => Get.toNamed(MyRoute.routeArticleListScreen,
-                        arguments: {'title': MyStrings.newArticles}),
+                    onTap: () {
+                      articleListController.getArticleList();
+                      Get.toNamed(MyRoute.routeArticleListScreen,
+                          arguments: {'title': MyStrings.newArticles});
+                    },
                     child: BluePenTitle(
                       title: MyStrings.viewHotestBlog,
                       bodyMargin: Get.width / 10,
                     )),
                 homePageBlogListItem(),
                 const SizedBox(height: 30),
-                const BlueMicrophoneTitle(title: MyStrings.viewHotestPodCasts),
+                //podcastTitle
+                GestureDetector(
+                    onTap: () => Get.toNamed(MyRoute.routePodcastListScreen,
+                        arguments: {'title': MyStrings.newPodcasts}),
+                    child: const BlueMicrophoneTitle(
+                        title: MyStrings.viewHotestPodCasts)),
                 //podcastListItem
                 homePagePodcastListItem(),
                 const SizedBox(height: 50),

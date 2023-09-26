@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
-import 'package:tech_application/Models/article_model.dart';
+import 'package:tech_application/Models/article/article_model.dart';
 import 'package:tech_application/Models/hashtag_model.dart';
-import 'package:tech_application/Models/podcast_model.dart';
+import 'package:tech_application/Models/podcast/podcast_model.dart';
 import 'package:tech_application/Models/poster_model.dart';
 import 'package:tech_application/component/constant/api_constant.dart';
 import 'package:tech_application/services/dio_service.dart';
@@ -31,8 +33,8 @@ class HomeScreenController extends GetxController {
       response.data['tags'].forEach((element) {
         tagsList.add(HashtagModel.fromJson(element));
       });
-      tagsList.removeWhere((element) => element.title=="اخبار");
-      tagsList.removeWhere((element) => element.title=="اخبار فیلم و سریال");
+      tagsList.removeWhere((element) => element.title == "اخبار");
+      tagsList.removeWhere((element) => element.title == "اخبار فیلم و سریال");
 
       response.data['top_visited'].forEach((element) {
         topArticlesList.add(ArticleModel.fromJson(element));
@@ -41,7 +43,7 @@ class HomeScreenController extends GetxController {
       response.data['top_podcasts'].forEach((element) {
         topPodcastsList.add(PodcastModel.fromJson(element));
       });
-      topPodcastsList.removeRange(0, 3);
+      topPodcastsList.removeRange(0, 5);
 
       loading.value = false;
     }

@@ -3,6 +3,7 @@ import 'package:tech_application/controller/article/article_info_controller.dart
 import 'package:tech_application/controller/article/article_list_controller.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
 import 'package:tech_application/controller/home_screen_controller.dart';
+import 'package:tech_application/controller/podcast/podcast_list_controller.dart';
 import 'package:tech_application/controller/register_controller.dart';
 
 class HomeScreenBinding implements Bindings {
@@ -19,6 +20,13 @@ class RegisterBinding implements Bindings {
   }
 }
 
+class PodcastBinding implements Bindings {
+  @override
+  void dependencies() {
+    Get.put(PodcastListController());
+
+  }
+}
 class ArticleBinding implements Bindings {
   @override
   void dependencies() {
