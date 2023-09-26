@@ -37,7 +37,7 @@ class ArticleManagementController extends GetxController {
   }
 
   getArticleManagementList() async {
-    String userId = GetStorage().read(MyStorage.userId);
+    String? userId = GetStorage().read(MyStorage.userId);
     loading.value = true;
 
     var response = await DioService().getMethod(

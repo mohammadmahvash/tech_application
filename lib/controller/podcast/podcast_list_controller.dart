@@ -17,9 +17,9 @@ class PodcastListController extends GetxController {
 
   Future getPodcastList() async {
     loading.value = true;
-    // String userId = GetStorage().read(MyStorage.userId);
+    String? userId = GetStorage().read(MyStorage.userId);
     var response = await DioService().getMethod(
-        "${ApiConstant.baseURL}podcast/get.php?command=new&user_id=");
+        "${ApiConstant.baseURL}podcast/get.php?command=new&user_id=$userId");
 
 
     if (response.statusCode == 200) {
