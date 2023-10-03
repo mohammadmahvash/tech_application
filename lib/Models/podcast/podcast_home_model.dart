@@ -1,6 +1,6 @@
 import 'package:tech_application/component/constant/api_constant.dart';
 
-class PodcastModel {
+class PodcastHomeModel {
   String? id;
   String? title;
   String? poster;
@@ -10,7 +10,7 @@ class PodcastModel {
   String? status;
   String? createdAt;
 
-  PodcastModel({
+  PodcastHomeModel({
     required this.id,
     required this.title,
     required this.poster,
@@ -21,7 +21,7 @@ class PodcastModel {
     required this.createdAt,
   });
 
-  PodcastModel.fromJson(Map<String, dynamic> json) {
+  PodcastHomeModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     title = json["title"];
     poster = ApiConstant.baseHostImageURL + json["poster"];

@@ -19,7 +19,6 @@ class ArticleSinglePageInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -77,11 +76,6 @@ class ArticleSinglePageInfo extends StatelessWidget {
                                   ),
                                 ),
                                 const Expanded(child: SizedBox()),
-                                const Icon(
-                                  Icons.bookmark_border_outlined,
-                                  color: Colors.white,
-                                ),
-                                const SizedBox(width: 20),
                                 InkWell(
                                   onTap: () async {
                                     await Share.share(

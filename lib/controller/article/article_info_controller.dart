@@ -9,7 +9,6 @@ import 'package:tech_application/component/constant/my_storage.dart';
 import 'package:tech_application/services/dio_service.dart';
 
 class ArticleInfoController extends GetxController {
-  RxInt id = RxInt(0);
   Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel().obs;
   RxList<ArticleModel> relatedArticle = RxList();
   RxList<HashtagModel> relatedTags = RxList();

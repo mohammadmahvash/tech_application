@@ -49,6 +49,7 @@ class MyStrings {
   static String titleAppBarArticlesList = "لیست مقاله ها";
   static String titleAppBarPodcastsList = "لیست پادکست ها";
   static String titleAppBarManageArticle = "مدیریت مقاله ها";
+  static String titleAppBarManagePodcast = "مدیریت پادکست ها";
   static String manageArticle = "مدیریت مقاله ها";
   static String managePodcast = "مدیریت پادکست ها";
   static String titleAppBarArticleContentEditor = "نوشتن/ویرایش مقاله ";

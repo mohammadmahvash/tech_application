@@ -22,7 +22,7 @@ class BlueMicrophoneTitle extends StatelessWidget {
         children: [
           ImageIcon(
             Assets.icons.bluemicrophone.provider(),
-            color: SolidColors.seeMore,
+            color: SolidColors.blueColor,
           ),
           const SizedBox(width: 8),
           Text(
@@ -52,7 +52,7 @@ class BluePenTitle extends StatelessWidget {
         children: [
           ImageIcon(
             Assets.icons.bluepen.provider(),
-            color: SolidColors.seeMore,
+            color: SolidColors.blueColor,
           ),
           const SizedBox(width: 8),
           Text(

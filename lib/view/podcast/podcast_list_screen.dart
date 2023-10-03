@@ -11,11 +11,9 @@ class PodcastListScreen extends StatelessWidget {
   PodcastListScreen({super.key});
 
   final String title = Get.arguments['title'];
-
   final PodcastListController podcastListController =
       Get.find<PodcastListController>();
-  // final ArticleInfoController articleInfoController =
-  //     Get.find<ArticleInfoController>();
+
   @override
   Widget build(BuildContext context) {
     double bodyMargin = Dimensions.bodyMargin;

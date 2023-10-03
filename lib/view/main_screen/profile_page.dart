@@ -31,7 +31,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               ImageIcon(
                 Assets.icons.bluepen.provider(),
-                color: SolidColors.seeMore,
+                color: SolidColors.blueColor,
               ),
               const SizedBox(width: 8),
               Text(

@@ -7,6 +7,7 @@ import 'package:tech_application/controller/article/article_info_controller.dart
 import 'package:tech_application/controller/article/article_list_controller.dart';
 import 'package:tech_application/controller/home_screen_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:tech_application/controller/podcast/podcast_info_controller.dart';
 
 import '../../component/constant/dimensions.dart';
 import '../../component/my_components.dart';
@@ -21,6 +22,9 @@ class HomeScreen extends StatelessWidget {
 
   final ArticleInfoController articleInfoController =
       Get.put(ArticleInfoController());
+
+  final PodcastInfoController podcastInfoController =
+      Get.put(PodcastInfoController());
 
   final ArticleListController articleListController =
       Get.put(ArticleListController());
@@ -42,8 +46,9 @@ class HomeScreen extends StatelessWidget {
                 GestureDetector(
                     onTap: () {
                       articleListController.getArticleList();
-                      Get.toNamed(MyRoute.routeArticleListScreen,
-                          arguments: {'title': MyStrings.newArticles});
+                      Get.toNamed(MyRoute.routeArticleListScreen, arguments: {
+                        'title': MyStrings.titleAppBarArticlesList
+                      });
                     },
                     child: BluePenTitle(
                       title: MyStrings.viewHotestBlog,
@@ -54,7 +59,9 @@ class HomeScreen extends StatelessWidget {
                 //podcastTitle
                 GestureDetector(
                     onTap: () => Get.toNamed(MyRoute.routePodcastListScreen,
-                        arguments: {'title': MyStrings.newPodcasts}),
+                            arguments: {
+                              'title': MyStrings.titleAppBarPodcastsList
+                            }),
                     child: const BlueMicrophoneTitle(
                         title: MyStrings.viewHotestPodCasts)),
                 //podcastListItem
@@ -180,48 +187,58 @@ class HomeScreen extends StatelessWidget {
         itemCount: homeScreenController.topPodcastsList.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(
-                index == homeScreenController.topPodcastsList.length - 1
-                    ? bodyMargin
-                    : 0,
-                0,
-                index == 0 ? bodyMargin : 10,
-                0),
-            child: Column(
-              children: [
-                SizedBox(
-                    height: Get.height / 5.3,
-                    width: Get.width / 2.4,
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          homeScreenController.topPodcastsList[index].poster!,
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                                image: imageProvider, fit: BoxFit.cover)),
-                      ),
-                      placeholder: (context, url) => circularLoading(),
-                      errorWidget: (context, url, error) => const Icon(
-                        Icons.image_not_supported_outlined,
-                        color: Colors.grey,
-                        size: 50,
-                      ),
-                    )),
-                SizedBox(
-                  width: Get.width / 2.7,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Center(
-                      child: Text(
-                        homeScreenController.topPodcastsList[index].title!,
-                        style: Get.theme.textTheme.headlineLarge,
+          return GestureDetector(
+            onTap: () async {
+              await podcastInfoController.getPodcastEpisodesList(
+                  homeScreenController.topPodcastsList[index].id.toString());
+
+              Get.toNamed(MyRoute.routePodcastSinglePageInfo, arguments: {
+                'homeScreenPodcast': homeScreenController.topPodcastsList[index]
+              });
+            },
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                  index == homeScreenController.topPodcastsList.length - 1
+                      ? bodyMargin
+                      : 0,
+                  0,
+                  index == 0 ? bodyMargin : 10,
+                  0),
+              child: Column(
+                children: [
+                  SizedBox(
+                      height: Get.height / 5.3,
+                      width: Get.width / 2.4,
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            homeScreenController.topPodcastsList[index].poster!,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.cover)),
+                        ),
+                        placeholder: (context, url) => circularLoading(),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          color: Colors.grey,
+                          size: 50,
+                        ),
+                      )),
+                  SizedBox(
+                    width: Get.width / 2.7,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Center(
+                        child: Text(
+                          homeScreenController.topPodcastsList[index].title!,
+                          style: Get.theme.textTheme.headlineLarge,
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           );
         },

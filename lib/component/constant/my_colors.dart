@@ -16,10 +16,10 @@ class SolidColors {
   static const Color submitPodCast = Color.fromARGB(255, 246, 246, 246);
   static const Color subText = Color.fromARGB(255, 197, 197, 197);
   static const Color hashTag = Color.fromARGB(255, 255, 255, 255);
-  static const Color seeMore = Color.fromARGB(255, 40, 107, 184);
   static const Color dividerColor = Color.fromARGB(255, 112, 112, 112);
   static const Color hintText = Color.fromARGB(255, 219, 219, 219);
   static const Color surface = Color.fromARGB(255, 242, 242, 242);
+  static const Color blueColor = Color.fromARGB(255, 40, 107, 184);
   static const Color greyColor = Color.fromARGB(255, 156, 156, 156);
   static const Color lightIcon = Color.fromARGB(255, 255, 255, 255);
   static const Color blackColor = Color.fromARGB(255, 4, 4, 4);

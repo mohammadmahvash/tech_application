@@ -60,7 +60,6 @@ class ArticleManagementList extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 10),
                   child: InkWell(
                     onTap: () {
-                      log(articleManagementController.articleList[index].id);
                       articleInfoController.getArticleInfo(
                           articleManagementController.articleList[index].id!);
                     },
