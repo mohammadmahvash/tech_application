@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tech_application/Models/podcast/podcast_info_model.dart';
 import 'package:tech_application/binding.dart';
 import 'package:tech_application/component/constant/my_route.dart';
 import 'package:tech_application/component/constant/my_strings.dart';
