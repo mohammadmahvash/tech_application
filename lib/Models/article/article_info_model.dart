@@ -23,7 +23,7 @@ class ArticleInfoModel {
     id = json["info"]["id"];
     title = json["info"]["title"];
     content = json["info"]["content"];
-    image = ApiConstant.baseHostImageURL + json["info"]["image"];
+    image = ApiConstant.baseHostURL + json["info"]["image"];
     categoryId = json["info"]["cat_id"];
     categoryName = json["info"]["cat_name"];
     author = json["info"]["author"];

@@ -24,7 +24,7 @@ class PodcastHomeModel {
   PodcastHomeModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     title = json["title"];
-    poster = ApiConstant.baseHostImageURL + json["poster"];
+    poster = ApiConstant.baseHostURL + json["poster"];
     categoryName = json["cat_name"];
     author = json["author"];
     view = json["view"];

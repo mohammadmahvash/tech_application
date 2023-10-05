@@ -28,7 +28,7 @@ class ArticleModel {
   ArticleModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     title = json["title"];
-    image = ApiConstant.baseHostImageURL + json["image"];
+    image = ApiConstant.baseHostURL + json["image"];
     categoryId = json["cat_id"];
     categoryName = json["cat_name"];
     author = json["author"];

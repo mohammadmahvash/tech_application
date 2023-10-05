@@ -1,3 +1,5 @@
+import 'package:tech_application/component/constant/api_constant.dart';
+
 class PodcastInfoModel {
   String? id;
   String? podcastId;
@@ -11,7 +13,7 @@ class PodcastInfoModel {
   PodcastInfoModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     podcastId = json["podcast_id"];
-    file = json["file"];
+    file = ApiConstant.baseHostURL + json["file"];
     title = json["title"];
     length = json["length"];
   }

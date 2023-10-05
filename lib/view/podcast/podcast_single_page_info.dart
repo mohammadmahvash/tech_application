@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tech_application/component/constant/dimensions.dart';
@@ -35,7 +36,7 @@ class PodcastSinglePageInfo extends StatelessWidget {
                               height: Get.height / 3.5,
                               child: Image(
                                 image: imageProvider,
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fill,
                               )),
                           placeholder: (context, url) => Column(
                                 children: [
@@ -78,6 +79,7 @@ class PodcastSinglePageInfo extends StatelessWidget {
                                 InkWell(
                                   onTap: () async {
                                     await Share.share("");
+                                    //TODO Add share icon
                                     // "${articleInfoController.articleInfoModel.value.title!}\n ${MyStrings.shareText}");
                                   },
                                   child: const Icon(
@@ -122,34 +124,56 @@ class PodcastSinglePageInfo extends StatelessWidget {
                                   .podcastEpisodesList.length,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(top: 15),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          ImageIcon(
-                                              Assets.icons.bluemicrophone
-                                                  .provider(),
-                                              color: SolidColors.blueColor),
-                                          const SizedBox(width: 10),
-                                          SizedBox(
-                                            width: Get.width / 1.5,
-                                            child: Text(
-                                                podcastInfoController
-                                                    .podcastEpisodesList[index]
-                                                    .title
-                                                    .toString(),
-                                                style: Get.theme.textTheme
-                                                    .headlineMedium),
-                                          ),
-                                        ],
-                                      ),
-                                      Text("25:00",
-                                          style: Get.theme.textTheme.labelSmall)
-                                    ],
+                                return InkWell(
+                                  onTap: () async {
+                                    await podcastInfoController.player
+                                        .seek(Duration.zero, index: index);
+
+                                    podcastInfoController
+                                            .currentPodcastIndex.value =
+                                        podcastInfoController
+                                            .player.currentIndex!;
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            ImageIcon(
+                                                Assets.icons.bluemicrophone
+                                                    .provider(),
+                                                color: SolidColors.blueColor),
+                                            const SizedBox(width: 10),
+                                            SizedBox(
+                                              width: Get.width / 1.5,
+                                              child: Obx(
+                                                () => Text(
+                                                    podcastInfoController
+                                                        .podcastEpisodesList[
+                                                            index]
+                                                        .title
+                                                        .toString(),
+                                                    style: podcastInfoController
+                                                                .currentPodcastIndex
+                                                                .value ==
+                                                            index
+                                                        ? Get.theme.textTheme
+                                                            .titleMedium
+                                                        : Get.theme.textTheme
+                                                            .headlineMedium),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                            "${podcastInfoController.podcastEpisodesList[index].length!}:00",
+                                            style:
+                                                Get.theme.textTheme.labelSmall)
+                                      ],
+                                    ),
                                   ),
                                 );
                               },
@@ -163,60 +187,108 @@ class PodcastSinglePageInfo extends StatelessWidget {
               )),
         ),
         Positioned(
-            right: 0,
-            left: 0,
-            bottom: 10,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  right: Dimensions.bodyMargin, left: Dimensions.bodyMargin),
-              child: Container(
-                height: Get.height / 7,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    gradient: LinearGradient(colors: GradientColors.bottomNav)),
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      LinearPercentIndicator(
-                        percent: 0.5,
-                        backgroundColor: Colors.white,
-                        progressColor: Colors.orangeAccent,
-                        lineHeight: 8,
-                        barRadius: const Radius.circular(10),
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(
+          right: 0,
+          left: 0,
+          bottom: 10,
+          child: Padding(
+            padding: EdgeInsets.only(
+                right: Dimensions.bodyMargin, left: Dimensions.bodyMargin),
+            child: Container(
+              height: Get.height / 7,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  gradient: LinearGradient(colors: GradientColors.bottomNav)),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    LinearPercentIndicator(
+                      percent: 0.5,
+                      backgroundColor: Colors.white,
+                      progressColor: Colors.orangeAccent,
+                      lineHeight: 8,
+                      barRadius: const Radius.circular(10),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            await podcastInfoController.player.stop();
+
+                            podcastInfoController.currentPodcastIndex.value = 0;
+                            podcastInfoController.playState.value = false;
+                          },
+                          child: const Icon(
+                            Icons.stop_circle,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        const SizedBox(),
+                        InkWell(
+                          onTap: () async {
+                            await podcastInfoController.player.seekToNext();
+
+                            podcastInfoController.currentPodcastIndex.value =
+                                podcastInfoController.player.currentIndex!;
+                          },
+                          child: const Icon(
                             Icons.skip_next,
                             color: Colors.white,
                             size: 30,
                           ),
-                          Icon(
-                            Icons.play_circle,
-                            color: Colors.white,
-                            size: 40,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            podcastInfoController.player.playing
+                                ? podcastInfoController.player.pause()
+                                : podcastInfoController.player.play();
+
+                            podcastInfoController.playState.value =
+                                podcastInfoController.player.playing;
+
+                            podcastInfoController.currentPodcastIndex.value =
+                                podcastInfoController.player.currentIndex!;
+                          },
+                          child: Obx(
+                            () => Icon(
+                              podcastInfoController.playState.value
+                                  ? Icons.pause_circle
+                                  : Icons.play_circle,
+                              color: Colors.white,
+                              size: 40,
+                            ),
                           ),
-                          Icon(
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            await podcastInfoController.player.seekToPrevious();
+
+                            podcastInfoController.currentPodcastIndex.value =
+                                podcastInfoController.player.currentIndex!;
+                          },
+                          child: const Icon(
                             Icons.skip_previous,
                             color: Colors.white,
                             size: 30,
                           ),
-                          SizedBox(),
-                          Icon(
-                            Icons.repeat,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                        ),
+                        const SizedBox(),
+                        const Icon(
+                          Icons.repeat,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
-            ))
+            ),
+          ),
+        )
       ])),
     );
   }
