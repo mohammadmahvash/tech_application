@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/controller/register_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 

@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/appbar_component.dart';
-import 'package:tech_application/component/constant/dimensions.dart';
-import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/constant/dimensions.dart';
+import 'package:tech_application/constant/my_colors.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/podcast/podcast_list_controller.dart';
 

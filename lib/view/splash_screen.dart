@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tech_application/component/constant/my_route.dart';
+import 'package:tech_application/route_manager/my_route.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 

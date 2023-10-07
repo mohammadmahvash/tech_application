@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:tech_application/component/appbar_component.dart';
-import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
 
 // ignore: must_be_immutable

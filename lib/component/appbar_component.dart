@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tech_application/component/constant/dimensions.dart';
-import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/constant/dimensions.dart';
+import 'package:tech_application/constant/my_colors.dart';
 
 PreferredSize appBar(String title) {
   double bodyMargin = Dimensions.bodyMargin;

@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/appbar_component.dart';
-import 'package:tech_application/component/constant/my_colors.dart';
-import 'package:tech_application/component/constant/my_route.dart';
-import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/constant/my_colors.dart';
+import 'package:tech_application/route_manager/my_route.dart';
+import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/article/article_info_controller.dart';
 import 'package:tech_application/controller/article/article_management_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
-import '../../component/constant/dimensions.dart';
+import '../../constant/dimensions.dart';
 
 class ArticleManagementList extends StatelessWidget {
   ArticleManagementList({super.key});

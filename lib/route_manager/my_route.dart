@@ -1,4 +1,5 @@
 class MyRoute {
+  MyRoute._();
   static const String routeMainScreen = "/MainScreen";
   static const String routeRegisterIntro = "/RegisterIntro";
   static const String routePodcastListScreen = "/PodcastListScreen";

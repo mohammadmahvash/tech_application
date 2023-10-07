@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:tech_application/component/constant/api_constant.dart';
-import 'package:tech_application/component/constant/my_route.dart';
-import 'package:tech_application/component/constant/my_storage.dart';
-import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/constant/api_constant.dart';
+import 'package:tech_application/route_manager/my_route.dart';
+import 'package:tech_application/constant/my_storage.dart';
+import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 import 'package:tech_application/services/dio_service.dart';
 

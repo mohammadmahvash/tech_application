@@ -1,21 +1,24 @@
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tech_application/component/constant/dimensions.dart';
-import 'package:tech_application/component/constant/my_colors.dart';
+import 'package:tech_application/constant/dimensions.dart';
+import 'package:tech_application/constant/my_colors.dart';
+import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/podcast/podcast_info_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
+// ignore: must_be_immutable
 class PodcastSinglePageInfo extends StatelessWidget {
   PodcastSinglePageInfo({super.key});
 
   final homeScreenPodcast = Get.arguments['homeScreenPodcast'];
   final PodcastInfoController podcastInfoController =
       Get.find<PodcastInfoController>();
+
+  String? currentPodcastTitle = "";
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,7 @@ class PodcastSinglePageInfo extends StatelessWidget {
                                 InkWell(
                                   onTap: () {
                                     Get.back();
+                                    podcastInfoController.stopProgressBar();
                                   },
                                   child: const Icon(
                                     Icons.arrow_back_outlined,
@@ -76,11 +80,11 @@ class PodcastSinglePageInfo extends StatelessWidget {
                                   ),
                                 ),
                                 const Expanded(child: SizedBox()),
+                                //ShareIcon
                                 InkWell(
                                   onTap: () async {
-                                    await Share.share("");
-                                    //TODO Add share icon
-                                    // "${articleInfoController.articleInfoModel.value.title!}\n ${MyStrings.shareText}");
+                                    await Share.share(
+                                        "پادکست : ${homeScreenPodcast.title!}\n $currentPodcastTitle \n ${MyStrings.shareText}");
                                   },
                                   child: const Icon(
                                     Icons.share,
@@ -114,6 +118,7 @@ class PodcastSinglePageInfo extends StatelessWidget {
                                 style: Get.theme.textTheme.headlineMedium),
                           ],
                         ),
+                        //files
                         SizedBox(
                           height: Get.height / 2.7,
                           child: Obx(
@@ -133,6 +138,12 @@ class PodcastSinglePageInfo extends StatelessWidget {
                                             .currentPodcastIndex.value =
                                         podcastInfoController
                                             .player.currentIndex!;
+
+                                    podcastInfoController.resetTimerCheck();
+
+                                    currentPodcastTitle = podcastInfoController
+                                        .podcastEpisodesList[index].title
+                                        .toString();
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 15),
@@ -186,15 +197,17 @@ class PodcastSinglePageInfo extends StatelessWidget {
                 ],
               )),
         ),
+        //playerContainer
         Positioned(
           right: 0,
           left: 0,
           bottom: 10,
           child: Padding(
             padding: EdgeInsets.only(
-                right: Dimensions.bodyMargin, left: Dimensions.bodyMargin),
+                right: Dimensions.bodyMargin / 2,
+                left: Dimensions.bodyMargin / 2),
             child: Container(
-              height: Get.height / 7,
+              height: Get.height / 5.5,
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   gradient: LinearGradient(colors: GradientColors.bottomNav)),
@@ -203,22 +216,42 @@ class PodcastSinglePageInfo extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    LinearPercentIndicator(
-                      percent: 0.5,
-                      backgroundColor: Colors.white,
-                      progressColor: Colors.orangeAccent,
-                      lineHeight: 8,
-                      barRadius: const Radius.circular(10),
+                    Obx(
+                      () => ProgressBar(
+                        timeLabelTextStyle:
+                            const TextStyle(color: Colors.white),
+                        thumbColor: Colors.orange,
+                        progressBarColor: Colors.orange,
+                        progress: podcastInfoController.progressValue.value,
+                        buffered: podcastInfoController.bufferedValue.value,
+                        total: podcastInfoController.player.duration ??
+                            const Duration(seconds: 0),
+                        onSeek: (position) async {
+                          podcastInfoController.player.seek(position);
+
+                          if (podcastInfoController.player.playing) {
+                            podcastInfoController.startProgressBar();
+                          } else {
+                            await podcastInfoController.player.seekToNext();
+
+                            podcastInfoController.currentPodcastIndex.value =
+                                podcastInfoController.player.currentIndex!;
+
+                            podcastInfoController.resetTimerCheck();
+                          }
+                        },
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         InkWell(
-                          onTap: () async {
-                            await podcastInfoController.player.stop();
+                          onTap: () {
+                            podcastInfoController.stopProgressBar();
 
-                            podcastInfoController.currentPodcastIndex.value = 0;
                             podcastInfoController.playState.value = false;
+
+                            podcastInfoController.resetTimerCheck();
                           },
                           child: const Icon(
                             Icons.stop_circle,
@@ -233,6 +266,8 @@ class PodcastSinglePageInfo extends StatelessWidget {
 
                             podcastInfoController.currentPodcastIndex.value =
                                 podcastInfoController.player.currentIndex!;
+
+                            podcastInfoController.resetTimerCheck();
                           },
                           child: const Icon(
                             Icons.skip_next,
@@ -242,6 +277,10 @@ class PodcastSinglePageInfo extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
+                            podcastInfoController.player.playing
+                                ? podcastInfoController.timer!.cancel()
+                                : podcastInfoController.startProgressBar();
+
                             podcastInfoController.player.playing
                                 ? podcastInfoController.player.pause()
                                 : podcastInfoController.player.play();
@@ -268,6 +307,8 @@ class PodcastSinglePageInfo extends StatelessWidget {
 
                             podcastInfoController.currentPodcastIndex.value =
                                 podcastInfoController.player.currentIndex!;
+
+                            podcastInfoController.resetTimerCheck();
                           },
                           child: const Icon(
                             Icons.skip_previous,
@@ -276,10 +317,19 @@ class PodcastSinglePageInfo extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(),
-                        const Icon(
-                          Icons.repeat,
-                          color: Colors.white,
-                          size: 30,
+                        InkWell(
+                          onTap: () {
+                            podcastInfoController.setLoopMode();
+                          },
+                          child: Obx(
+                            () => Icon(
+                              Icons.repeat,
+                              color: podcastInfoController.isLoopAll.value
+                                  ? Colors.blue
+                                  : Colors.white,
+                              size: 30,
+                            ),
+                          ),
                         ),
                       ],
                     )

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:tech_application/component/constant/dimensions.dart';
-import 'package:tech_application/component/constant/my_colors.dart';
-import 'package:tech_application/component/constant/my_strings.dart';
+import 'package:tech_application/constant/dimensions.dart';
+import 'package:tech_application/constant/my_colors.dart';
+import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
 import 'package:tech_application/controller/register_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
