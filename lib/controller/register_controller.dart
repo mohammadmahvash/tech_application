@@ -13,6 +13,7 @@ import 'package:tech_application/services/dio_service.dart';
 
 class RegisterController extends GetxController {
   TextEditingController emailTextEditingController = TextEditingController();
+  TextEditingController userNameTextEditingController = TextEditingController();
   TextEditingController activatedCodeTextEditingController =
       TextEditingController();
 
@@ -20,6 +21,8 @@ class RegisterController extends GetxController {
 
   var email = "";
   var userId = "";
+
+  var box = GetStorage();
 
   registerEmail() async {
     Map<String, dynamic> map = {
@@ -29,6 +32,7 @@ class RegisterController extends GetxController {
     var response = await DioService().postMethod(map, ApiConstant.postRegister);
     email = emailTextEditingController.text;
     userId = response.data['user_id'];
+    box.write(MyStorage.email, emailTextEditingController.text);
     log(response.data.toString());
   }
 
@@ -50,7 +54,7 @@ class RegisterController extends GetxController {
 
       switch (responseStatus) {
         case 'verified':
-          var box = GetStorage();
+          
           box.write(MyStorage.token, response.data["token"]);
           box.write(MyStorage.userId, response.data["user_id"]);
 
@@ -77,11 +81,19 @@ class RegisterController extends GetxController {
     }
   }
 
-  checkLogIn() {
+  checkLogInForWrite() {
     if (GetStorage().read(MyStorage.token) == null) {
       Get.toNamed(MyRoute.routeRegisterIntro);
     } else {
       mainScreenManagementBottomSheet();
+    }
+  }
+  checkLogInForProfilePage() {
+    if (GetStorage().read(MyStorage.token) == null) {
+      Get.toNamed(MyRoute.routeRegisterIntro);
+      return false;
+    } else {
+      return true;
     }
   }
 

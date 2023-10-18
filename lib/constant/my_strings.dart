@@ -11,6 +11,7 @@ class MyStrings {
   static const String myFavPodcast = "پادکست های مورد علاقه من";
   static const String logOut = "خروج از حساب کاربری";
   static const String logIn = "ورود به حساب کاربری";
+  static const String insertYourUserName = "لطفا نام کاربری خودت رو وارد کن";
   static const String insertYourEmail = "لطفا ایمیلت رو وارد کن";
   static const String activateCode = "کد فعال سازی رو وارد کن ";
   static const String chooseFavoriteCategories =
@@ -93,6 +94,7 @@ class MyStrings {
   مجددا وارد حساب کاربری خود شوید!""";
   static String errorText = "Error";
   static String youAlreadyLeft = "قبلا خارج شدی !!";
+  static String youSuccessfullyLogOut = "با موفقیت از حساب کاربری خود خارج شدی";
   static String areYouSureExit = "آیا از خروج خود مطمئن هستید ؟";
   static String addNewPodcast = "اضافه کردن یک پادکست جدید";
   static String newArticles = "مقالات جدید";

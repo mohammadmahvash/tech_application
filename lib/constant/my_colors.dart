@@ -4,6 +4,7 @@ class SolidColors {
   static const Color posterSubTitle = Color.fromARGB(200, 255, 255, 255);
   static const Color posterTitle = Color.fromARGB(255, 255, 255, 255);
   static const Color primaryColor = Color.fromARGB(255, 68, 4, 87);
+  static const Color disableButtonprimaryColor = Color.fromARGB(255, 100, 85, 105);
   static const Color colorTitle = Color.fromARGB(255, 40, 107, 184);
   static const Color textTitle = Color.fromARGB(255, 0, 0, 0);
   static const Color scaffoldBackground = Color.fromARGB(255, 255, 255, 255);
