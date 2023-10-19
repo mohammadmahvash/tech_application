@@ -114,7 +114,8 @@ class PodcastSinglePageInfo extends StatelessWidget {
                             Image.asset(Assets.images.profileavatar.path,
                                 scale: 8),
                             const SizedBox(width: 10),
-                            Text(homeScreenPodcast.author!,
+                            Text(
+                              MyStrings.nameMohamadMahvash,
                                 style: Get.theme.textTheme.headlineMedium),
                           ],
                         ),

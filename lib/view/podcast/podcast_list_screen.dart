@@ -5,7 +5,9 @@ import 'package:tech_application/component/appbar_component.dart';
 import 'package:tech_application/constant/dimensions.dart';
 import 'package:tech_application/constant/my_colors.dart';
 import 'package:tech_application/component/my_components.dart';
+import 'package:tech_application/controller/podcast/podcast_info_controller.dart';
 import 'package:tech_application/controller/podcast/podcast_list_controller.dart';
+import 'package:tech_application/route_manager/my_route.dart';
 
 class PodcastListScreen extends StatelessWidget {
   PodcastListScreen({super.key});
@@ -13,6 +15,8 @@ class PodcastListScreen extends StatelessWidget {
   final String title = Get.arguments['title'];
   final PodcastListController podcastListController =
       Get.find<PodcastListController>();
+  final PodcastInfoController podcastInfoController =
+      Get.put(PodcastInfoController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +38,16 @@ class PodcastListScreen extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: InkWell(
-                        onTap: () {
-                          // articleInfoController.getArticleInfo(
-                          //     articleListController.articleList[index].id!);
+                        onTap: () async {
+                          await podcastInfoController.getPodcastEpisodesList(
+                              podcastListController.podcastList[index].id
+                                  .toString());
+
+                          Get.toNamed(MyRoute.routePodcastSinglePageInfo,
+                              arguments: {
+                                'homeScreenPodcast':
+                                    podcastListController.podcastList[index]
+                              });
                         },
                         child: Row(
                           children: [
