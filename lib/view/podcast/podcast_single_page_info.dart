@@ -115,7 +115,8 @@ class PodcastSinglePageInfo extends StatelessWidget {
                                 scale: 8),
                             const SizedBox(width: 10),
                             Text(
-                              MyStrings.nameMohamadMahvash,
+                              // MyStrings.nameMohamadMahvash,
+                              homeScreenPodcast.author!,
                                 style: Get.theme.textTheme.headlineMedium),
                           ],
                         ),

@@ -92,7 +92,7 @@ class PodcastListScreen extends StatelessWidget {
                                       Text(
                                           podcastListController
                                                   .podcastList[index]
-                                                  .publisher ??
+                                                  .author ??
                                               "",
                                           style:
                                               Get.theme.textTheme.labelSmall),

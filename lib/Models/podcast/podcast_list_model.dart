@@ -4,7 +4,7 @@ class PodcastListModel {
   String? id;
   String? title;
   String? poster;
-  String? publisher;
+  String? author;
   String? view;
   String? status;
   String? createdAt;
@@ -14,7 +14,7 @@ class PodcastListModel {
     required this.id,
     required this.title,
     required this.poster,
-    required this.publisher,
+    required this.author,
     required this.view,
     required this.status,
     required this.createdAt,
@@ -25,7 +25,7 @@ class PodcastListModel {
     id = json["id"];
     title = json["title"];
     poster = ApiConstant.baseHostURL + json["poster"];
-    publisher = json["publisher"];
+    author = json["publisher"];
     view = json["view"];
     status = json["status"];
     createdAt = json["created_at"];
