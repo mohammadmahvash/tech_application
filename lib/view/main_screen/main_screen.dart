@@ -60,7 +60,23 @@ class MainScreen extends StatelessWidget {
                   MyStrings.aboutTec,
                   style: Get.theme.textTheme.headlineMedium,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.defaultDialog(
+                      title: MyStrings.welcomeToTechBlog,
+                      titleStyle: const TextStyle(
+                          color: SolidColors.scaffoldBackground, fontSize: 25),
+                      backgroundColor: SolidColors.primaryColor,
+                      content: Text(textAlign: TextAlign.center,
+                        MyStrings.aboutTechBlogDialog,
+                        style: const TextStyle(
+                            color: SolidColors.scaffoldBackground),
+                      ),
+                      contentPadding: const EdgeInsets.all(15),
+                      radius: 20,
+                      cancel: ElevatedButton(
+                          onPressed: () => Get.back(),
+                          child: Text(MyStrings.verification)));
+                },
               ),
               const Divider(
                 color: SolidColors.dividerColor,
@@ -117,7 +133,9 @@ class MainScreen extends StatelessWidget {
               image: Assets.images.logo.provider(),
               height: Get.height / 13.6,
             ),
-            const Icon(Icons.search, size: 30, color: Colors.black),
+            SizedBox(
+              width: Get.width / 10,
+            )
           ],
         ),
       ),

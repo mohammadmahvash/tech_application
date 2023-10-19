@@ -41,7 +41,8 @@ class MyStrings {
   static String titltArticleManagementSinglePageInfoDefault =
       'اینجا عنوان مقاله قرار میگیره ، یه عنوان جذاب انتخاب کن';
 
-  static String editOrginalContentTextArticleManagementSinglePageInfoDefault = """
+  static String editOrginalContentTextArticleManagementSinglePageInfoDefault =
+      """
 من متن و بدنه اصلی مقاله هستم ، اگه میخوای من رو ویرایش کنی و یه مقاله جذاب بنویسی ، نوشته آبی رنگ بالا که نوشته "ویرایش متن اصلی مقاله" رو با انگشتت لمس کن تا وارد ویرایشگر بشی""";
 
   static String visit = 'بازدید';
@@ -76,7 +77,8 @@ class MyStrings {
   static String shareTec = "اشتراک گذاری تک بلاگ";
   static String tecIngithub = "تک‌بلاگ در گیت هاب";
   static String shareKnowledge = "دونسته هات رو با بقیه به اشتراک بذار ...";
-  static String clickonCategoryToAddIntoArticle = "روی دسته بندی مرتبط ضربه بزن تا به مقاله اضافه بشه";
+  static String clickonCategoryToAddIntoArticle =
+      "روی دسته بندی مرتبط ضربه بزن تا به مقاله اضافه بشه";
   static String gigTech = """
 فکر کن !!  اینجا بودنت به این معناست که یک گیک تکنولوژی هستی
 دونسته هات رو با جامعه‌ی گیک های فارسی زبان به اشتراک بذار ...
@@ -128,4 +130,10 @@ class MyStrings {
   static String writeYourTitle = "عنوان را وارد کنید";
   static String cannotChooseDuplicateTag = "نمیتوانید تگ تکراری انتخاب کنید!";
   static String youHaveNotChoosenCategoryYet = "هنوز دسته بندی انتخاب نکردی!";
+  static String welcomeToTechBlog = "به تک بلاگ خوش آمدید";
+  static String aboutTechBlogDialog = """
+  آیا به جدیدترین اخبار تکنولوژی و جذاب‌ ترین بازی‌ها علاقه دارید؟ آیا می‌خواهید با دوستان و اشخاصی که علاقه‌مند به موضوعات شما هستند،علایق خود را به اشتراک بگذارید؟ اپلیکیشن ما طراحی شده تا تجربه‌ای بهتر و مفیدتر در دنیای تکنولوژی و بازی‌ها برای شما ایجاد کند.
+  
+با تک بلاگ، جهان تکنولوژی و بازی‌ها به دستان شما خواهد آمد. از امکانات اخباری تا پادکست‌های تخصصی، همه چیز در یک اپلیکیشن جامع و راحت.
+""";
 }
