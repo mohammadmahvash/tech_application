@@ -54,7 +54,6 @@ class RegisterController extends GetxController {
 
       switch (responseStatus) {
         case 'verified':
-          
           box.write(MyStorage.token, response.data["token"]);
           box.write(MyStorage.userId, response.data["user_id"]);
 
@@ -88,6 +87,7 @@ class RegisterController extends GetxController {
       mainScreenManagementBottomSheet();
     }
   }
+
   checkLogInForProfilePage() {
     if (GetStorage().read(MyStorage.token) == null) {
       Get.toNamed(MyRoute.routeRegisterIntro);
@@ -153,7 +153,9 @@ class RegisterController extends GetxController {
                 ),
                 //PodcastManagementBTN
                 InkWell(
-                  onTap: () => debugPrint("podcast management"),
+                  onTap: () {
+                    Get.offNamed(MyRoute.routePodcastManagementList);
+                  },
                   child: SizedBox(
                     height: 40,
                     child: Row(

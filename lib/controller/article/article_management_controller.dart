@@ -17,7 +17,6 @@ import 'package:tech_application/services/dio_service.dart';
 
 class ArticleManagementController extends GetxController {
   RxList articleList = RxList.empty();
-  RxList<HashtagModel> relatedTags = RxList.empty();
   Rx<ArticleInfoModel> articleInfoModel = ArticleInfoModel(
           MyStrings.titltArticleManagementSinglePageInfoDefault,
           MyStrings

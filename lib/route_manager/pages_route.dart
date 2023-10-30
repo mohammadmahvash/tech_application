@@ -8,6 +8,7 @@ import 'package:tech_application/view/article/article_management_single_page_inf
 import 'package:tech_application/view/article/article_single_page_info.dart';
 import 'package:tech_application/view/main_screen/main_screen.dart';
 import 'package:tech_application/view/podcast/podcast_list_screen.dart';
+import 'package:tech_application/view/podcast/podcast_management_list.dart';
 import 'package:tech_application/view/podcast/podcast_single_page_info.dart';
 import 'package:tech_application/view/register/register_intro.dart';
 
@@ -33,6 +34,10 @@ class PagesRoute {
       page: () => PodcastSinglePageInfo(),
       binding: PodcastBinding(),
     ),
+    GetPage(
+        name: MyRoute.routePodcastManagementList,
+        page: () => PodcastManagementList(),
+        binding: PodcastManagementBinding()),
     GetPage(
         name: MyRoute.routeArticleListScreen,
         page: () => ArticleListScreen(),

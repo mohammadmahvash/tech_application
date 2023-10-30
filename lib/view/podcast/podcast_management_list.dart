@@ -2,49 +2,46 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:tech_application/component/appbar_component.dart';
 import 'package:tech_application/constant/my_colors.dart';
-import 'package:tech_application/constant/my_storage.dart';
+import 'package:tech_application/controller/podcast/podcast_management_controller.dart';
 import 'package:tech_application/route_manager/my_route.dart';
 import 'package:tech_application/constant/my_strings.dart';
 import 'package:tech_application/component/my_components.dart';
-import 'package:tech_application/controller/article/article_info_controller.dart';
-import 'package:tech_application/controller/article/article_management_controller.dart';
 import 'package:tech_application/gen/assets.gen.dart';
 
 import '../../constant/dimensions.dart';
 
-class ArticleManagementList extends StatelessWidget {
-  ArticleManagementList({super.key});
+class PodcastManagementList extends StatelessWidget {
+  PodcastManagementList({super.key});
 
-  final ArticleManagementController articleManagementController =
-      Get.find<ArticleManagementController>();
+  final PodcastManagementController podcastManagementController =
+      Get.find<PodcastManagementController>();
 
-  final ArticleInfoController articleInfoController =
-      Get.put(ArticleInfoController());
+  // final ArticleInfoController articleInfoController =
+  //     Get.put(ArticleInfoController());
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: SolidColors.scaffoldBackground,
-        appBar: appBar(MyStrings.titleAppBarManageArticle),
-        body: Obx(() => articleManagementController.loading.value == true
+        appBar: appBar(MyStrings.titleAppBarManagePodcast),
+        body: Obx(() => podcastManagementController.loading.value == true
             ? Column(
                 children: [
                   SizedBox(height: Get.height / 2.8),
                   circularLoading(),
                 ],
               )
-            : articleManagementController.articleList.isNotEmpty
-                ? articleManagementArticleListState()
-                : articleManagementEmptyState()),
+            : podcastManagementController.podcastList.isNotEmpty
+                ? podcastManagementPodcastListState()
+                : podcastManagementEmptyState()),
       ),
     );
   }
 
-  Widget articleManagementArticleListState() {
+  Widget podcastManagementPodcastListState() {
     double bodyMargin = Dimensions.bodyMargin;
     return Column(
       children: [
@@ -54,14 +51,14 @@ class ArticleManagementList extends StatelessWidget {
                 left: bodyMargin / 1.9, right: bodyMargin / 1.9),
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: articleManagementController.articleList.length,
+              itemCount: podcastManagementController.podcastList.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: InkWell(
                     onTap: () {
-                      articleInfoController.getArticleInfo(
-                          articleManagementController.articleList[index].id!);
+                      // articleInfoController.getArticleInfo(
+                      //     podcastManagementController.podcastList[index].id!);
                     },
                     child: Row(
                       children: [
@@ -69,8 +66,8 @@ class ArticleManagementList extends StatelessWidget {
                           width: Get.width / 4,
                           height: Get.height / 7,
                           child: CachedNetworkImage(
-                            imageUrl: articleManagementController
-                                .articleList[index].image!,
+                            imageUrl: podcastManagementController
+                                .podcastList[index].poster!,
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
@@ -90,8 +87,8 @@ class ArticleManagementList extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                  articleManagementController
-                                      .articleList[index].title!,
+                                  podcastManagementController
+                                      .podcastList[index].title!,
                                   style: Get.theme.textTheme.headlineMedium,
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 3),
@@ -101,15 +98,9 @@ class ArticleManagementList extends StatelessWidget {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Text(
-                                      GetStorage().read(MyStorage.userName) ?? "",
+                                      podcastManagementController
+                                          .podcastList[index].author!,
                                       style: Get.theme.textTheme.labelSmall),
-                                  Text(
-                                      "${articleManagementController.articleList[index].view!} ${MyStrings.visit}",
-                                      style: Get.theme.textTheme.labelSmall),
-                                  Text(
-                                      articleManagementController
-                                          .articleList[index].categoryName!,
-                                      style: Get.theme.textTheme.bodySmall),
                                 ],
                               )
                             ],
@@ -132,9 +123,10 @@ class ArticleManagementList extends StatelessWidget {
               width: Get.width / 1.25,
               height: Get.height / 13,
               child: ElevatedButton(
-                onPressed: () =>
-                    Get.toNamed(MyRoute.routeArticleManagementSinglePageInfo),
-                child: Text(MyStrings.textManageArticle),
+                onPressed: () {
+                  // Get.toNamed(MyRoute.routeArticleManagementSinglePageInfo);
+                },
+                child: Text(MyStrings.addNewPodcast),
               ),
             ),
           ),
@@ -143,7 +135,7 @@ class ArticleManagementList extends StatelessWidget {
     );
   }
 
-  Widget articleManagementEmptyState() {
+  Widget podcastManagementEmptyState() {
     return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         const SizedBox(height: 150),
@@ -152,7 +144,7 @@ class ArticleManagementList extends StatelessWidget {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-              text: MyStrings.articleEmpty,
+              text: MyStrings.podcastEmpty,
               style: Get.theme.textTheme.headlineLarge),
         ),
         Expanded(
@@ -164,9 +156,10 @@ class ArticleManagementList extends StatelessWidget {
                 width: Get.width / 1.25,
                 height: Get.height / 13,
                 child: ElevatedButton(
-                  onPressed: () =>
-                      Get.toNamed(MyRoute.routeArticleManagementSinglePageInfo),
-                  child: Text(MyStrings.textManageArticle),
+                  onPressed: () {
+                    // Get.toNamed(MyRoute.routeArticleManagementSinglePageInfo),
+                  },
+                  child: Text(MyStrings.addNewPodcast),
                 ),
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:tech_application/controller/article/article_management_controlle
 import 'package:tech_application/controller/home_screen_controller.dart';
 import 'package:tech_application/controller/podcast/podcast_info_controller.dart';
 import 'package:tech_application/controller/podcast/podcast_list_controller.dart';
+import 'package:tech_application/controller/podcast/podcast_management_controller.dart';
 import 'package:tech_application/controller/register_controller.dart';
 
 class HomeScreenBinding implements Bindings {
@@ -27,6 +28,12 @@ class PodcastBinding implements Bindings {
     Get.put(PodcastListController());
 
     Get.lazyPut(() => PodcastInfoController());
+  }
+}
+class PodcastManagementBinding implements Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => PodcastManagementController());
   }
 }
 
