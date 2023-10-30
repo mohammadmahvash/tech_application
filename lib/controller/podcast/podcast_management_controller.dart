@@ -33,7 +33,7 @@ class PodcastManagementController extends GetxController {
     loading.value = true;
 
     var response = await DioService().getMethod(
-        "${ApiConstant.baseURL}podcast/get.php?command=published_by_me&user_id=1");
+        "${ApiConstant.baseURL}podcast/get.php?command=published_by_me&user_id=$userId");
 
     if (response.statusCode == 200) {
       response.data.forEach((element) {
