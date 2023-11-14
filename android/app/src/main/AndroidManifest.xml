@@ -4,7 +4,7 @@
     <application
         android:label="TechBlog"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/techbot">
         <activity
             android:name=".MainActivity"
             android:exported="true"
