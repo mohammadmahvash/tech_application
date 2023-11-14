@@ -8,4 +8,5 @@ class ApiConstant {
       "${baseURL}article/get.php?command=new&user_id=";
   static const postRegister = "${baseURL}register/action.php";
   static const postArticle = "${baseURL}article/post.php";
+  static const postPodcast = "${baseURL}podcast/post.php";
 }

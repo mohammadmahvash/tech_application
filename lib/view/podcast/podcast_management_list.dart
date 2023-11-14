@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tech_application/component/appbar_component.dart';
 import 'package:tech_application/constant/my_colors.dart';
+import 'package:tech_application/controller/podcast/podcast_info_controller.dart';
 import 'package:tech_application/controller/podcast/podcast_management_controller.dart';
 import 'package:tech_application/route_manager/my_route.dart';
 import 'package:tech_application/constant/my_strings.dart';
@@ -18,8 +19,8 @@ class PodcastManagementList extends StatelessWidget {
   final PodcastManagementController podcastManagementController =
       Get.find<PodcastManagementController>();
 
-  // final ArticleInfoController articleInfoController =
-  //     Get.put(ArticleInfoController());
+  final PodcastInfoController podcastInfoController =
+      Get.put(PodcastInfoController());
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +57,16 @@ class PodcastManagementList extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: InkWell(
-                    onTap: () {
-                      // articleInfoController.getArticleInfo(
-                      //     podcastManagementController.podcastList[index].id!);
+                    onTap: () async {
+                      await podcastInfoController.getPodcastEpisodesList(
+                          podcastManagementController.podcastList[index].id
+                              .toString());
+
+                      Get.toNamed(MyRoute.routePodcastSinglePageInfo,
+                          arguments: {
+                            'homeScreenPodcast':
+                                podcastManagementController.podcastList[index]
+                          });
                     },
                     child: Row(
                       children: [
@@ -82,29 +90,21 @@ class PodcastManagementList extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 5),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Text(
-                                  podcastManagementController
-                                      .podcastList[index].title!,
-                                  style: Get.theme.textTheme.headlineMedium,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3),
-                              const SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                      podcastManagementController
-                                          .podcastList[index].author!,
-                                      style: Get.theme.textTheme.labelSmall),
-                                ],
-                              )
-                            ],
-                          ),
+                        const SizedBox(width: 10),
+                        Column(
+                          children: [
+                            Text(
+                                podcastManagementController
+                                    .podcastList[index].title!,
+                                style: Get.theme.textTheme.headlineMedium,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3),
+                            const SizedBox(height: 10),
+                            Text(
+                                podcastManagementController
+                                    .podcastList[index].author!,
+                                style: Get.theme.textTheme.labelSmall)
+                          ],
                         )
                       ],
                     ),
@@ -124,7 +124,7 @@ class PodcastManagementList extends StatelessWidget {
               height: Get.height / 13,
               child: ElevatedButton(
                 onPressed: () {
-                  // Get.toNamed(MyRoute.routeArticleManagementSinglePageInfo);
+                  Get.toNamed(MyRoute.routePodcastManagementSinglePageInfo);
                 },
                 child: Text(MyStrings.addNewPodcast),
               ),
@@ -157,7 +157,7 @@ class PodcastManagementList extends StatelessWidget {
                 height: Get.height / 13,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Get.toNamed(MyRoute.routeArticleManagementSinglePageInfo),
+                    Get.toNamed(MyRoute.routePodcastManagementSinglePageInfo);
                   },
                   child: Text(MyStrings.addNewPodcast),
                 ),

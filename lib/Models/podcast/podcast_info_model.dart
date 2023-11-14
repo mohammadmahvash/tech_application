@@ -8,7 +8,7 @@ class PodcastInfoModel {
   String? length;
 
   PodcastInfoModel(
-      [this.id, this.podcastId, this.file, this.title, this.length]);
+      [this.title, this.id, this.podcastId, this.file, this.length]);
 
   PodcastInfoModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];

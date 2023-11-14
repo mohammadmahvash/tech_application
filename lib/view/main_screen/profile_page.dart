@@ -22,8 +22,7 @@ class ProfilePage extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
-          const SizedBox(height: 30),
-          const SizedBox(height: 40),
+          SizedBox(height: Get.height/4),
           Text(
             GetStorage().read(MyStorage.userName) ?? "",
             style: Get.theme.textTheme.headlineMedium,
@@ -34,32 +33,6 @@ class ProfilePage extends StatelessWidget {
             style: Get.theme.textTheme.headlineMedium,
           ),
           const SizedBox(height: 25),
-          const DividerTech(),
-          InkWell(
-            onTap: () {},
-            splashColor: SolidColors.primaryColor,
-            child: SizedBox(
-                height: 50,
-                child: Center(
-                  child: Text(
-                    MyStrings.myFavBlog,
-                    style: Get.theme.textTheme.headlineLarge,
-                  ),
-                )),
-          ),
-          const DividerTech(),
-          InkWell(
-            onTap: () {},
-            splashColor: SolidColors.primaryColor,
-            child: SizedBox(
-                height: 50,
-                child: Center(
-                  child: Text(
-                    MyStrings.myFavPodcast,
-                    style: Get.theme.textTheme.headlineLarge,
-                  ),
-                )),
-          ),
           const DividerTech(),
           InkWell(
             onTap: () {

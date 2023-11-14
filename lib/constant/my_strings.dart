@@ -113,6 +113,7 @@ class MyStrings {
   static String tecEmail = "techblog@gmail.com";
   static String yourRegistrationWasSuccesful = "ثبت نام شما با موفقیت انجام شد";
   static String articleStoreSuccesful = "مقاله با موفقیت ثبت شد";
+  static String podcastStoreSuccesful = "پادکست با موفقیت ثبت شد";
   static String activateCodeIsNotCorrect = "کد فعال سازی وارد شده اشتباه است";
   static String activateCodeIsExpired = "کد فعال سازی وارد شده منقضی شده است";
   static String pleaseEnterEmailCorrect =

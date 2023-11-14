@@ -252,7 +252,6 @@ class ArticleManagementSinglePageInfo extends StatelessWidget {
                         height: Get.height / 13,
                         child: ElevatedButton(
                           onPressed: () async{
-                            // debugger();
                             await articleManagementInfoController
                                   .storeArticle();
                                   },

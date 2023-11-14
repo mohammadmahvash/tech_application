@@ -1,4 +1,6 @@
+import 'dart:developer';
 
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -6,12 +8,17 @@ import 'package:tech_application/Models/podcast/podcast_home_model.dart';
 import 'package:tech_application/Models/podcast/podcast_info_model.dart';
 import 'package:tech_application/constant/api_constant.dart';
 import 'package:tech_application/constant/my_storage.dart';
+import 'package:tech_application/constant/my_strings.dart';
+import 'package:tech_application/controller/file_picker_controller.dart';
+import 'package:tech_application/route_manager/my_route.dart';
 import 'package:tech_application/services/dio_service.dart';
 
 class PodcastManagementController extends GetxController {
   RxList podcastList = RxList.empty();
-  Rx<PodcastInfoModel> podcastInfoModel = PodcastInfoModel().obs;
-  
+  Rx<PodcastInfoModel> podcastInfoModel = PodcastInfoModel(
+    MyStrings.titltArticleManagementSinglePageInfoDefault,
+  ).obs;
+
   // ArticleInfoModel(
   //         MyStrings.titltArticleManagementSinglePageInfoDefault,
   //         MyStrings
@@ -43,63 +50,37 @@ class PodcastManagementController extends GetxController {
     }
   }
 
-  // storeArticle() async {
-  //   FilePickerController filePickerController =
-  //       Get.find<FilePickerController>();
-  //   loading.value = true;
+  storePodcast() async {
+    FilePickerController filePickerController =
+        Get.find<FilePickerController>();
+    loading.value = true;
 
-  //   Map<String, dynamic> map = {
-  //     'title': articleInfoModel.value.title,
-  //     'content': articleInfoModel.value.content,
-  //     'cat_id': articleInfoModel.value.categoryId,
-  //     'tag_list': "$selectedTagsId",
-  //     'user_id': GetStorage().read(MyStorage.userId),
-  //     'image': await dio.MultipartFile.fromFile(
-  //         filePickerController.file.value.path!),
-  //     'command': "store",
-  //   };
-  //   var response = await DioService().postMethod(map, ApiConstant.postArticle);
-  //   log(response.data.toString());
+    Map<String, dynamic> map = {
+      'podcast_id': podcastInfoModel.value.podcastId,
+      'title': podcastInfoModel.value.title,
+      'length': podcastInfoModel.value.length,
+      'file': await dio.MultipartFile.fromFile(filePickerController.file.value.path!),
+      'command': "store_file",
+    };
+    var response = await DioService().postMethod(map, ApiConstant.postPodcast);
+    log(response.data.toString());
 
-  //   var statusCode = response.data["status_code"];
-  //   loading.value = false;
+    var success = response.data["success"];
+    loading.value = false;
 
-  //   switch (statusCode) {
-  //     case 201:
-  //       Get.snackbar(MyStrings.success, MyStrings.articleStoreSuccesful,
-  //           backgroundColor: Colors.greenAccent);
-  //       break;
-  //     case 401:
-  //       Get.snackbar(MyStrings.error, MyStrings.notAuthorizedError,
-  //           backgroundColor: Colors.redAccent);
-  //       break;
-  //     case 403:
-  //       Get.snackbar(
-  //         MyStrings.error,
-  //         MyStrings.invalidTokenError,
-  //         backgroundColor: Colors.redAccent,
-  //       );
-  //       break;
-  //     case 500:
-  //       Get.snackbar(
-  //         MyStrings.error,
-  //         MyStrings.serverError,
-  //         backgroundColor: Colors.redAccent,
-  //       );
-  //       break;
-  //   }
-  //   Get.offNamed(MyRoute.routeArticleManagementList);
-  // }
+    if (success == "true") {
+      Get.snackbar(MyStrings.success, MyStrings.articleStoreSuccesful,
+          backgroundColor: Colors.greenAccent);
+    } else {
+      Get.snackbar(MyStrings.error, MyStrings.errorText,
+          backgroundColor: Colors.redAccent);
+    }
+    Get.offNamed(MyRoute.routeArticleManagementList);
+  }
 
   updatePodcastTitle() {
     podcastInfoModel.update((val) {
       val!.title = textEditingController.text;
     });
   }
-
-  // updateMainTextArticle(String content) {
-  //   podcastInfoModel.update((val) {
-  //     val!.content = content;
-  //   });
-  // }
 }
