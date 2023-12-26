@@ -1,5 +1,10 @@
 # tech_application
 
+
+## Version 1.0.0
+<a href="https://github.com/mohammadmahvash/tech_application/releases">Download the apk file</a>
+
+## Photos
 <div align="center">
 <img src="assets/images/logo.png"align="center" width="200" />
 
@@ -12,6 +17,8 @@
   
 
 <br/>  
+
+
 
 
 ## Skills
