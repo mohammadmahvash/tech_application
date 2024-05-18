@@ -41,7 +41,7 @@ class HomeScreenController extends GetxController {
       response.data['top_podcasts'].forEach((element) {
         topPodcastsList.add(PodcastHomeModel.fromJson(element));
       });
-      topPodcastsList.removeRange(0, 5);
+      topPodcastsList.removeRange(0, 2);
 
       loading.value = false;
     }

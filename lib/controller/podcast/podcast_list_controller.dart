@@ -26,7 +26,7 @@ class PodcastListController extends GetxController {
       response.data.forEach((element) {
         podcastList.add(PodcastListModel.fromJson(element));
       });
-      podcastList.removeRange(0, 5);
+      podcastList.removeRange(0, 2);
       loading.value = false;
     }
   }
